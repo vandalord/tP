@@ -9,6 +9,15 @@ You can reach us at the email `doctorwho[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Cavan Chong
+
+<img src="images/vandalord.png" width="200px">
+
+[[github](https://github.com/vandalord)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Team Lead
+
 ### Sebastien Leib
 
 <img src="images/alieron.png" width="200px">
