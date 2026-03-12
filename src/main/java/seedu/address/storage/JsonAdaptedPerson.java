@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.patient.Address;
+import seedu.address.model.patient.Appointment;
 import seedu.address.model.patient.Email;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;
@@ -29,6 +30,9 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String appointmentStart;
+    private final Integer appointmentDuration;
+    private final String appointmentNote;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given patient details.
@@ -36,7 +40,10 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+             @JsonProperty("appointmentStart") String appointmentStart,
+             @JsonProperty("appointmentDuration") Integer appointmentDuration,
+             @JsonProperty("appointmentNote") String appointmentNote) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,6 +51,9 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.appointmentStart = appointmentStart;
+        this.appointmentDuration = appointmentDuration;
+        this.appointmentNote = appointmentNote;
     }
 
     /**
@@ -57,6 +67,13 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+
+        appointmentStart = source.getAppointment()
+                .map(a -> a.getStartTime().format(Appointment.FORMATTER)).orElse(null);
+        appointmentDuration = source.getAppointment()
+                .map(Appointment::getDuration).orElse(null);
+        appointmentNote = source.getAppointment()
+                .map(Appointment::getNote).orElse(null);
     }
 
     /**
@@ -103,7 +120,20 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Patient(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        Appointment modelAppointment = null;
+        if (appointmentStart != null && appointmentDuration != null && appointmentNote != null) {
+            if (!Appointment.isValidDateTime(appointmentStart)) {
+                throw new IllegalValueException(Appointment.MESSAGE_CONSTRAINTS);
+            }
+            if (!Appointment.isValidDuration(appointmentDuration)) {
+                throw new IllegalValueException(Appointment.DURATION_CONSTRAINTS);
+            }
+            // Note is allowed to be blank based on your previous requirement
+            modelAppointment = new Appointment(appointmentStart, appointmentDuration, appointmentNote);
+        }
+
+        return new Patient(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelAppointment);
     }
 
 }
