@@ -34,6 +34,62 @@ public class AppointmentTest {
     }
 
     @Test
+    public void getStartTime_success() {
+        String startTimeStr = "12-03-2026 14:00";
+        Appointment appt = new Appointment(startTimeStr, VALID_DURATION, VALID_NOTE);
+
+        LocalDateTime expectedTime = LocalDateTime.parse(startTimeStr, Appointment.FORMATTER);
+        assertEquals(expectedTime, appt.getStartTime());
+    }
+
+    @Test
+    public void getDuration_success() {
+        int duration = 45;
+        Appointment appt = new Appointment(VALID_START, duration, VALID_NOTE);
+        assertEquals(duration, appt.getDuration());
+    }
+
+    @Test
+    public void getNote_success() {
+        String note = "Patient requires follow-up in 2 weeks.";
+        Appointment appt = new Appointment(VALID_START, VALID_DURATION, note);
+        assertEquals(note, appt.getNote());
+    }
+
+    @Test
+    public void getNote_blankNote_success() {
+        String blankNote = "";
+        Appointment appt = new Appointment(VALID_START, VALID_DURATION, blankNote);
+        assertEquals("", appt.getNote());
+    }
+
+    @Test
+    public void constructor_invalidDurationFailure() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Appointment(VALID_START, 0, VALID_NOTE));
+
+        assertThrows(IllegalArgumentException.class, () ->
+                new Appointment(VALID_START, -1, VALID_NOTE));
+    }
+
+    @Test
+    public void constructor_invalidNoteFailure() {
+        assertThrows(NullPointerException.class, () ->
+                new Appointment(VALID_START, VALID_DURATION, null));
+    }
+
+    @Test
+    public void constructor_parsingFailure() {
+        String wrongPattern = "2026-03-12 14:00";
+        assertThrows(IllegalArgumentException.class, () ->
+                new Appointment(wrongPattern, VALID_DURATION, VALID_NOTE));
+
+        String impossibleDate = "32-01-2026 14:00";
+        assertThrows(IllegalArgumentException.class, () ->
+                new Appointment(impossibleDate, VALID_DURATION, VALID_NOTE));
+    }
+
+    @Test
     public void getEndTime_success() {
         Appointment appt = new Appointment("12-03-2026 14:00", 30, VALID_NOTE);
         LocalDateTime expectedEnd = LocalDateTime.of(2026, 3, 12, 14, 30);

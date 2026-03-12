@@ -61,7 +61,7 @@ public class Appointment {
      * Returns true if the duration is a positive integer.
      */
     public static boolean isValidDuration(int duration) {
-        return duration > 0;
+        return duration > 0 & duration <= Integer.MAX_VALUE;
     }
 
     /**
