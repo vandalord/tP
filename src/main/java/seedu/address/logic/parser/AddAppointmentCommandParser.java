@@ -36,12 +36,15 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAppointmentCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddAppointmentCommand.MESSAGE_USAGE),
+                    pe);
         }
 
         // check start time and duration(required arguments) are present
         if (!arePrefixesPresent(argMultimap, PREFIX_APPOINTMENT_STARTTIME, PREFIX_APPOINTMENT_DURATION)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAppointmentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddAppointmentCommand.MESSAGE_USAGE));
         }
 
         // ensure no duplicate arguments
