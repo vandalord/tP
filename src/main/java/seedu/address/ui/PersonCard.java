@@ -40,6 +40,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label appointment;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -55,5 +57,14 @@ public class PersonCard extends UiPart<Region> {
         patient.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        patient.getAppointment().ifPresentOrElse(
+                appt -> {
+                    appointment.setText(appt.toString());
+                    appointment.setVisible(true);
+                    appointment.setManaged(true);
+                }, () -> {
+                    appointment.setText("No appointment scheduled");
+                }
+        );
     }
 }
