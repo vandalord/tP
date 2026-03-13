@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_DURATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_NOTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_STARTTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -53,6 +56,26 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    /* ===================== Appointment ===================== */
+
+    // Valid values
+    public static final String VALID_APPOINTMENT_STARTTIME = "12-03-2026 14:00";
+    public static final String VALID_APPOINTMENT_DURATION = "30";
+    public static final String VALID_APPOINTMENT_NOTE = "Routine Checkup";
+    public static final String INVALID_APPOINTMENT_STARTTIME = "2026/03/12";
+    public static final String INVALID_APPOINTMENT_DURATION = "-10";
+
+    public static final String APPOINTMENT_STARTTIME_DESC_VALID =
+            " " + PREFIX_APPOINTMENT_STARTTIME + VALID_APPOINTMENT_STARTTIME;
+    public static final String APPOINTMENT_DURATION_DESC_VALID =
+            " " + PREFIX_APPOINTMENT_DURATION + VALID_APPOINTMENT_DURATION;
+    public static final String APPOINTMENT_NOTE_DESC_VALID =
+            " " + PREFIX_APPOINTMENT_NOTE + VALID_APPOINTMENT_NOTE;
+    public static final String INVALID_APPOINTMENT_STARTTIME_DESC =
+            " " + PREFIX_APPOINTMENT_STARTTIME + INVALID_APPOINTMENT_STARTTIME;
+    public static final String INVALID_APPOINTMENT_DURATION_DESC =
+            " " + PREFIX_APPOINTMENT_DURATION + INVALID_APPOINTMENT_DURATION;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

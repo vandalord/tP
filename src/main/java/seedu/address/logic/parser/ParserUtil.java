@@ -21,10 +21,13 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_POSITIVE_INTEGER = "Number is not a non-zero unsigned integer. "
+            + "Ensure the number is more than 0 and less than or equal to " + Integer.MAX_VALUE;
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -120,5 +123,19 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code candidate} integer into an int and returns it. Leading and trailing
+     * whitespaces will be trimmed.
+     *
+     * @throws ParseException if the specified candidate is invalid (not non-zero unsigned integer).
+     */
+    public static int parsePositiveInteger(String candidate) throws ParseException {
+        String trimmedCandidate = candidate.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedCandidate)) {
+            throw new ParseException(MESSAGE_INVALID_POSITIVE_INTEGER);
+        }
+        return Integer.parseInt(candidate);
     }
 }

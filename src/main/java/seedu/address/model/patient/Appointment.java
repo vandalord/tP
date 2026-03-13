@@ -18,6 +18,9 @@ public class Appointment {
             "Appointments should have a start time in 'dd-MM-yyyy HH:mm' format, "
                     + "a positive integer for duration (minutes), and a note.";
 
+    public static final String STARTTIME_CONSTRAINTS =
+            "Appointments should have a start time in 'dd-MM-yyyy HH:mm' format";
+
     public static final String DURATION_CONSTRAINTS =
             "Appointments should have a positive integer for duration (minutes).";
 
@@ -31,14 +34,14 @@ public class Appointment {
      * Constructs an {@code Appointment}.
      *
      * @param startTimeStr A valid start date-time string.
-     * @param duration A positive integer representing duration in minutes.
-     * @param note A description or comment for the appointment.
+     * @param duration     A positive integer representing duration in minutes.
+     * @param note         A description or comment for the appointment.
      */
     public Appointment(String startTimeStr, int duration, String note) {
         requireNonNull(startTimeStr);
         requireNonNull(note);
-        checkArgument(isValidDateTime(startTimeStr), MESSAGE_CONSTRAINTS);
-        checkArgument(duration > 0, "Duration must be a positive integer.");
+        checkArgument(isValidDateTime(startTimeStr), STARTTIME_CONSTRAINTS);
+        checkArgument(duration > 0, DURATION_CONSTRAINTS);
 
         this.startTime = LocalDateTime.parse(startTimeStr, FORMATTER);
         this.duration = duration;
