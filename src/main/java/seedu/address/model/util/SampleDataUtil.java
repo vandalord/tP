@@ -12,6 +12,7 @@ import seedu.address.model.patient.Email;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
+import seedu.address.model.tag.GeneralTag;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -55,7 +56,7 @@ public class SampleDataUtil {
      */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
+                .map(GeneralTag::new)
                 .collect(Collectors.toSet());
     }
 

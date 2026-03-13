@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.tag.Tag;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -54,9 +55,29 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(patient.getPhone().value);
         address.setText(patient.getAddress().value);
         email.setText(patient.getEmail().value);
-        patient.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        for (Tag tag : patient.getTags().stream()
+                .sorted((t1, t2) -> {
+                    int p1 = getPriority(t1);
+                    int p2 = getPriority(t2);
+                    if (p1 != p2) {
+                        return Integer.compare(p1, p2);
+                    }
+                    return t1.tagName.compareTo(t2.tagName);
+                }).toList()) {
+
+            Label tagLabel = new Label(tag.tagName);
+            tagLabel.getStyleClass().add("tag");
+
+            if (tag instanceof seedu.address.model.tag.Allergy) {
+                tagLabel.getStyleClass().add("allergy-tag");
+            } else if (tag instanceof seedu.address.model.tag.MedicalCondition) {
+                tagLabel.getStyleClass().add("condition-tag");
+            } else {
+                tagLabel.getStyleClass().add("general-tag");
+            }
+
+            tags.getChildren().add(tagLabel);
+        }
         patient.getAppointment().ifPresentOrElse(
                 appt -> {
                     appointment.setText(appt.toString());
@@ -67,4 +88,14 @@ public class PersonCard extends UiPart<Region> {
                 }
         );
     }
+    private int getPriority(Tag tag) {
+        if (tag instanceof seedu.address.model.tag.Allergy) {
+            return 0;
+        }
+        if (tag instanceof seedu.address.model.tag.MedicalCondition) {
+            return 1;
+        }
+        return 2;
+    }
 }
+
