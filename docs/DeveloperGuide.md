@@ -267,6 +267,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* may vary in technological confidence but prefers efficient keyboard-driven interaction
 
 **Value proposition**: manage patient details like chronic conditions, severe allergies, and appointment scheduling faster than a typical mouse/GUI driven app
 
@@ -342,7 +343,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Doctor requests to list all patients. 
 2. DoctorWho shows the list of patients. 
 3. Doctor identifies the patient and uses the command to add a new allergy tag. 
-4. DoctorWho updates the patient record and displays the new allergy in the detail panel.
+4. DoctorWho updates the patient record and displays a success message.
 <br>Use case ends.
 
 Extensions
@@ -350,6 +351,22 @@ Extensions
 * 3a. The patient already has the specified allergy listed. 
   * 3a1. DoctorWho shows an error message: "Patient already has the allergy."
   <br>Use case resumes at step 3.
+
+**Use case: Delete a patient**
+
+**MSS**
+1. Doctor requests to list all patients.
+2. DoctorWho displays the list of patients.
+3. Doctor specifies the INDEX of the patient to delete.
+4. DoctorWho removes the specified patient from the system.
+5. DoctorWho removes all appointments associated with that patient.
+6. DoctorWho displays a confirmation message indicating the patient has been deleted.
+   <br>Use case ends.
+
+**Extensions**
+* 3a. The specified INDEX is invalid.
+    * 3a1.DoctorWho displays an error message indicating that the index is invalid.
+      <br>Use case ends.
 
 ### Non-Functional Requirements
 
@@ -359,9 +376,6 @@ Extensions
 4. Data must be saved locally in a human-readable JSON format to allow for manual inspection or external backup without using the app. 
 5. The system should handle corrupted data files by notifying the user and failing gracefully rather than crashing.
 6. The system should be fully functional in an offline environment with no dependency on external servers or internet connectivity.
-7. The system must be developed incrementally, ensuring that the `master` branch always contains a stable, runnable version of the product.
-
-*{More to be added}*
 
 ### Glossary
 
