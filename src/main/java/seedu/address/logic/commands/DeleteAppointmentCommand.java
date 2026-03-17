@@ -24,15 +24,12 @@ public class DeleteAppointmentCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS =
-            "Deleted appointment for Patient: %1$s";
-
-    public static final String MESSAGE_NO_APPOINTMENT =
-            "This patient does not have an appointment to delete.";
+            "Appointment deleted for %1$s.";
 
     private final Index targetIndex;
 
     /**
-        * @param targetIndex of the patient in the filtered patient list whose appointment is to be deleted
+     * @param targetIndex of the patient in the filtered patient list whose appointment is to be deleted
      */
     public DeleteAppointmentCommand(Index targetIndex) {
         requireNonNull(targetIndex);
@@ -41,7 +38,7 @@ public class DeleteAppointmentCommand extends Command {
 
     /**
      * Executes the delete appointment command by removing the appointment of the patient
-        * at the specified {@code targetIndex} in the filtered patient list.
+     * at the specified {@code targetIndex} in the filtered patient list.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -52,24 +49,21 @@ public class DeleteAppointmentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Patient personToEdit = lastShownList.get(targetIndex.getZeroBased());
-        if (personToEdit.getAppointment().isEmpty()) {
-            throw new CommandException(MESSAGE_NO_APPOINTMENT);
-        }
+        Patient patientToEdit = lastShownList.get(targetIndex.getZeroBased());
 
-        Patient updatedPerson = new Patient(
-            personToEdit.getName(),
-            personToEdit.getPhone(),
-            personToEdit.getEmail(),
-            personToEdit.getAddress(),
-            personToEdit.getTags(),
+        Patient updatedPatient = new Patient(
+            patientToEdit.getName(),
+            patientToEdit.getPhone(),
+            patientToEdit.getEmail(),
+            patientToEdit.getAddress(),
+            patientToEdit.getTags(),
             null
         );
 
-        model.setPerson(personToEdit, updatedPerson);
+        model.setPerson(patientToEdit, updatedPatient);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(
-                String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS, Messages.format(updatedPerson)));
+                String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS, updatedPatient.getName()));
     }
 
     @Override
