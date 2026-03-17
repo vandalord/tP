@@ -18,9 +18,9 @@ public class DeleteAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "dapt";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the appointment of the person identified "
-            + "by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + ": Deletes the appointment of the patient identified "
+            + "by the index number used in the displayed patient list.\n"
+            + "Parameters: PATIENT_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS =
@@ -32,7 +32,7 @@ public class DeleteAppointmentCommand extends Command {
     private final Index targetIndex;
 
     /**
-     * @param targetIndex of the person in the filtered person list whose appointment is to be deleted
+        * @param targetIndex of the patient in the filtered patient list whose appointment is to be deleted
      */
     public DeleteAppointmentCommand(Index targetIndex) {
         requireNonNull(targetIndex);
@@ -41,7 +41,7 @@ public class DeleteAppointmentCommand extends Command {
 
     /**
      * Executes the delete appointment command by removing the appointment of the patient
-     * at the specified {@code targetIndex} in the filtered person list.
+        * at the specified {@code targetIndex} in the filtered patient list.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
