@@ -58,8 +58,8 @@ public class CommandTestUtil {
     public static final String VALID_ALLERGY_DUST = "dust";
     public static final String VALID_ALLERGY_POLLEN = "pollen";
     public static final String VALID_MEDICALCONDITION_DIABETES = "diabetes";
-    public static final String ALLERGY_DESC_FRIEND = " " + PREFIX_ALLERGY + VALID_ALLERGY_SEAFOOD;
-    public static final String ALLERGY_DESC_HUSBAND = " " + PREFIX_ALLERGY + VALID_ALLERGY_NUTS;
+    public static final String ALLERGY_DESC_SEAFOOD = " " + PREFIX_ALLERGY + VALID_ALLERGY_SEAFOOD;
+    public static final String ALLERGY_DESC_NUTS = " " + PREFIX_ALLERGY + VALID_ALLERGY_NUTS;
     public static final String ALLERGY_DESC_DUST = " " + PREFIX_ALLERGY + VALID_ALLERGY_DUST;
     public static final String ALLERGY_DESC_POLLEN = " " + PREFIX_ALLERGY + VALID_ALLERGY_POLLEN;
     public static final String MEDICALCONDITION_DESC_DIABETES = " " + PREFIX_MEDICALCONDITION

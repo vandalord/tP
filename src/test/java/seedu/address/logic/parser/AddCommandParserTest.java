@@ -3,8 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_NUTS;
+import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_SEAFOOD;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
@@ -57,7 +57,7 @@ public class AddCommandParserTest {
         // whitespace only preamble
         Patient expectedPatient = new PatientBuilder(BOB).withAllergies(VALID_ALLERGY_SEAFOOD).build();
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ALLERGY_DESC_FRIEND, new AddCommand(expectedPatient));
+                + ADDRESS_DESC_BOB + ALLERGY_DESC_SEAFOOD, new AddCommand(expectedPatient));
 
         // multiple tags - all accepted
         Patient expectedPatientMultipleTags = new PatientBuilder(BOB)
@@ -65,7 +65,7 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + ALLERGY_DESC_HUSBAND + ALLERGY_DESC_FRIEND,
+                        + ALLERGY_DESC_NUTS + ALLERGY_DESC_SEAFOOD,
                 new AddCommand(expectedPatientMultipleTags));
 
         // allergy and medical condition
@@ -75,14 +75,14 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + ALLERGY_DESC_FRIEND + ALLERGY_DESC_PEANUT + CONDITION_DESC_ASTHMA,
+                        + ALLERGY_DESC_SEAFOOD + ALLERGY_DESC_PEANUT + CONDITION_DESC_ASTHMA,
                 new AddCommand(expectedPatientWithMedical));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ALLERGY_DESC_FRIEND;
+                + ADDRESS_DESC_BOB + ALLERGY_DESC_SEAFOOD;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -180,19 +180,19 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + ALLERGY_DESC_HUSBAND + ALLERGY_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + ALLERGY_DESC_NUTS + ALLERGY_DESC_SEAFOOD, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + ALLERGY_DESC_HUSBAND + ALLERGY_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
+                + ALLERGY_DESC_NUTS + ALLERGY_DESC_SEAFOOD, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + ALLERGY_DESC_HUSBAND + ALLERGY_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+                + ALLERGY_DESC_NUTS + ALLERGY_DESC_SEAFOOD, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + ALLERGY_DESC_HUSBAND + ALLERGY_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+                + ALLERGY_DESC_NUTS + ALLERGY_DESC_SEAFOOD, Address.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
@@ -204,7 +204,7 @@ public class AddCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ALLERGY_DESC_HUSBAND + ALLERGY_DESC_FRIEND,
+                + ADDRESS_DESC_BOB + ALLERGY_DESC_NUTS + ALLERGY_DESC_SEAFOOD,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         // invalid allergy
