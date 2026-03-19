@@ -28,7 +28,7 @@ Yes, if your clinic is still:
 2. Next, download the latest `doctorwho.jar` file from [here](https://github.com/AY2526S2-CS2103T-F10-1/tp/releases).
 
 3. Then, move the `doctorwho.jar` file to the folder where you want to keep your contacts (we suggest you place it in a new, empty folder!)
-   ![Moving .jar file to folder](images/ShiftJarFile.gif)
+   ![Moving .jar file to folder](images/ShiftingJarFile.gif)
 
 4. Now, open up a command terminal, go to the folder where `doctorwho.jar` is, and use the `java -jar doctorwho.jar` command to run the application. You've just taken your first step toward managing contacts quickly!
    ![Opening the .jar file](images/OpeningJarFile.gif)
