@@ -13,17 +13,17 @@ import javafx.scene.layout.Region;
 /**
  * Panel containing the list of patients.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class PatientListPanel extends UiPart<Region> {
+    private static final String FXML = "PatientListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(PatientListPanel.class);
 
     @FXML
     private ListView<Patient> personListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code PatientListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Patient> patientList) {
+    public PatientListPanel(ObservableList<Patient> patientList) {
         super(FXML);
         personListView.setItems(patientList);
         personListView.setCellFactory(listView -> new PersonListViewCell());

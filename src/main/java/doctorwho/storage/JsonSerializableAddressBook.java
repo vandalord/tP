@@ -28,8 +28,8 @@ class JsonSerializableAddressBook {
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("patients") List<JsonAdaptedPatient> patients,
-                                       @JsonProperty("patients") List<JsonAdaptedPatient> patient_2) {
-        List<JsonAdaptedPatient> patientsToLoad = patients != null ? patients : patient_2;
+                                       @JsonProperty("persons") List<JsonAdaptedPatient> legacyPersons) {
+        List<JsonAdaptedPatient> patientsToLoad = patients != null ? patients : legacyPersons;
         if (patientsToLoad != null) {
             this.patients.addAll(patientsToLoad);
         }
