@@ -106,7 +106,7 @@ public class AddAppointmentCommandTest {
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
 
         assertTrue(outOfBoundIndex.getZeroBased()
-                < model.getAddressBook().getPersonList().size());
+                < model.getAddressBook().getPatientList().size());
 
         AddAppointmentCommand command =
                 new AddAppointmentCommand(outOfBoundIndex, appointment);

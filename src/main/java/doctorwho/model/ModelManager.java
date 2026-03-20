@@ -33,7 +33,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPatients = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPatients = new FilteredList<>(this.addressBook.getPatientList());
     }
 
     public ModelManager() {
@@ -90,12 +90,12 @@ public class ModelManager implements Model {
     @Override
     public boolean hasPatient(Patient patient) {
         requireNonNull(patient);
-        return addressBook.hasPerson(patient);
+        return addressBook.hasPatient(patient);
     }
 
     @Override
     public void deletePatient(Patient target) {
-        addressBook.removePerson(target);
+        addressBook.removePatient(target);
     }
 
     @Override
@@ -108,7 +108,7 @@ public class ModelManager implements Model {
     public void setPatient(Patient target, Patient editedPatient) {
         requireAllNonNull(target, editedPatient);
 
-        addressBook.setPerson(target, editedPatient);
+        addressBook.setPatient(target, editedPatient);
     }
 
     //=========== Filtered Patient List Accessors =============================================================
