@@ -1,6 +1,11 @@
 package doctorwho.logic.commands;
 
-import static doctorwho.logic.commands.CommandTestUtil.*;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_ALLERGY_ASPIRIN;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_ALLERGY_SULFONAMIDES;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_CONDITION_DIABETES;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_CONDITION_HYPERTENSION;
+import static doctorwho.logic.commands.CommandTestUtil.assertCommandFailure;
+import static doctorwho.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static doctorwho.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;

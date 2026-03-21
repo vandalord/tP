@@ -1,6 +1,15 @@
 package doctorwho.logic.commands;
 
-import static doctorwho.logic.commands.CommandTestUtil.*;
+import static doctorwho.logic.commands.CommandTestUtil.DESC_AMY;
+import static doctorwho.logic.commands.CommandTestUtil.DESC_BOB;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_ALLERGY_ASPIRIN;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_ALLERGY_IBUPROFEN;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_CONDITION_DIABETES;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static doctorwho.logic.commands.CommandTestUtil.assertCommandFailure;
+import static doctorwho.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static doctorwho.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static doctorwho.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static doctorwho.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static doctorwho.testutil.TypicalPersons.getTypicalAddressBook;

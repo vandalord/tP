@@ -1,6 +1,14 @@
 package doctorwho.logic.commands;
 
-import static doctorwho.logic.commands.CommandTestUtil.*;
+import static doctorwho.logic.commands.CommandTestUtil.DESC_AMY;
+import static doctorwho.logic.commands.CommandTestUtil.DESC_BOB;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_ALLERGY_ASPIRIN;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_ALLERGY_IBUPROFEN;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_CONDITION_DIABETES;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,6 +21,7 @@ import doctorwho.logic.commands.EditCommand.EditPersonDescriptor;
 import doctorwho.model.tag.Allergy;
 import doctorwho.model.tag.Condition;
 import doctorwho.testutil.EditPersonDescriptorBuilder;
+
 public class EditPatientDescriptorTest {
 
     @Test

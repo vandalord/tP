@@ -1,6 +1,12 @@
 package doctorwho.model.patient;
 
-import static doctorwho.logic.commands.CommandTestUtil.*;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_ALLERGY_IBUPROFEN;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_CONDITION_DIABETES;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_CONDITION_HYPERTENSION;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static doctorwho.testutil.Assert.assertThrows;
 import static doctorwho.testutil.TypicalPersons.ALICE;
 import static doctorwho.testutil.TypicalPersons.BOB;
