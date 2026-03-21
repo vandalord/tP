@@ -1,7 +1,6 @@
 package doctorwho.logic.commands;
 
-import static doctorwho.logic.commands.CommandTestUtil.assertCommandFailure;
-import static doctorwho.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static doctorwho.logic.commands.CommandTestUtil.*;
 import static doctorwho.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -37,6 +36,73 @@ public class AddCommandIntegrationTest {
                 String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPatient)),
                 expectedModel);
     }
+
+    @Test
+    public void execute_newPersonWithMultipleAllergies_success() {
+        Patient validPatient = new PatientBuilder()
+            .withAllergies(VALID_ALLERGY_ASPIRIN, VALID_ALLERGY_SULFONAMIDES)
+            .build();
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addPerson(validPatient);
+
+        assertCommandSuccess(new AddCommand(validPatient), model,
+            String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPatient)),
+            expectedModel);
+    }
+
+    @Test
+    public void execute_newPersonWithAllergiesNoConditions_success() {
+        Patient validPatient = new PatientBuilder()
+            .withAllergies(VALID_ALLERGY_ASPIRIN)
+            .withConditions()
+            .build();
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addPerson(validPatient);
+
+        assertCommandSuccess(new AddCommand(validPatient), model,
+            String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPatient)),
+            expectedModel);
+    }
+
+    @Test
+    public void execute_newPersonWithConditionsNoAllergies_success() {
+        Patient validPatient = new PatientBuilder()
+            .withAllergies()
+            .withConditions(VALID_CONDITION_DIABETES)
+            .build();
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addPerson(validPatient);
+
+        assertCommandSuccess(new AddCommand(validPatient), model,
+            String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPatient)),
+            expectedModel);
+    }
+
+    @Test
+    public void execute_newPersonWithMultipleConditions_success() {
+        Patient validPatient = new PatientBuilder()
+            .withConditions(VALID_CONDITION_DIABETES, VALID_CONDITION_HYPERTENSION)
+            .build();
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addPerson(validPatient);
+
+        assertCommandSuccess(new AddCommand(validPatient), model,
+            String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPatient)),
+            expectedModel);
+    }
+
+    @Test
+    public void execute_newPersonWithAllergiesAndConditions_success() {
+        Patient validPatient = new PatientBuilder().withAllergies(VALID_ALLERGY_ASPIRIN)
+            .withConditions(VALID_CONDITION_DIABETES).build();
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addPerson(validPatient);
+
+        assertCommandSuccess(new AddCommand(validPatient), model,
+            String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPatient)),
+            expectedModel);
+    }
+
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {

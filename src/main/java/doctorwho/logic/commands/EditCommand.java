@@ -116,11 +116,11 @@ public class EditCommand extends Command {
                 .collect(Collectors.toSet());
 
         Set<Tag> finalAllergies = editPersonDescriptor.getAllergies().orElse(existingAllergies);
-        Set<Tag> finalconditions = editPersonDescriptor.getConditions().orElse(existingConditions);
+        Set<Tag> finalConditions = editPersonDescriptor.getConditions().orElse(existingConditions);
 
         Set<Tag> updatedTags = new HashSet<>();
         updatedTags.addAll(finalAllergies);
-        updatedTags.addAll(finalconditions);
+        updatedTags.addAll(finalConditions);
 
         return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
                 patientToEdit.getAppointment().orElse(null));

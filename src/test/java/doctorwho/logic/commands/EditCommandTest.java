@@ -1,14 +1,6 @@
 package doctorwho.logic.commands;
 
-import static doctorwho.logic.commands.CommandTestUtil.DESC_AMY;
-import static doctorwho.logic.commands.CommandTestUtil.DESC_BOB;
-import static doctorwho.logic.commands.CommandTestUtil.VALID_ALLERGY_ASPIRIN;
-import static doctorwho.logic.commands.CommandTestUtil.VALID_ALLERGY_IBUPROFEN;
-import static doctorwho.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static doctorwho.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static doctorwho.logic.commands.CommandTestUtil.assertCommandFailure;
-import static doctorwho.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static doctorwho.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static doctorwho.logic.commands.CommandTestUtil.*;
 import static doctorwho.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static doctorwho.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static doctorwho.testutil.TypicalPersons.getTypicalAddressBook;
@@ -199,7 +191,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_editMultipleconditions_success() {
+    public void execute_editMultipleConditions_success() {
         Patient patientToEdit = new PatientBuilder()
                 .withAllergies(VALID_ALLERGY_ASPIRIN)
                 .withConditions("diabetes", "hypertension")
@@ -244,6 +236,114 @@ public class EditCommandTest {
                 .build();
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
                 Messages.format(expectedPatient));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(patientToEdit, expectedPatient);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_resetAllergies_success() {
+        Patient patientToEdit = new PatientBuilder()
+            .withAllergies(VALID_ALLERGY_ASPIRIN)
+            .withConditions(VALID_CONDITION_DIABETES)
+            .build();
+        model.addPerson(patientToEdit);
+        Index lastIndex = Index.fromOneBased(model.getFilteredPersonList().size());
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+            .withAllergies()
+            .build();
+        EditCommand editCommand = new EditCommand(lastIndex, descriptor);
+
+        Patient expectedPatient = new PatientBuilder()
+            .withAllergies()
+            .withConditions(VALID_CONDITION_DIABETES)
+            .build();
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+            Messages.format(expectedPatient));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(patientToEdit, expectedPatient);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_resetConditions_success() {
+        Patient patientToEdit = new PatientBuilder()
+            .withAllergies(VALID_ALLERGY_ASPIRIN)
+            .withConditions(VALID_CONDITION_DIABETES)
+            .build();
+        model.addPerson(patientToEdit);
+        Index lastIndex = Index.fromOneBased(model.getFilteredPersonList().size());
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+            .withConditions()
+            .build();
+        EditCommand editCommand = new EditCommand(lastIndex, descriptor);
+
+        Patient expectedPatient = new PatientBuilder()
+            .withAllergies(VALID_ALLERGY_ASPIRIN)
+            .withConditions()
+            .build();
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+            Messages.format(expectedPatient));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(patientToEdit, expectedPatient);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_addAllergiesToPatientWithNone_success() {
+        Patient patientToEdit = new PatientBuilder()
+            .withAllergies()
+            .withConditions(VALID_CONDITION_DIABETES)
+            .build();
+        model.addPerson(patientToEdit);
+        Index lastIndex = Index.fromOneBased(model.getFilteredPersonList().size());
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+            .withAllergies(VALID_ALLERGY_ASPIRIN)
+            .build();
+        EditCommand editCommand = new EditCommand(lastIndex, descriptor);
+
+        Patient expectedPatient = new PatientBuilder()
+            .withAllergies(VALID_ALLERGY_ASPIRIN)
+            .withConditions(VALID_CONDITION_DIABETES)
+            .build();
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+            Messages.format(expectedPatient));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(patientToEdit, expectedPatient);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_addConditionsToPatientWithNone_success() {
+        Patient patientToEdit = new PatientBuilder()
+            .withAllergies(VALID_ALLERGY_ASPIRIN)
+            .withConditions()
+            .build();
+        model.addPerson(patientToEdit);
+        Index lastIndex = Index.fromOneBased(model.getFilteredPersonList().size());
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+            .withConditions(VALID_CONDITION_DIABETES)
+            .build();
+        EditCommand editCommand = new EditCommand(lastIndex, descriptor);
+
+        Patient expectedPatient = new PatientBuilder()
+            .withAllergies(VALID_ALLERGY_ASPIRIN)
+            .withConditions(VALID_CONDITION_DIABETES)
+            .build();
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+            Messages.format(expectedPatient));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(patientToEdit, expectedPatient);

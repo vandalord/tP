@@ -1,12 +1,6 @@
 package doctorwho.logic.commands;
 
-import static doctorwho.logic.commands.CommandTestUtil.DESC_AMY;
-import static doctorwho.logic.commands.CommandTestUtil.DESC_BOB;
-import static doctorwho.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static doctorwho.logic.commands.CommandTestUtil.VALID_ALLERGY_IBUPROFEN;
-import static doctorwho.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static doctorwho.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static doctorwho.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static doctorwho.logic.commands.CommandTestUtil.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -14,9 +8,39 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import doctorwho.logic.commands.EditCommand.EditPersonDescriptor;
+import doctorwho.model.tag.Allergy;
+import doctorwho.model.tag.Condition;
 import doctorwho.testutil.EditPersonDescriptorBuilder;
 
+import java.util.Set;
+
 public class EditPatientDescriptorTest {
+
+    @Test
+    public void isAnyFieldEdited_onlyAllergiesSet_returnsTrue() {
+        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        descriptor.setAllergies(Set.of(new Allergy(VALID_ALLERGY_ASPIRIN)));
+        assertTrue(descriptor.isAnyFieldEdited());
+    }
+
+    @Test
+    public void isAnyFieldEdited_onlyConditionsSet_returnsTrue() {
+        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        descriptor.setConditions(Set.of(new Condition(VALID_CONDITION_DIABETES)));
+        assertTrue(descriptor.isAnyFieldEdited());
+    }
+
+    @Test
+    public void copyConstructor_copiesAllergiesAndConditions() {
+        EditPersonDescriptor original = new EditPersonDescriptorBuilder()
+            .withAllergies(VALID_ALLERGY_ASPIRIN)
+            .withConditions(VALID_CONDITION_DIABETES)
+            .build();
+        EditPersonDescriptor copy = new EditPersonDescriptor(original);
+
+        assertEquals(original.getAllergies(), copy.getAllergies());
+        assertEquals(original.getConditions(), copy.getConditions());
+    }
 
     @Test
     public void equals() {
@@ -52,9 +76,14 @@ public class EditPatientDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different tags -> returns false
+        // different allergies -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAllergies(VALID_ALLERGY_IBUPROFEN).build();
         assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different conditions -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withConditions(VALID_CONDITION_DIABETES).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
     }
 
     @Test
