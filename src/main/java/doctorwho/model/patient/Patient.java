@@ -15,7 +15,7 @@ import doctorwho.model.tag.Condition;
 import doctorwho.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Patient in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Patient {
@@ -99,7 +99,7 @@ public class Patient {
      * Returns true if both patients have the same name.
      * This defines a weaker notion of equality between two patients.
      */
-    public boolean isSamePerson(Patient otherPatient) {
+    public boolean isSamePatient(Patient otherPatient) {
         if (otherPatient == this) {
             return true;
         }

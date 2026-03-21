@@ -17,32 +17,32 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import doctorwho.logic.commands.EditCommand.EditPersonDescriptor;
+import doctorwho.logic.commands.EditCommand.EditPatientDescriptor;
 import doctorwho.model.tag.Allergy;
 import doctorwho.model.tag.Condition;
-import doctorwho.testutil.EditPersonDescriptorBuilder;
+import doctorwho.testutil.EditPatientDescriptorBuilder;
 
 public class EditPatientDescriptorTest {
 
     @Test
     public void isAnyFieldEdited_onlyAllergiesSet_returnsTrue() {
-        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        EditPatientDescriptor descriptor = new EditPatientDescriptor();
         descriptor.setAllergies(Set.of(new Allergy(VALID_ALLERGY_ASPIRIN)));
         assertTrue(descriptor.isAnyFieldEdited());
     }
 
     @Test
     public void isAnyFieldEdited_onlyConditionsSet_returnsTrue() {
-        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        EditPatientDescriptor descriptor = new EditPatientDescriptor();
         descriptor.setConditions(Set.of(new Condition(VALID_CONDITION_DIABETES)));
         assertTrue(descriptor.isAnyFieldEdited());
     }
 
     @Test
     public void copyConstructor_copiesAllergiesAndConditions() {
-        EditPersonDescriptor original = new EditPersonDescriptorBuilder().withAllergies(VALID_ALLERGY_ASPIRIN)
+        EditPatientDescriptor original = new EditPatientDescriptorBuilder().withAllergies(VALID_ALLERGY_ASPIRIN)
             .withConditions(VALID_CONDITION_DIABETES).build();
-        EditPersonDescriptor copy = new EditPersonDescriptor(original);
+        EditPatientDescriptor copy = new EditPatientDescriptor(original);
 
         assertEquals(original.getAllergies(), copy.getAllergies());
         assertEquals(original.getConditions(), copy.getConditions());
@@ -51,7 +51,7 @@ public class EditPatientDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditPersonDescriptor descriptorWithSameValues = new EditPersonDescriptor(DESC_AMY);
+        EditPatientDescriptor descriptorWithSameValues = new EditPatientDescriptor(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -67,40 +67,40 @@ public class EditPatientDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+        EditPatientDescriptor editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
+        editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different email -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
+        editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different address -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
+        editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different allergies -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAllergies(VALID_ALLERGY_IBUPROFEN).build();
+        editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withAllergies(VALID_ALLERGY_IBUPROFEN).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different conditions -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withConditions(VALID_CONDITION_DIABETES).build();
+        editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withConditions(VALID_CONDITION_DIABETES).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
     @Test
     public void toStringMethod() {
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", phone="
-                + editPersonDescriptor.getPhone().orElse(null) + ", email="
-                + editPersonDescriptor.getEmail().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + ", allergies="
-                + editPersonDescriptor.getAllergies().orElse(null) + ", conditions="
-                + editPersonDescriptor.getConditions().orElse(null) + "}";
-        assertEquals(expected, editPersonDescriptor.toString());
+        EditPatientDescriptor EditPatientDescriptor = new EditPatientDescriptor();
+        String expected = EditPatientDescriptor.class.getCanonicalName() + "{name="
+                + EditPatientDescriptor.getName().orElse(null) + ", phone="
+                + EditPatientDescriptor.getPhone().orElse(null) + ", email="
+                + EditPatientDescriptor.getEmail().orElse(null) + ", address="
+                + EditPatientDescriptor.getAddress().orElse(null) + ", allergies="
+                + EditPatientDescriptor.getAllergies().orElse(null) + ", conditions="
+                + EditPatientDescriptor.getConditions().orElse(null) + "}";
+        assertEquals(expected, EditPatientDescriptor.toString());
     }
 }

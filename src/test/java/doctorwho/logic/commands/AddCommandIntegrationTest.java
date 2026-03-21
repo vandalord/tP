@@ -6,7 +6,7 @@ import static doctorwho.logic.commands.CommandTestUtil.VALID_CONDITION_DIABETES;
 import static doctorwho.logic.commands.CommandTestUtil.VALID_CONDITION_HYPERTENSION;
 import static doctorwho.logic.commands.CommandTestUtil.assertCommandFailure;
 import static doctorwho.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static doctorwho.testutil.TypicalPersons.getTypicalAddressBook;
+import static doctorwho.testutil.TypicalPatients.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,11 +31,11 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
+    public void execute_newPatient_success() {
         Patient validPatient = new PatientBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPatient);
+        expectedModel.addPatient(validPatient);
 
         assertCommandSuccess(new AddCommand(validPatient), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPatient)),
@@ -43,12 +43,12 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPersonWithMultipleAllergies_success() {
+    public void execute_newPatientWithMultipleAllergies_success() {
         Patient validPatient = new PatientBuilder()
             .withAllergies(VALID_ALLERGY_ASPIRIN, VALID_ALLERGY_SULFONAMIDES)
             .build();
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPatient);
+        expectedModel.addPatient(validPatient);
 
         assertCommandSuccess(new AddCommand(validPatient), model,
             String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPatient)),
@@ -56,13 +56,13 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPersonWithAllergiesNoConditions_success() {
+    public void execute_newPatientWithAllergiesNoConditions_success() {
         Patient validPatient = new PatientBuilder()
             .withAllergies(VALID_ALLERGY_ASPIRIN)
             .withConditions()
             .build();
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPatient);
+        expectedModel.addPatient(validPatient);
 
         assertCommandSuccess(new AddCommand(validPatient), model,
             String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPatient)),
@@ -70,13 +70,13 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPersonWithConditionsNoAllergies_success() {
+    public void execute_newPatientWithConditionsNoAllergies_success() {
         Patient validPatient = new PatientBuilder()
             .withAllergies()
             .withConditions(VALID_CONDITION_DIABETES)
             .build();
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPatient);
+        expectedModel.addPatient(validPatient);
 
         assertCommandSuccess(new AddCommand(validPatient), model,
             String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPatient)),
@@ -84,12 +84,12 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPersonWithMultipleConditions_success() {
+    public void execute_newPatientWithMultipleConditions_success() {
         Patient validPatient = new PatientBuilder()
             .withConditions(VALID_CONDITION_DIABETES, VALID_CONDITION_HYPERTENSION)
             .build();
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPatient);
+        expectedModel.addPatient(validPatient);
 
         assertCommandSuccess(new AddCommand(validPatient), model,
             String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPatient)),
@@ -97,11 +97,11 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPersonWithAllergiesAndConditions_success() {
+    public void execute_newPatientWithAllergiesAndConditions_success() {
         Patient validPatient = new PatientBuilder().withAllergies(VALID_ALLERGY_ASPIRIN)
             .withConditions(VALID_CONDITION_DIABETES).build();
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPatient);
+        expectedModel.addPatient(validPatient);
 
         assertCommandSuccess(new AddCommand(validPatient), model,
             String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPatient)),
@@ -109,10 +109,10 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Patient patientInList = model.getAddressBook().getPersonList().get(0);
+    public void execute_duplicatePatient_throwsCommandException() {
+        Patient patientInList = model.getAddressBook().getPatientList().get(0);
         assertCommandFailure(new AddCommand(patientInList), model,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+                AddCommand.MESSAGE_DUPLICATE_PATIENT);
     }
 
 }

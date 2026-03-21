@@ -1,13 +1,13 @@
 package doctorwho.logic;
 
-import static doctorwho.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static doctorwho.logic.Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX;
 import static doctorwho.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static doctorwho.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static doctorwho.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static doctorwho.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static doctorwho.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static doctorwho.testutil.Assert.assertThrows;
-import static doctorwho.testutil.TypicalPersons.AMY;
+import static doctorwho.testutil.TypicalPatients.AMY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
@@ -61,7 +61,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -83,8 +83,8 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getFilteredPatientList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPatientList().remove(0));
     }
 
     /**
@@ -174,7 +174,7 @@ public class LogicManagerTest {
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         Patient expectedPatient = new PatientBuilder(AMY).withAllergies().withConditions().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPatient);
+        expectedModel.addPatient(expectedPatient);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

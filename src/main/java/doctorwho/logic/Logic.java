@@ -35,7 +35,7 @@ public interface Logic {
     /**
      * Returns an unmodifiable view of the filtered list of patients
      */
-    ObservableList<Patient> getFilteredPersonList();
+    ObservableList<Patient> getFilteredPatientList();
 
     /**
      * Returns the user prefs' address book file path.

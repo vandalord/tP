@@ -4,7 +4,7 @@ import static doctorwho.commons.util.CollectionUtil.requireAllNonNull;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_APPOINTMENT_DURATION;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_APPOINTMENT_NOTE;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_APPOINTMENT_STARTTIME;
-import static doctorwho.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static doctorwho.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
@@ -42,7 +42,7 @@ public class AddAppointmentCommand extends Command {
             + PREFIX_APPOINTMENT_DURATION + "30 "
             + PREFIX_APPOINTMENT_NOTE + "Routine Checkup";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Added appointment to: %1$s";
+    public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Added appointment to: %1$s";
 
     private final Index index;
     private final Appointment appointment;
@@ -60,25 +60,25 @@ public class AddAppointmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Patient> lastShownList = model.getFilteredPersonList();
+        List<Patient> lastShownList = model.getFilteredPatientList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
         }
 
         Patient patientToEdit = lastShownList.get(index.getZeroBased());
-        Patient editedPatient = addAppointmentToPerson(patientToEdit, appointment);
+        Patient editedPatient = addAppointmentToPatient(patientToEdit, appointment);
 
-        model.setPerson(patientToEdit, editedPatient);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPatient)));
+        model.setPatient(patientToEdit, editedPatient);
+        model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
+        return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, Messages.format(editedPatient)));
     }
 
     /**
      * Creates and returns a {@code Patient} with the details of {@code patientToEdit}
      * with {@code appointment} added, regardless of whether {@code patientToEdit} has an existing appointment.
      */
-    private static Patient addAppointmentToPerson(Patient patientToEdit, Appointment appointmentToAdd) {
+    private static Patient addAppointmentToPatient(Patient patientToEdit, Appointment appointmentToAdd) {
         assert patientToEdit != null;
 
         Name name = patientToEdit.getName();

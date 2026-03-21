@@ -2,10 +2,10 @@ package doctorwho.logic.commands;
 
 import static doctorwho.logic.commands.CommandTestUtil.assertCommandFailure;
 import static doctorwho.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static doctorwho.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static doctorwho.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static doctorwho.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static doctorwho.testutil.TypicalPersons.getTypicalAddressBook;
+import static doctorwho.logic.commands.CommandTestUtil.showPatientAtIndex;
+import static doctorwho.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
+import static doctorwho.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
+import static doctorwho.testutil.TypicalPatients.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -31,8 +31,8 @@ public class DeleteAppointmentCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Patient patientToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteAppointmentCommand command = new DeleteAppointmentCommand(INDEX_FIRST_PERSON);
+        Patient patientToEdit = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
+        DeleteAppointmentCommand command = new DeleteAppointmentCommand(INDEX_FIRST_PATIENT);
 
         Patient updatedPatient = new PatientBuilder(patientToEdit)
                 .withAppointment(null)
@@ -42,59 +42,59 @@ public class DeleteAppointmentCommandTest {
                 updatedPatient.getName());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(patientToEdit, updatedPatient);
+        expectedModel.setPatient(patientToEdit, updatedPatient);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertTrue(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getAppointment().isEmpty());
+        assertTrue(model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased()).getAppointment().isEmpty());
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPatientList().size() + 1);
         DeleteAppointmentCommand command = new DeleteAppointmentCommand(outOfBoundIndex);
 
-        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_patientHasNoAppointment_success() {
-        Patient originalPatient = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Patient originalPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
         Patient patientWithoutAppointment = new PatientBuilder(originalPatient)
                 .withAppointment(null)
                 .build();
-        model.setPerson(originalPatient, patientWithoutAppointment);
+        model.setPatient(originalPatient, patientWithoutAppointment);
 
-        DeleteAppointmentCommand command = new DeleteAppointmentCommand(INDEX_FIRST_PERSON);
+        DeleteAppointmentCommand command = new DeleteAppointmentCommand(INDEX_FIRST_PATIENT);
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 patientWithoutAppointment.getName());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertTrue(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getAppointment().isEmpty());
+        assertTrue(model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased()).getAppointment().isEmpty());
     }
 
     @Test
     public void execute_invalidIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPatientAtIndex(model, INDEX_FIRST_PATIENT);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        Index outOfBoundIndex = INDEX_SECOND_PATIENT;
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPatientList().size());
 
         DeleteAppointmentCommand command = new DeleteAppointmentCommand(outOfBoundIndex);
-        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteAppointmentCommand deleteFirstCommand = new DeleteAppointmentCommand(INDEX_FIRST_PERSON);
-        DeleteAppointmentCommand deleteSecondCommand = new DeleteAppointmentCommand(INDEX_SECOND_PERSON);
+        DeleteAppointmentCommand deleteFirstCommand = new DeleteAppointmentCommand(INDEX_FIRST_PATIENT);
+        DeleteAppointmentCommand deleteSecondCommand = new DeleteAppointmentCommand(INDEX_SECOND_PATIENT);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteAppointmentCommand deleteFirstCommandCopy = new DeleteAppointmentCommand(INDEX_FIRST_PERSON);
+        DeleteAppointmentCommand deleteFirstCommandCopy = new DeleteAppointmentCommand(INDEX_FIRST_PATIENT);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

@@ -43,10 +43,10 @@ public class DeleteAppointmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Patient> lastShownList = model.getFilteredPersonList();
+        List<Patient> lastShownList = model.getFilteredPatientList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
         }
 
         Patient patientToEdit = lastShownList.get(targetIndex.getZeroBased());
@@ -60,8 +60,8 @@ public class DeleteAppointmentCommand extends Command {
                 null
         );
 
-        model.setPerson(patientToEdit, updatedPatient);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.setPatient(patientToEdit, updatedPatient);
+        model.updateFilteredPatientList(Model.PREDICATE_SHOW_ALL_PATIENTS);
         return new CommandResult(
                 String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS, updatedPatient.getName()));
     }

@@ -7,7 +7,7 @@ import doctorwho.commons.util.StringUtil;
 import doctorwho.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Patient}'s {@code Name} matches any of the keywords given.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Patient> {
     private final List<String> keywords;

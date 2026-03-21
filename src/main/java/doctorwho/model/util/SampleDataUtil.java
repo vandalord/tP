@@ -17,7 +17,7 @@ import doctorwho.model.tag.Condition;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static Patient[] getSamplePersons() {
+    public static Patient[] getSamplePatients() {
         return new Patient[]{
             new Patient(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                         new Address("Blk 30 Geylang Street 29, #06-40"),
@@ -43,8 +43,8 @@ public class SampleDataUtil {
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Patient samplePatient : getSamplePersons()) {
-            sampleAb.addPerson(samplePatient);
+        for (Patient samplePatient : getSamplePatients()) {
+            sampleAb.addPatient(samplePatient);
         }
         return sampleAb;
     }

@@ -24,7 +24,7 @@ import doctorwho.model.patient.Patient;
 /**
  * A utility class containing a list of {@code Patient} objects to be used in tests.
  */
-public class TypicalPersons {
+public class TypicalPatients {
 
     public static final Patient ALICE = new PatientBuilder().withName("Alice Pauline")
         .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
@@ -54,7 +54,7 @@ public class TypicalPersons {
     public static final Patient IDA = new PatientBuilder().withName("Ida Mueller").withPhone("8482131")
         .withEmail("hans@example.com").withAddress("chicago ave").build();
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
+    // Manually added - Patient's details found in {@code CommandTestUtil}
     public static final Patient AMY = new PatientBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
         .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withAllergies(VALID_ALLERGY_ASPIRIN)
         .withConditions(VALID_CONDITION_ASTHMA).build();
@@ -65,7 +65,7 @@ public class TypicalPersons {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersons() {
+    private TypicalPatients() {
     } // prevents instantiation
 
     /**
@@ -73,8 +73,8 @@ public class TypicalPersons {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Patient patient : getTypicalPersons()) {
-            ab.addPerson(patient);
+        for (Patient patient : getTypicalPatients()) {
+            ab.addPatient(patient);
         }
         return ab;
     }
@@ -82,7 +82,7 @@ public class TypicalPersons {
     /**
      * Returns a list of all typical patients.
      */
-    public static List<Patient> getTypicalPersons() {
+    public static List<Patient> getTypicalPatients() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

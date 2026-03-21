@@ -2,10 +2,10 @@ package doctorwho.logic.commands;
 
 import static doctorwho.logic.commands.CommandTestUtil.assertCommandFailure;
 import static doctorwho.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static doctorwho.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static doctorwho.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static doctorwho.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static doctorwho.testutil.TypicalPersons.getTypicalAddressBook;
+import static doctorwho.logic.commands.CommandTestUtil.showPatientAtIndex;
+import static doctorwho.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
+import static doctorwho.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
+import static doctorwho.testutil.TypicalPatients.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -35,57 +35,57 @@ public class AddAppointmentCommandTest {
 
     @Test
     public void execute_addAppointmentUnfilteredList_success() {
-        Patient patientToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Patient patientToEdit = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
 
         Patient editedPatient = new PatientBuilder(patientToEdit)
                 .withAppointment(appointment)
                 .build();
 
         AddAppointmentCommand addAppointmentCommand =
-                new AddAppointmentCommand(INDEX_FIRST_PERSON, appointment);
+                new AddAppointmentCommand(INDEX_FIRST_PATIENT, appointment);
 
         String expectedMessage = String.format(
-                AddAppointmentCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                AddAppointmentCommand.MESSAGE_EDIT_PATIENT_SUCCESS,
                 Messages.format(editedPatient));
 
         Model expectedModel = new ModelManager(
                 new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        expectedModel.setPerson(patientToEdit, editedPatient);
+        expectedModel.setPatient(patientToEdit, editedPatient);
 
         assertCommandSuccess(addAppointmentCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_addAppointmentFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPatientAtIndex(model, INDEX_FIRST_PATIENT);
 
         Patient patientInFilteredList =
-                model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+                model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
 
         Patient editedPatient = new PatientBuilder(patientInFilteredList)
                 .withAppointment(appointment)
                 .build();
 
         AddAppointmentCommand command =
-                new AddAppointmentCommand(INDEX_FIRST_PERSON, appointment);
+                new AddAppointmentCommand(INDEX_FIRST_PATIENT, appointment);
 
         String expectedMessage = String.format(
-                AddAppointmentCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                AddAppointmentCommand.MESSAGE_EDIT_PATIENT_SUCCESS,
                 Messages.format(editedPatient));
 
         Model expectedModel =
                 new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPatient);
+        expectedModel.setPatient(model.getFilteredPatientList().get(0), editedPatient);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidPatientIndexUnfilteredList_failure() {
         Index outOfBoundIndex =
-                Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+                Index.fromOneBased(model.getFilteredPatientList().size() + 1);
 
         AddAppointmentCommand command =
                 new AddAppointmentCommand(outOfBoundIndex, appointment);
@@ -93,20 +93,20 @@ public class AddAppointmentCommandTest {
         assertCommandFailure(
                 command,
                 model,
-                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
     }
 
     /**
      * Index larger than filtered list but within address book.
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    public void execute_invalidPatientIndexFilteredList_failure() {
+        showPatientAtIndex(model, INDEX_FIRST_PATIENT);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = INDEX_SECOND_PATIENT;
 
         assertTrue(outOfBoundIndex.getZeroBased()
-                < model.getAddressBook().getPersonList().size());
+                < model.getAddressBook().getPatientList().size());
 
         AddAppointmentCommand command =
                 new AddAppointmentCommand(outOfBoundIndex, appointment);
@@ -114,7 +114,7 @@ public class AddAppointmentCommandTest {
         assertCommandFailure(
                 command,
                 model,
-                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -123,11 +123,11 @@ public class AddAppointmentCommandTest {
                 new Appointment("12-03-2026 14:00", 60, "Consultation");
 
         AddAppointmentCommand standardCommand =
-                new AddAppointmentCommand(INDEX_FIRST_PERSON, appointment);
+                new AddAppointmentCommand(INDEX_FIRST_PATIENT, appointment);
 
         // same values -> true
         AddAppointmentCommand commandWithSameValues =
-                new AddAppointmentCommand(INDEX_FIRST_PERSON, appointment);
+                new AddAppointmentCommand(INDEX_FIRST_PATIENT, appointment);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> true
@@ -141,20 +141,20 @@ public class AddAppointmentCommandTest {
 
         // different index -> false
         assertFalse(standardCommand.equals(
-                new AddAppointmentCommand(INDEX_SECOND_PERSON, appointment)));
+                new AddAppointmentCommand(INDEX_SECOND_PATIENT, appointment)));
 
         // different appointment -> false
         assertFalse(standardCommand.equals(
-                new AddAppointmentCommand(INDEX_FIRST_PERSON, otherAppointment)));
+                new AddAppointmentCommand(INDEX_FIRST_PATIENT, otherAppointment)));
     }
 
     @Test
     public void toStringMethod() {
         AddAppointmentCommand command =
-                new AddAppointmentCommand(INDEX_FIRST_PERSON, appointment);
+                new AddAppointmentCommand(INDEX_FIRST_PATIENT, appointment);
 
         String expected = AddAppointmentCommand.class.getCanonicalName()
-                + "{index=" + INDEX_FIRST_PERSON
+                + "{index=" + INDEX_FIRST_PATIENT
                 + ", appointment=" + appointment + "}";
 
         assertEquals(expected, command.toString());
