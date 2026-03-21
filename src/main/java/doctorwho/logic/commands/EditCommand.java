@@ -111,12 +111,12 @@ public class EditCommand extends Command {
         Set<Tag> existingAllergies = existingTags.stream()
                 .filter(t -> t instanceof Allergy)
                 .collect(Collectors.toSet());
-        Set<Tag> existingconditions = existingTags.stream()
+        Set<Tag> existingConditions = existingTags.stream()
                 .filter(t -> t instanceof Condition)
                 .collect(Collectors.toSet());
 
         Set<Tag> finalAllergies = editPersonDescriptor.getAllergies().orElse(existingAllergies);
-        Set<Tag> finalconditions = editPersonDescriptor.getconditions().orElse(existingconditions);
+        Set<Tag> finalconditions = editPersonDescriptor.getConditions().orElse(existingConditions);
 
         Set<Tag> updatedTags = new HashSet<>();
         updatedTags.addAll(finalAllergies);
@@ -175,7 +175,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setAllergies(toCopy.allergies);
-            setconditions(toCopy.conditions);
+            setConditions(toCopy.conditions);
         }
 
         /**
@@ -238,7 +238,7 @@ public class EditCommand extends Command {
          * Sets {@code conditions} to this object's {@code conditions}.
          * A defensive copy of {@code conditions} is used internally.
          */
-        public void setconditions(Set<Tag> conditions) {
+        public void setConditions(Set<Tag> conditions) {
             this.conditions = (conditions != null) ? new HashSet<>(conditions) : null;
         }
 
@@ -247,7 +247,7 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code conditions} is null.
          */
-        public Optional<Set<Tag>> getconditions() {
+        public Optional<Set<Tag>> getConditions() {
             return (conditions != null)
                     ? Optional.of(Collections.unmodifiableSet(conditions)) : Optional.empty();
         }

@@ -47,15 +47,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tags = new HashSet<>();
-
-        for (String allergy : argMultimap.getAllValues(PREFIX_ALLERGY)) {
-            tags.add(ParserUtil.parseAllergy(allergy));
-        }
-
-        for (String condition : argMultimap.getAllValues(PREFIX_CONDITION)) {
-            tags.add(ParserUtil.parseCondition(condition));
-        }
+        Set<Tag> tags = ParserUtil.parseAllergies(argMultimap.getAllValues(PREFIX_ALLERGY));
+        tags.addAll(ParserUtil.parseConditions(argMultimap.getAllValues(PREFIX_CONDITION)));
 
         Patient patient = new Patient(name, phone, email, address, tags);
 

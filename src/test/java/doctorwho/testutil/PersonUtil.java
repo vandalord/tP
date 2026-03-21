@@ -64,8 +64,8 @@ public class PersonUtil {
                 allergies.forEach(s -> sb.append(PREFIX_ALLERGY).append(s.tagName).append(" "));
             }
         }
-        if (descriptor.getconditions().isPresent()) {
-            Set<Tag> conditions = descriptor.getconditions().get();
+        if (descriptor.getConditions().isPresent()) {
+            Set<Tag> conditions = descriptor.getConditions().get();
             if (conditions.isEmpty()) {
                 sb.append(PREFIX_CONDITION);
             } else {

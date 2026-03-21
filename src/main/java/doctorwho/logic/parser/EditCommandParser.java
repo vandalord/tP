@@ -9,16 +9,13 @@ import static doctorwho.logic.parser.CliSyntax.PREFIX_NAME;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_PHONE;
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
-
 import doctorwho.commons.core.index.Index;
 import doctorwho.logic.commands.EditCommand;
 import doctorwho.logic.commands.EditCommand.EditPersonDescriptor;
 import doctorwho.logic.parser.exceptions.ParseException;
-import doctorwho.model.tag.Tag;
+
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -34,8 +31,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_ALLERGY, PREFIX_CONDITION);
+            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_ALLERGY, PREFIX_CONDITION);
 
         Index index;
 
@@ -62,39 +59,24 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
 
-        // al/ for Allergy only
-        parseAllergiesForEdit(argMultimap.getAllValues(PREFIX_ALLERGY))
-                .ifPresent(editPersonDescriptor::setAllergies);
-
-        // c/ for MC only
-        parseconditionsForEdit(argMultimap.getAllValues(PREFIX_CONDITION))
-                .ifPresent(editPersonDescriptor::setconditions);
+        if (argMultimap.getValue(PREFIX_ALLERGY).isPresent()) {
+            Collection<String> allergies = argMultimap.getAllValues(PREFIX_ALLERGY);
+            Collection<String> allergySet = allergies.size() == 1 && allergies.contains("")
+                ? Collections.emptySet() : allergies;
+            editPersonDescriptor.setAllergies(ParserUtil.parseAllergies(allergySet));
+        }
+        if (argMultimap.getValue(PREFIX_CONDITION).isPresent()) {
+            Collection<String> conditions = argMultimap.getAllValues(PREFIX_CONDITION);
+            Collection<String> conditionSet = conditions.size() == 1 && conditions.contains("")
+                ? Collections.emptySet() : conditions;
+            editPersonDescriptor.setConditions(ParserUtil.parseConditions(conditionSet));
+        }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditCommand(index, editPersonDescriptor);
-    }
-
-    private Optional<Set<Tag>> parseAllergiesForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
-
-        if (tags.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseAllergies(tagSet));
-    }
-
-    private Optional<Set<Tag>> parseconditionsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
-
-        if (tags.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseConditions(tagSet));
     }
 
 }

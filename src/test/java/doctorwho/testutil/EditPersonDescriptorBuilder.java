@@ -48,7 +48,7 @@ public class EditPersonDescriptorBuilder {
                 .collect(Collectors.toSet());
 
         descriptor.setAllergies(allergies);
-        descriptor.setconditions(conditions);
+        descriptor.setConditions(conditions);
     }
 
     /**
@@ -99,7 +99,7 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withConditions(String... conditions) {
         Set<Tag> conditionset = Stream.of(conditions).map(Condition::new).collect(Collectors.toSet());
-        descriptor.setconditions(conditionset);
+        descriptor.setConditions(conditionset);
         return this;
     }
 
