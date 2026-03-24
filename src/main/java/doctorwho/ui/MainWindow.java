@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PatientListPanel patientListPanel;
+    private PatientDetailPanel patientDetailPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private StatusBarFooter statusBarFooter;
@@ -46,6 +47,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane patientListPanelPlaceholder;
+
+    @FXML
+    private StackPane patientDetailPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -118,6 +122,16 @@ public class MainWindow extends UiPart<Stage> {
         patientListPanel = new PatientListPanel(lst);
         patientListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
 
+        patientListPanel.getPatientListView().getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> {
+                    if (newValue != null) {
+                        patientDetailPanel.setPatient(newValue);
+                    }
+                });
+
+        patientDetailPanel = new PatientDetailPanel();
+        patientDetailPanelPlaceholder.getChildren().add(patientDetailPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -187,6 +201,11 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            Patient selected = patientListPanel.getPatientListView().getSelectionModel().getSelectedItem();
+            if (selected != null) {
+                patientDetailPanel.setPatient(selected);
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

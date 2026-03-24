@@ -368,3 +368,47 @@
 .tag.general-tag {
     -fx-background-color: #4dabf7 !important;
 }
+
+/* The main background of the right-hand panel */
+.patient-detail-panel {
+    -fx-background-color: #383838;
+}
+
+/* The style for the floating cards */
+.detail-card-section {
+    -fx-background-color: #454545;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #3e7b91;
+    -fx-border-width: 1;
+
+    /* Adds a subtle shadow behind the cards */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 5);
+}
+
+/* Make the scroll pane background blend in */
+.detail-scroll-pane, .detail-scroll-pane .viewport {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+/* Header text styling */
+.detail-header-section .cell_big_label {
+    -fx-text-fill: white;
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+}
+
+/* Titles inside the cards (like "Appointment") */
+.detail-section-title {
+    -fx-text-fill: #e8e8e8;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 5 0;
+}
+
+/* Ensures icon labels are styled nicely */
+.cell_small_label_container .label {
+    -fx-text-fill: #cccccc;
+    -fx-font-size: 14px;
+}
