@@ -119,6 +119,31 @@ public class ListAppointmentCommandTest {
     }
 
     @Test
+    public void execute_thenListCommand_showsAllPatients() {
+        Patient withAppointment = new PatientBuilder()
+                        .withName("With Appointment")
+                        .withAppointment(new Appointment("12-03-2026 11:00", 30, "visit"))
+                        .build();
+        Patient withoutAppointment = new PatientBuilder()
+                        .withName("Without Appointment")
+                        .withAppointment(null)
+                        .build();
+
+        AddressBook addressBook = new AddressBook();
+        addressBook.addPatient(withAppointment);
+        addressBook.addPatient(withoutAppointment);
+
+        Model model = new ModelManager(addressBook, new UserPrefs());
+        new ListAppointmentCommand().execute(model);
+
+        new ListCommand().execute(model);
+
+        assertEquals(2, model.getFilteredPatientList().size());
+        assertTrue(model.getFilteredPatientList().contains(withAppointment));
+        assertTrue(model.getFilteredPatientList().contains(withoutAppointment));
+    }
+
+    @Test
     public void equals() {
         LocalDate firstDate = LocalDate.of(2026, 3, 12);
         LocalDate secondDate = LocalDate.of(2026, 3, 13);

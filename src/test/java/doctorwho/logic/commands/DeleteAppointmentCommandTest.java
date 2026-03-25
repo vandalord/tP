@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import doctorwho.commons.core.index.Index;
@@ -18,6 +20,7 @@ import doctorwho.model.AddressBook;
 import doctorwho.model.Model;
 import doctorwho.model.ModelManager;
 import doctorwho.model.UserPrefs;
+import doctorwho.model.patient.Appointment;
 import doctorwho.model.patient.Patient;
 import doctorwho.testutil.PatientBuilder;
 
@@ -83,6 +86,43 @@ public class DeleteAppointmentCommandTest {
 
         DeleteAppointmentCommand command = new DeleteAppointmentCommand(outOfBoundIndex);
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_afterListAppointmentsCommand_resetsToShowAllPatients() {
+        Patient withAppointment = new PatientBuilder()
+            .withName("With Appointment")
+            .withAppointment(new Appointment("12-03-2026 08:00", 30, "A"))
+            .build();
+        Patient withoutAppointment = new PatientBuilder()
+            .withName("Without Appointment")
+            .withAppointment(null)
+            .build();
+
+        AddressBook addressBook = new AddressBook();
+        addressBook.addPatient(withAppointment);
+        addressBook.addPatient(withoutAppointment);
+
+        Model customModel = new ModelManager(addressBook, new UserPrefs());
+        new ListAppointmentCommand(LocalDate.of(2026, 3, 12)).execute(customModel);
+
+        DeleteAppointmentCommand command = new DeleteAppointmentCommand(INDEX_FIRST_PATIENT);
+
+        Patient updatedPatient = new PatientBuilder(withAppointment)
+            .withAppointment(null)
+            .build();
+
+        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
+            updatedPatient.getName());
+
+        Model expectedModel = new ModelManager(addressBook, new UserPrefs());
+        expectedModel.setPatient(withAppointment, updatedPatient);
+        expectedModel.updateFilteredPatientList(Model.PREDICATE_SHOW_ALL_PATIENTS);
+
+        assertCommandSuccess(command, customModel, expectedMessage, expectedModel);
+        assertEquals(2, customModel.getFilteredPatientList().size());
+        assertTrue(customModel.getFilteredPatientList().contains(updatedPatient));
+        assertTrue(customModel.getFilteredPatientList().contains(withoutAppointment));
     }
 
     @Test

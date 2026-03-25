@@ -129,8 +129,8 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPatientList(Predicate<Patient> predicate) {
         requireNonNull(predicate);
-        filteredPatients.setPredicate(predicate);
         sortedPatients.setComparator(null);
+        filteredPatients.setPredicate(predicate);
     }
 
     @Override

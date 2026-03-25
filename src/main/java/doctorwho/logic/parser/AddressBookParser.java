@@ -18,6 +18,7 @@ import doctorwho.logic.commands.EditCommand;
 import doctorwho.logic.commands.ExitCommand;
 import doctorwho.logic.commands.FindCommand;
 import doctorwho.logic.commands.HelpCommand;
+import doctorwho.logic.commands.ListAppointmentCommand;
 import doctorwho.logic.commands.ListCommand;
 import doctorwho.logic.parser.exceptions.ParseException;
 
@@ -84,6 +85,9 @@ public class AddressBookParser {
 
         case DeleteAppointmentCommand.COMMAND_WORD:
             return new DeleteAppointmentCommandParser().parse(arguments);
+
+        case ListAppointmentCommand.COMMAND_WORD:
+            return new ListAppointmentCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
