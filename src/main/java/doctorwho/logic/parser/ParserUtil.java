@@ -29,7 +29,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_POSITIVE_INTEGER = "Number is not a non-zero unsigned integer. "
             + "Ensure the number is more than 0 and less than or equal to " + Integer.MAX_VALUE;
-    public static final String MESSAGE_INVALID_DATE = "Date should be in 'DD-MM-YYYY' format.";
+    public static final String MESSAGE_INVALID_DATE = "Date should be in 'dd-MM-yyyy' format.";
 
     private static final DateTimeFormatter APPOINTMENT_DATE_FORMATTER = DateTimeFormatter
         .ofPattern("dd-MM-uuuu")

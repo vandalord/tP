@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Comparator;
 
 import org.junit.jupiter.api.Test;
 
@@ -91,6 +92,20 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPatientList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPatientList().remove(0));
+    }
+
+    @Test
+    public void updatePatientListComparator_nullComparator_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.updatePatientListComparator(null));
+    }
+
+    @Test
+    public void updatePatientListComparator_validComparator_noException() {
+        modelManager.addPatient(ALICE);
+        modelManager.updatePatientListComparator(Comparator.comparing(patient -> patient.getName().fullName));
+
+        assertEquals(1, modelManager.getFilteredPatientList().size());
+        assertEquals(ALICE, modelManager.getFilteredPatientList().get(0));
     }
 
     @Test

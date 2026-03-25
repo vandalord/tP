@@ -4,6 +4,7 @@ import static doctorwho.commons.util.CollectionUtil.requireAllNonNull;
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -126,6 +127,11 @@ public class ModelManager implements Model {
     public void updateFilteredPatientList(Predicate<Patient> predicate) {
         requireNonNull(predicate);
         filteredPatients.setPredicate(predicate);
+    }
+
+    @Override
+    public void updatePatientListComparator(Comparator<Patient> comparator) {
+        requireNonNull(comparator);
     }
 
     @Override
