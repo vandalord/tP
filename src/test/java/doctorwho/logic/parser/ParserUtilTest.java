@@ -1,12 +1,14 @@
 package doctorwho.logic.parser;
 
 import static doctorwho.logic.commands.CommandTestUtil.VALID_ALLERGY_ASPIRIN;
+import static doctorwho.logic.parser.ParserUtil.MESSAGE_INVALID_DATE;
 import static doctorwho.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static doctorwho.testutil.Assert.assertThrows;
 import static doctorwho.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -32,6 +34,8 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_ALLERGY = "#aspirin";
     private static final String INVALID_CONDITION = "#diabetes";
+    private static final String INVALID_APPOINTMENT_DATE = "2026-03-12";
+    private static final String INVALID_APPOINTMENT_DATE_NON_LEAP = "29-02-2026";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -39,6 +43,7 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_ALLERGY_1 = VALID_ALLERGY_ASPIRIN;
     private static final String VALID_CONDITION_2 = "diabetes";
+    private static final String VALID_APPOINTMENT_DATE = "12-03-2026";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -270,5 +275,35 @@ public class ParserUtilTest {
         List<String> conditionsList = new ArrayList<>();
         conditionsList.add("!!!");
         assertThrows(ParseException.class, () -> ParserUtil.parseConditions(conditionsList));
+    }
+
+    @Test
+    public void parseAppointmentDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAppointmentDate(null));
+    }
+
+    @Test
+    public void parseAppointmentDate_invalidFormat_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_DATE, () ->
+            ParserUtil.parseAppointmentDate(INVALID_APPOINTMENT_DATE));
+    }
+
+    @Test
+    public void parseAppointmentDate_nonLeapDate_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_DATE, () ->
+            ParserUtil.parseAppointmentDate(INVALID_APPOINTMENT_DATE_NON_LEAP));
+    }
+
+    @Test
+    public void parseAppointmentDate_validValueWithoutWhitespace_returnsLocalDate() throws Exception {
+        LocalDate expectedDate = LocalDate.of(2026, 3, 12);
+        assertEquals(expectedDate, ParserUtil.parseAppointmentDate(VALID_APPOINTMENT_DATE));
+    }
+
+    @Test
+    public void parseAppointmentDate_validValueWithWhitespace_returnsTrimmedLocalDate() throws Exception {
+        String dateWithWhitespace = WHITESPACE + VALID_APPOINTMENT_DATE + WHITESPACE;
+        LocalDate expectedDate = LocalDate.of(2026, 3, 12);
+        assertEquals(expectedDate, ParserUtil.parseAppointmentDate(dateWithWhitespace));
     }
 }

@@ -418,7 +418,7 @@ public class EditCommandTest {
         Index index = Index.fromOneBased(1);
         EditPatientDescriptor editPatientDescriptor = new EditPatientDescriptor();
         EditCommand editCommand = new EditCommand(index, editPatientDescriptor);
-        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", EditPatientDescriptor="
+        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editPatientDescriptor="
                 + editPatientDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }

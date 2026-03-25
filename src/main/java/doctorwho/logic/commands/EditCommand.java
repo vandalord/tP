@@ -58,18 +58,18 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the address book.";
 
     private final Index index;
-    private final EditPatientDescriptor EditPatientDescriptor;
+    private final EditPatientDescriptor editPatientDescriptor;
 
     /**
      * @param index                of the patient in the filtered patient list to edit
-     * @param EditPatientDescriptor details to edit the patient with
+     * @param editPatientDescriptor details to edit the patient with
      */
-    public EditCommand(Index index, EditPatientDescriptor EditPatientDescriptor) {
+    public EditCommand(Index index, EditPatientDescriptor editPatientDescriptor) {
         requireNonNull(index);
-        requireNonNull(EditPatientDescriptor);
+        requireNonNull(editPatientDescriptor);
 
         this.index = index;
-        this.EditPatientDescriptor = new EditPatientDescriptor(EditPatientDescriptor);
+        this.editPatientDescriptor = new EditPatientDescriptor(editPatientDescriptor);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class EditCommand extends Command {
         }
 
         Patient patientToEdit = lastShownList.get(index.getZeroBased());
-        Patient editedPatient = createEditedPatient(patientToEdit, EditPatientDescriptor);
+        Patient editedPatient = createEditedPatient(patientToEdit, editPatientDescriptor);
 
         if (!patientToEdit.isSamePatient(editedPatient) && model.hasPatient(editedPatient)) {
             throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
@@ -97,17 +97,17 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Patient} with the details of {@code PatientToEdit}
      * edited with {@code EditPatientDescriptor}.
      */
-    private static Patient createEditedPatient(Patient patientToEdit, EditPatientDescriptor EditPatientDescriptor) {
+    private static Patient createEditedPatient(Patient patientToEdit, EditPatientDescriptor editPatientDescriptor) {
         assert patientToEdit != null;
 
-        Name updatedName = EditPatientDescriptor.getName().orElse(patientToEdit.getName());
-        Phone updatedPhone = EditPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
-        Email updatedEmail = EditPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
-        Address updatedAddress = EditPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
+        Name updatedName = editPatientDescriptor.getName().orElse(patientToEdit.getName());
+        Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
+        Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
+        Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
 
         Set<Tag> existingTags = patientToEdit.getTags();
 
-        //Keep the existing tags of each type unless that specific type is being replaced
+        // Keep the existing tags of each type unless that specific type is being replaced.
         Set<Tag> existingAllergies = existingTags.stream()
                 .filter(t -> t instanceof Allergy)
                 .collect(Collectors.toSet());
@@ -115,8 +115,8 @@ public class EditCommand extends Command {
                 .filter(t -> t instanceof Condition)
                 .collect(Collectors.toSet());
 
-        Set<Tag> finalAllergies = EditPatientDescriptor.getAllergies().orElse(existingAllergies);
-        Set<Tag> finalConditions = EditPatientDescriptor.getConditions().orElse(existingConditions);
+        Set<Tag> finalAllergies = editPatientDescriptor.getAllergies().orElse(existingAllergies);
+        Set<Tag> finalConditions = editPatientDescriptor.getConditions().orElse(existingConditions);
 
         Set<Tag> updatedTags = new HashSet<>();
         updatedTags.addAll(finalAllergies);
@@ -139,14 +139,14 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
-                && EditPatientDescriptor.equals(otherEditCommand.EditPatientDescriptor);
+            && editPatientDescriptor.equals(otherEditCommand.editPatientDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("EditPatientDescriptor", EditPatientDescriptor)
+                .add("editPatientDescriptor", editPatientDescriptor)
                 .toString();
     }
 

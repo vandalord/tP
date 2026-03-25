@@ -44,39 +44,39 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
-        EditPatientDescriptor EditPatientDescriptor = new EditPatientDescriptor();
+        EditPatientDescriptor editPatientDescriptor = new EditPatientDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            EditPatientDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editPatientDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            EditPatientDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            editPatientDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            EditPatientDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+            editPatientDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            EditPatientDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+            editPatientDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
 
         if (argMultimap.getValue(PREFIX_ALLERGY).isPresent()) {
             Collection<String> allergies = argMultimap.getAllValues(PREFIX_ALLERGY);
             Collection<String> allergySet = allergies.size() == 1 && allergies.contains("")
                 ? Collections.emptySet() : allergies;
-            EditPatientDescriptor.setAllergies(ParserUtil.parseAllergies(allergySet));
+            editPatientDescriptor.setAllergies(ParserUtil.parseAllergies(allergySet));
         }
         if (argMultimap.getValue(PREFIX_CONDITION).isPresent()) {
             Collection<String> conditions = argMultimap.getAllValues(PREFIX_CONDITION);
             Collection<String> conditionSet = conditions.size() == 1 && conditions.contains("")
                 ? Collections.emptySet() : conditions;
-            EditPatientDescriptor.setConditions(ParserUtil.parseConditions(conditionSet));
+            editPatientDescriptor.setConditions(ParserUtil.parseConditions(conditionSet));
         }
 
-        if (!EditPatientDescriptor.isAnyFieldEdited()) {
+        if (!editPatientDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, EditPatientDescriptor);
+        return new EditCommand(index, editPatientDescriptor);
     }
 
 }

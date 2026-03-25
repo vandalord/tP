@@ -2,6 +2,10 @@ package doctorwho.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,6 +29,11 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_POSITIVE_INTEGER = "Number is not a non-zero unsigned integer. "
             + "Ensure the number is more than 0 and less than or equal to " + Integer.MAX_VALUE;
+    public static final String MESSAGE_INVALID_DATE = "Date should be in 'DD-MM-YYYY' format.";
+
+    private static final DateTimeFormatter APPOINTMENT_DATE_FORMATTER = DateTimeFormatter
+        .ofPattern("dd-MM-uuuu")
+        .withResolverStyle(ResolverStyle.STRICT);
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -150,5 +159,22 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_POSITIVE_INTEGER);
         }
         return Integer.parseInt(candidate);
+    }
+
+    /**
+     * Parses {@code date} into a {@code LocalDate} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the specified date is invalid.
+     */
+    public static LocalDate parseAppointmentDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+
+        try {
+            return LocalDate.parse(trimmedDate, APPOINTMENT_DATE_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(MESSAGE_INVALID_DATE, e);
+        }
     }
 }
