@@ -9,9 +9,6 @@ import static java.util.Objects.requireNonNull;
  */
 public abstract class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}-]+([ ][\\p{Alnum}-]+)*";
-
     public final String tagName;
 
     /**
@@ -21,16 +18,16 @@ public abstract class Tag {
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTagName(tagName), getMessageConstraints());
         this.tagName = tagName;
     }
+
+    protected abstract String getMessageConstraints();
 
     /**
      * Returns true if a given string is a valid tag name.
      */
-    public static boolean isValidTagName(String test) {
-        return test.matches(VALIDATION_REGEX);
-    }
+    public abstract boolean isValidTagName(String test);
 
     @Override
     public boolean equals(Object other) {
@@ -44,7 +41,8 @@ public abstract class Tag {
         }
 
         Tag otherTag = (Tag) other;
-        return tagName.equals(otherTag.tagName);
+        return tagName.equals(otherTag.tagName)
+            && this.getClass().equals(otherTag.getClass());
     }
 
     @Override

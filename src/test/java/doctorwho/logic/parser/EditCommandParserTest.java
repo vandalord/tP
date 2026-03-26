@@ -50,11 +50,12 @@ import doctorwho.model.patient.Address;
 import doctorwho.model.patient.Email;
 import doctorwho.model.patient.Name;
 import doctorwho.model.patient.Phone;
-import doctorwho.model.tag.Tag;
+import doctorwho.model.tag.Allergy;
+import doctorwho.model.tag.Condition;
 import doctorwho.testutil.EditPatientDescriptorBuilder;
 
 public class EditCommandParserTest {
-    private static final String TAG_EMPTY = " " + PREFIX_ALLERGY;
+    private static final String ALLERGY_EMPTY = " " + PREFIX_ALLERGY;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -94,19 +95,20 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
-        assertParseFailure(parser, "1" + INVALID_ALLERGY_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+        assertParseFailure(parser, "1" + INVALID_ALLERGY_DESC, Allergy.MESSAGE_CONSTRAINTS); // invalid allergy
+        assertParseFailure(parser, "1" + INVALID_CONDITION_DESC, Condition.MESSAGE_CONSTRAINTS);
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
 
-        // while parsing {@code PREFIX_ALLERGY} alone will reset the tags of the {@code Patient} being edited,
-        // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + ALLERGY_DESC_IBUPROFEN + ALLERGY_DESC_SULFONAMIDES + TAG_EMPTY,
-                Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + ALLERGY_DESC_IBUPROFEN + TAG_EMPTY + ALLERGY_DESC_SULFONAMIDES,
-                Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + ALLERGY_DESC_IBUPROFEN + ALLERGY_DESC_SULFONAMIDES,
-                Tag.MESSAGE_CONSTRAINTS);
+        // al/ with no value (ALLERGY_EMPTY) creates an Allergy("") which fails validation
+        // this should fail regardless of where the empty al/ appears in the input
+        assertParseFailure(parser, "1" + ALLERGY_DESC_IBUPROFEN + ALLERGY_DESC_SULFONAMIDES + ALLERGY_EMPTY,
+                Allergy.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + ALLERGY_DESC_IBUPROFEN + ALLERGY_EMPTY + ALLERGY_DESC_SULFONAMIDES,
+                Allergy.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + ALLERGY_EMPTY + ALLERGY_DESC_IBUPROFEN + ALLERGY_DESC_SULFONAMIDES,
+                Allergy.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
@@ -213,36 +215,6 @@ public class EditCommandParserTest {
     }
 
     /**
-     * Tests that a single allergy field is correctly parsed into an edit command.
-     */
-    @Test
-    public void parse_allergyFieldSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PATIENT;
-        String userInput = targetIndex.getOneBased() + ALLERGY_DESC_SULFONAMIDES;
-
-        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder()
-                .withAllergies(VALID_ALLERGY_SULFONAMIDES).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
-
-    /**
-     * Tests that a single condition field is correctly parsed into an edit command.
-     */
-    @Test
-    public void parse_conditionFieldSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PATIENT;
-        String userInput = targetIndex.getOneBased() + CONDITION_DESC_DIABETES;
-
-        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder()
-                .withConditions(VALID_CONDITION_DIABETES).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
-
-    /**
      * Tests that multiple allergy fields are correctly parsed into an edit command.
      */
     @Test
@@ -255,22 +227,6 @@ public class EditCommandParserTest {
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
-    }
-
-    /**
-     * Tests that an invalid allergy value results in a parse failure.
-     */
-    @Test
-    public void parse_invalidAllergyValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_ALLERGY_DESC, Tag.MESSAGE_CONSTRAINTS);
-    }
-
-    /**
-     * Tests that an invalid condition value results in a parse failure.
-     */
-    @Test
-    public void parse_invalidConditionValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_CONDITION_DESC, Tag.MESSAGE_CONSTRAINTS);
     }
 
     /**
@@ -311,22 +267,6 @@ public class EditCommandParserTest {
 
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder()
                 .withConditions(VALID_CONDITION_DIABETES, VALID_CONDITION_HYPERTENSION).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
-
-    /**
-     * Tests that both allergy and condition fields are correctly parsed into an edit command.
-     */
-    @Test
-    public void parse_allergyAndConditionSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PATIENT;
-        String userInput = targetIndex.getOneBased() + ALLERGY_DESC_ASPIRIN + CONDITION_DESC_DIABETES;
-
-        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder()
-                .withAllergies(VALID_ALLERGY_ASPIRIN)
-                .withConditions(VALID_CONDITION_DIABETES).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

@@ -61,22 +61,22 @@ class JsonAdaptedTag {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Tag toModelType() throws IllegalValueException {
-
-        String name = tagName;
-        String type = tagType;
-
-        if (!Tag.isValidTagName(name)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
-        }
-
-        switch (type) {
+        switch (tagType) {
         case "allergy":
-            return new Allergy(name);
+            try {
+                return new Allergy(tagName);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalValueException(Allergy.MESSAGE_CONSTRAINTS);
+            }
         case "condition":
-            return new Condition(name);
+            try {
+                return new Condition(tagName);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalValueException(Condition.MESSAGE_CONSTRAINTS);
+            }
         default:
-            throw new IllegalValueException("Unknown tag type: " + type
-                    + ". Tags must be prefixed with 'allergy:' or 'condition:'");
+            throw new IllegalValueException("Unknown tag type: " + tagType
+                + ". Tags must be prefixed with 'allergy:' or 'condition:'");
         }
     }
 }

@@ -120,11 +120,11 @@ public class ParserUtil {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            String trimmedAllergy = tagName.trim();
-            if (!Tag.isValidTagName(trimmedAllergy)) {
-                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            try {
+                tagSet.add(new Allergy(tagName.trim()));
+            } catch (IllegalArgumentException e) {
+                throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
             }
-            tagSet.add(new Allergy(trimmedAllergy));
         }
         return tagSet;
     }
@@ -139,11 +139,11 @@ public class ParserUtil {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            String trimmedCondition = tagName.trim();
-            if (!Tag.isValidTagName(trimmedCondition)) {
-                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            try {
+                tagSet.add(new Condition(tagName.trim()));
+            } catch (IllegalArgumentException e) {
+                throw new ParseException(Condition.MESSAGE_CONSTRAINTS);
             }
-            tagSet.add(new Condition(trimmedCondition));
         }
         return tagSet;
     }

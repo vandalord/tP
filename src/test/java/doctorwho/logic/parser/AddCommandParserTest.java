@@ -49,7 +49,8 @@ import doctorwho.model.patient.Email;
 import doctorwho.model.patient.Name;
 import doctorwho.model.patient.Patient;
 import doctorwho.model.patient.Phone;
-import doctorwho.model.tag.Tag;
+import doctorwho.model.tag.Allergy;
+import doctorwho.model.tag.Condition;
 import doctorwho.testutil.PatientBuilder;
 
 public class AddCommandParserTest {
@@ -224,10 +225,6 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
                 + ALLERGY_DESC_IBUPROFEN + ALLERGY_DESC_ASPIRIN, Address.MESSAGE_CONSTRAINTS);
 
-        // invalid tag
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_ALLERGY_DESC + ALLERGY_DESC_ASPIRIN, Tag.MESSAGE_CONSTRAINTS);
-
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC,
                 Name.MESSAGE_CONSTRAINTS);
@@ -239,10 +236,11 @@ public class AddCommandParserTest {
 
         // invalid allergy
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_ALLERGY_DESC, Tag.MESSAGE_CONSTRAINTS);
+            + INVALID_ALLERGY_DESC, Allergy.MESSAGE_CONSTRAINTS);
 
         // invalid condition
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_CONDITION_DESC, Tag.MESSAGE_CONSTRAINTS);
+            + INVALID_CONDITION_DESC, Condition.MESSAGE_CONSTRAINTS);
+
     }
 }

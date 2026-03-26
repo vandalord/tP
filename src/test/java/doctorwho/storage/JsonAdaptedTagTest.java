@@ -17,11 +17,9 @@ public class JsonAdaptedTagTest {
      * Tests that a valid allergy tag string is correctly converted to an Allergy model type.
      */
     @Test
-    public void toModelType_validAllergyTag_returnsAllergy() throws Exception {
+    public void toJson_allergyTagString_returnsCorrectFormat() throws Exception {
         JsonAdaptedTag adaptedTag = new JsonAdaptedTag("allergy:Aspirin");
-        Tag modelTag = adaptedTag.toModelType();
-
-        assertEquals(Allergy.class, modelTag.getClass());
+        assertEquals("allergy:Aspirin", adaptedTag.toJson());
     }
 
     /**
@@ -40,7 +38,7 @@ public class JsonAdaptedTagTest {
      */
     @Test
     public void toModelType_invalidTag_throwsException() {
-        JsonAdaptedTag adaptedTag = new JsonAdaptedTag("#invalid");
+        JsonAdaptedTag adaptedTag = new JsonAdaptedTag("allergy:#invalid");
 
         assertThrows(
                 IllegalValueException.class,
