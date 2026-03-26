@@ -123,6 +123,10 @@
     -fx-text-fill: #333333;
 }
 
+.list-cell:empty {
+    -fx-background-color: transparent;
+}
+
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
