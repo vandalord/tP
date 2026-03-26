@@ -1,8 +1,9 @@
 package doctorwho.model.tag;
 
-import static doctorwho.logic.commands.CommandTestUtil.VALID_ALLERGY_ASPIRIN;
 import static doctorwho.testutil.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -63,8 +64,6 @@ public class AllergyTest {
         assertDoesNotThrow(() -> new Allergy("amoxicillin clavulanate"));
         // exactly 30 characters
         assertDoesNotThrow(() -> new Allergy("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
-        // verify toString format
-        assertEquals("[Aspirin]", new Allergy(VALID_ALLERGY_ASPIRIN).toString());
     }
 
     @Test

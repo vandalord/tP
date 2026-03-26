@@ -1,6 +1,5 @@
 package doctorwho.model.tag;
 
-import static doctorwho.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -66,12 +65,20 @@ public class ConditionTest {
         assertDoesNotThrow(() -> new Condition("New-Patient Follow-Up"));
         // exactly 50 characters
         assertDoesNotThrow(() -> new Condition("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
-        // verify toString format
-        assertEquals("[Asthma]", new Condition("Asthma").toString());
     }
 
     @Test
     public void toString_correctFormat() {
         assertEquals("[diabetes]", new Condition("diabetes").toString());
+    }
+
+    @Test
+    public void equals_sameType_returnsTrue() {
+        assertEquals(new Condition("diabetes"), new Condition("diabetes"));
+    }
+
+    @Test
+    public void hashCode_sameTag_equal() {
+        assertEquals(new Condition("diabetes").hashCode(), new Condition("diabetes").hashCode());
     }
 }
