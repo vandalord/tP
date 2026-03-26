@@ -242,6 +242,6 @@ public class AddCommandParserTest {
 
         // invalid condition
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + " c/!!!", Tag.MESSAGE_CONSTRAINTS);
+                + " mc/!!!", Tag.MESSAGE_CONSTRAINTS);
     }
 }
