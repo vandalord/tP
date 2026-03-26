@@ -2,8 +2,7 @@ package doctorwho.model.tag;
 
 import static doctorwho.logic.commands.CommandTestUtil.VALID_ALLERGY_ASPIRIN;
 import static doctorwho.testutil.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -66,5 +65,25 @@ public class AllergyTest {
         assertDoesNotThrow(() -> new Allergy("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
         // verify toString format
         assertEquals("[Aspirin]", new Allergy(VALID_ALLERGY_ASPIRIN).toString());
+    }
+
+    @Test
+    public void equals_sameType_returnsTrue() {
+        assertEquals(new Allergy("ibuprofen"), new Allergy("ibuprofen"));
+    }
+
+    @Test
+    public void equals_differentType_returnsFalse() {
+        assertNotEquals(new Allergy("ibuprofen"), new Condition("ibuprofen"));
+    }
+
+    @Test
+    public void hashCode_sameTag_equal() {
+        assertEquals(new Allergy("ibuprofen").hashCode(), new Allergy("ibuprofen").hashCode());
+    }
+
+    @Test
+    public void toString_correctFormat() {
+        assertEquals("[ibuprofen]", new Allergy("ibuprofen").toString());
     }
 }

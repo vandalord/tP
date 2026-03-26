@@ -69,4 +69,9 @@ public class ConditionTest {
         // verify toString format
         assertEquals("[Asthma]", new Condition("Asthma").toString());
     }
+
+    @Test
+    public void toString_correctFormat() {
+        assertEquals("[diabetes]", new Condition("diabetes").toString());
+    }
 }
