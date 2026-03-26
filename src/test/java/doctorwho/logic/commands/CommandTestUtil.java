@@ -54,9 +54,9 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_ALLERGY_DESC = " " 
+    public static final String INVALID_ALLERGY_DESC = " "
                                             + PREFIX_ALLERGY + "ibuprofen*"; // '*' not allowed in allergies
-    public static final String INVALID_CONDITION_DESC = " " 
+    public static final String INVALID_CONDITION_DESC = " "
                                             + PREFIX_CONDITION + "diab*"; // '*' not allowed in conditions
 
     public static final String VALID_ALLERGY_SULFONAMIDES = "Sulfonamides";
