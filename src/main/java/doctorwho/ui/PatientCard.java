@@ -55,28 +55,33 @@ public class PatientCard extends UiPart<Region> {
         phone.setText(patient.getPhone().value);
         address.setText(patient.getAddress().value);
         email.setText(patient.getEmail().value);
-        for (Tag tag : patient.getTags().stream()
-                .sorted((t1, t2) -> {
-                    int p1 = getPriority(t1);
-                    int p2 = getPriority(t2);
-                    if (p1 != p2) {
-                        return Integer.compare(p1, p2);
-                    }
-                    return t1.tagName.compareTo(t2.tagName);
-                }).toList()) {
+        if (patient.getTags().isEmpty()) {
+            tags.setVisible(false);
+            tags.setManaged(false);
+        } else {
+            for (Tag tag : patient.getTags().stream()
+                    .sorted((t1, t2) -> {
+                        int p1 = getPriority(t1);
+                        int p2 = getPriority(t2);
+                        if (p1 != p2) {
+                            return Integer.compare(p1, p2);
+                        }
+                        return t1.tagName.compareTo(t2.tagName);
+                    }).toList()) {
 
-            Label tagLabel = new Label(tag.tagName);
-            tagLabel.getStyleClass().add("tag");
+                Label tagLabel = new Label(tag.tagName);
+                tagLabel.getStyleClass().add("tag");
 
-            if (tag instanceof Allergy) {
-                tagLabel.getStyleClass().add("allergy-tag");
-            } else if (tag instanceof Condition) {
-                tagLabel.getStyleClass().add("condition-tag");
-            } else {
-                tagLabel.getStyleClass().add("general-tag");
+                if (tag instanceof Allergy) {
+                    tagLabel.getStyleClass().add("allergy-tag");
+                } else if (tag instanceof Condition) {
+                    tagLabel.getStyleClass().add("condition-tag");
+                } else {
+                    tagLabel.getStyleClass().add("general-tag");
+                }
+
+                tags.getChildren().add(tagLabel);
             }
-
-            tags.getChildren().add(tagLabel);
         }
         patient.getAppointment().ifPresentOrElse(
                 appt -> {

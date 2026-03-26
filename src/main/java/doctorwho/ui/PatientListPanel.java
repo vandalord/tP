@@ -46,4 +46,11 @@ public class PatientListPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Returns the internal ListView of patients.
+     */
+    public ListView<Patient> getPatientListView() {
+        return patientListView;
+    }
+
 }

@@ -61,7 +61,7 @@ public class EditCommand extends Command {
     private final EditPatientDescriptor editPatientDescriptor;
 
     /**
-     * @param index                 of the patient in the filtered patient list to edit
+     * @param index                of the patient in the filtered patient list to edit
      * @param editPatientDescriptor details to edit the patient with
      */
     public EditCommand(Index index, EditPatientDescriptor editPatientDescriptor) {

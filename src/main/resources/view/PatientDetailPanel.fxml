@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:id="detailPane" styleClass="patient-detail-panel" prefWidth="600">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20" />
+    </padding>
+
+    <VBox spacing="2" VBox.vgrow="NEVER" styleClass="detail-header-section">
+        <Label fx:id="name" styleClass="cell_big_label" text="\$patientName" minWidth="0" minHeight="-Infinity"/>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+<!--            <Label fx:id="age" styleClass="cell_small_label" text="\$age" />-->
+            <Label styleClass="cell_small_label" text="/" />
+<!--            <Label fx:id="gender" styleClass="cell_small_label" text="\$gender" />-->
+        </HBox>
+    </VBox>
+
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="detail-scroll-pane">
+        <content>
+            <VBox spacing="15">
+                <padding>
+                    <Insets top="15" right="0" bottom="15" left="0" />
+                </padding>
+
+                <VBox styleClass="detail-card-section" spacing="10">
+                    <padding>
+                        <Insets top="15" right="15" bottom="15" left="15" />
+                    </padding>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT" styleClass="cell_small_label_container">
+                        <ImageView fitHeight="16" fitWidth="16" preserveRatio="true">
+                            <Image url="@/images/phone_icon.png" />
+                        </ImageView>
+                        <Label fx:id="phone" text="\$phone" />
+                    </HBox>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT" styleClass="cell_small_label_container">
+                        <ImageView fitHeight="16" fitWidth="16" preserveRatio="true">
+                            <Image url="@/images/mail_icon.png" />
+                        </ImageView>
+                        <Label fx:id="email" text="\$email" />
+                    </HBox>
+
+                    <HBox spacing="10" alignment="TOP_LEFT" styleClass="cell_small_label_container">
+                        <ImageView fitHeight="16" fitWidth="16" preserveRatio="true">
+                            <Image url="@/images/home_icon.png" />
+                        </ImageView>
+                        <Label fx:id="address" text="\$address" wrapText="true" />
+                    </HBox>
+
+                    <VBox spacing="5" alignment="TOP_LEFT" styleClass="cell_small_label_container">
+                        <Label text="Allergies:" styleClass="label-bright"/>
+                        <FlowPane fx:id="allergies" hgap="5" vgap="5" />
+                    </VBox>
+
+                    <VBox spacing="5" alignment="TOP_LEFT" styleClass="cell_small_label_container">
+                        <Label text="Medical Conditions:" styleClass="label-bright"/>
+                        <FlowPane fx:id="conditions" hgap="5" vgap="5" />
+                    </VBox>
+                </VBox>
+
+                <VBox styleClass="detail-card-section" spacing="10">
+                    <padding>
+                        <Insets top="15" right="15" bottom="15" left="15" />
+                    </padding>
+                    <Label text="Appointment" styleClass="detail-section-title" />
+
+                    <Label fx:id="appointment" styleClass="cell_small_label" text="No appointment scheduled" wrapText="true" />
+                </VBox>
+            </VBox>
+        </content>
+    </ScrollPane>
+</VBox>
