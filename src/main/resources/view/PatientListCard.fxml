@@ -36,7 +36,11 @@
       </FlowPane>
 
       <HBox spacing="5" alignment="CENTER_LEFT">
-        <Label text="NRIC:" styleClass="cell_small_label" />
+        <ImageView fitHeight="15" fitWidth="15" preserveRatio="true">
+          <image>
+            <Image url="@/images/nric_icon.png"/>
+          </image>
+        </ImageView>
         <Label fx:id="nric" styleClass="cell_small_label" text="$nric"/>
       </HBox>
 
