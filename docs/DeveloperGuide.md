@@ -506,15 +506,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * User is at the command prompt
 
 **Main Success Scenario:**
-1. User requests to find patients by keyword
-2. DoctorWho displays all patients whose names contain the keyword
-3. DoctorWho shows a success message
+1. User requests to find patients by specifying a name keyword
+2. DoctorWho displays all patients whose names contain the input keyword
+3. DoctorWho shows a success message with the number of patients found
 
    Use case ends.
 
 **Extensions:**
 
-* 1a. No patient name contains the keyword
+* 1a. No patients found matching the keyword
     * 1a1. DoctorWho shows a success message with 0 patients listed
 
       Use case ends.
@@ -525,7 +525,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 **Post conditions:**
-* Patient list panel displays only patients matching the keyword
+* Patient list panel displays only patients matching the input name
 
 ---
 
