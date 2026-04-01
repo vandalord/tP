@@ -14,6 +14,7 @@ import doctorwho.model.patient.Address;
 import doctorwho.model.patient.Appointment;
 import doctorwho.model.patient.Email;
 import doctorwho.model.patient.Name;
+import doctorwho.model.patient.Nric;
 import doctorwho.model.patient.Patient;
 import doctorwho.model.patient.Phone;
 import doctorwho.model.tag.Tag;
@@ -26,6 +27,7 @@ class JsonAdaptedPatient {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Patient's %s field is missing!";
 
     private final String name;
+    private final String nric;
     private final String phone;
     private final String email;
     private final String address;
@@ -38,13 +40,15 @@ class JsonAdaptedPatient {
      * Constructs a {@code JsonAdaptedPatient} with the given patient details.
      */
     @JsonCreator
-    public JsonAdaptedPatient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedPatient(@JsonProperty("name") String name, @JsonProperty("nric") String nric,
+                              @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
                               @JsonProperty("tags") List<JsonAdaptedTag> tags,
                               @JsonProperty("appointmentStart") String appointmentStart,
                               @JsonProperty("appointmentDuration") Integer appointmentDuration,
                               @JsonProperty("appointmentNote") String appointmentNote) {
         this.name = name;
+        this.nric = nric;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -61,6 +65,7 @@ class JsonAdaptedPatient {
      */
     public JsonAdaptedPatient(Patient source) {
         name = source.getName().fullName;
+        nric = source.getNric().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
@@ -94,6 +99,14 @@ class JsonAdaptedPatient {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
+
+        if (nric == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
+        }
+        if (!Nric.isValidNric(nric)) {
+            throw new IllegalValueException(Nric.MESSAGE_CONSTRAINTS);
+        }
+        final Nric modelNric = new Nric(nric);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
@@ -138,7 +151,7 @@ class JsonAdaptedPatient {
             modelAppointment = new Appointment(appointmentStart, appointmentDuration, appointmentNote);
         }
 
-        return new Patient(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelAppointment);
+        return new Patient(modelName, modelNric, modelPhone, modelEmail, modelAddress, modelTags, modelAppointment);
     }
 
 }

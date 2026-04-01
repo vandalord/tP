@@ -6,6 +6,7 @@ import static doctorwho.logic.commands.CommandTestUtil.VALID_CONDITION_DIABETES;
 import static doctorwho.logic.commands.CommandTestUtil.VALID_CONDITION_HYPERTENSION;
 import static doctorwho.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static doctorwho.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static doctorwho.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static doctorwho.testutil.Assert.assertThrows;
 import static doctorwho.testutil.TypicalPatients.ALICE;
@@ -79,6 +80,10 @@ public class PatientTest {
         editedAlice = new PatientBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        // different nric -> returns false
+        editedAlice = new PatientBuilder(ALICE).withNric(VALID_NRIC_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
         // different email -> returns false
         editedAlice = new PatientBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
@@ -115,8 +120,9 @@ public class PatientTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Patient.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+        String expected = Patient.class.getCanonicalName() + "{name=" + ALICE.getName() + ", nric=" + ALICE.getNric()
+            + ", phone=" + ALICE.getPhone() + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
+            + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

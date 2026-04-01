@@ -8,6 +8,7 @@ import doctorwho.logic.commands.EditCommand.EditPatientDescriptor;
 import doctorwho.model.patient.Address;
 import doctorwho.model.patient.Email;
 import doctorwho.model.patient.Name;
+import doctorwho.model.patient.Nric;
 import doctorwho.model.patient.Patient;
 import doctorwho.model.patient.Phone;
 import doctorwho.model.tag.Allergy;
@@ -35,6 +36,7 @@ public class EditPatientDescriptorBuilder {
     public EditPatientDescriptorBuilder(Patient patient) {
         descriptor = new EditPatientDescriptor();
         descriptor.setName(patient.getName());
+        descriptor.setNric(patient.getNric());
         descriptor.setPhone(patient.getPhone());
         descriptor.setEmail(patient.getEmail());
         descriptor.setAddress(patient.getAddress());
@@ -64,6 +66,14 @@ public class EditPatientDescriptorBuilder {
      */
     public EditPatientDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Nric} of the {@code EditPatientDescriptor} that we are building.
+     */
+    public EditPatientDescriptorBuilder withNric(String nric) {
+        descriptor.setNric(new Nric(nric));
         return this;
     }
 

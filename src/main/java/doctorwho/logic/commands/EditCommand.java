@@ -5,6 +5,7 @@ import static doctorwho.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_CONDITION;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_NAME;
+import static doctorwho.logic.parser.CliSyntax.PREFIX_NRIC;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_PHONE;
 import static doctorwho.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 import static java.util.Objects.requireNonNull;
@@ -26,6 +27,7 @@ import doctorwho.model.Model;
 import doctorwho.model.patient.Address;
 import doctorwho.model.patient.Email;
 import doctorwho.model.patient.Name;
+import doctorwho.model.patient.Nric;
 import doctorwho.model.patient.Patient;
 import doctorwho.model.patient.Phone;
 import doctorwho.model.tag.Allergy;
@@ -44,6 +46,7 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_NRIC + "NRIC] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
@@ -101,6 +104,7 @@ public class EditCommand extends Command {
         assert patientToEdit != null;
 
         Name updatedName = editPatientDescriptor.getName().orElse(patientToEdit.getName());
+        Nric updatedNric = editPatientDescriptor.getNric().orElse(patientToEdit.getNric());
         Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
         Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
         Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
@@ -122,7 +126,7 @@ public class EditCommand extends Command {
         updatedTags.addAll(finalAllergies);
         updatedTags.addAll(finalConditions);
 
-        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+        return new Patient(updatedName, updatedNric, updatedPhone, updatedEmail, updatedAddress, updatedTags,
                 patientToEdit.getAppointment().orElse(null));
     }
 
@@ -156,6 +160,7 @@ public class EditCommand extends Command {
      */
     public static class EditPatientDescriptor {
         private Name name;
+        private Nric nric;
         private Phone phone;
         private Email email;
         private Address address;
@@ -171,6 +176,7 @@ public class EditCommand extends Command {
          */
         public EditPatientDescriptor(EditPatientDescriptor toCopy) {
             setName(toCopy.name);
+            setNric(toCopy.nric);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
@@ -182,7 +188,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, allergies, conditions);
+            return CollectionUtil.isAnyNonNull(name, nric, phone, email, address, allergies, conditions);
         }
 
         public void setName(Name name) {
@@ -191,6 +197,14 @@ public class EditCommand extends Command {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
+        }
+
+        public void setNric(Nric nric) {
+            this.nric = nric;
+        }
+
+        public Optional<Nric> getNric() {
+            return Optional.ofNullable(nric);
         }
 
         public void setPhone(Phone phone) {
@@ -265,6 +279,7 @@ public class EditCommand extends Command {
 
             EditPatientDescriptor otherEditPatientDescriptor = (EditPatientDescriptor) other;
             return Objects.equals(name, otherEditPatientDescriptor.name)
+                    && Objects.equals(nric, otherEditPatientDescriptor.nric)
                     && Objects.equals(phone, otherEditPatientDescriptor.phone)
                     && Objects.equals(email, otherEditPatientDescriptor.email)
                     && Objects.equals(address, otherEditPatientDescriptor.address)
@@ -276,6 +291,7 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
+                    .add("nric", nric)
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)

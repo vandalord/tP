@@ -3,6 +3,7 @@
   "patients": [
     {
       "name": "Alice Pauline",
+      "nric": "S9435125A",
       "phone": "94351253",
       "email": "alice@example.com",
       "address": "123, Jurong West Ave 6, #08-111",
@@ -13,6 +14,7 @@
     },
     {
       "name": "Benson Meier",
+      "nric": "S9876543C",
       "phone": "98765432",
       "email": "johnd@example.com",
       "address": "311, Clementi Ave 2, #02-25",
@@ -23,6 +25,7 @@
     },
     {
       "name": "Carl Kurz",
+      "nric": "S9535256A",
       "phone": "95352563",
       "email": "heinz@example.com",
       "address": "wall street",
@@ -30,6 +33,7 @@
     },
     {
       "name": "Daniel Meier",
+      "nric": "S8765253Z",
       "phone": "87652533",
       "email": "cornelia@example.com",
       "address": "10th street",
@@ -39,6 +43,7 @@
     },
     {
       "name": "Elle Meyer",
+      "nric": "S0948222I",
       "phone": "9482224",
       "email": "werner@example.com",
       "address": "michegan ave",
@@ -46,6 +51,7 @@
     },
     {
       "name": "Fiona Kunz",
+      "nric": "S0948242C",
       "phone": "9482427",
       "email": "lydia@example.com",
       "address": "little tokyo",
@@ -55,6 +61,7 @@
     },
     {
       "name": "George Best",
+      "nric": "S0948244Z",
       "phone": "9482442",
       "email": "anna@example.com",
       "address": "4th street",

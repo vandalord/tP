@@ -5,6 +5,7 @@ import static doctorwho.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static doctorwho.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static doctorwho.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static doctorwho.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static doctorwho.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
 import static doctorwho.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static doctorwho.testutil.Assert.assertThrows;
 import static doctorwho.testutil.TypicalPatients.AMY;
@@ -170,7 +171,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + NRIC_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         Patient expectedPatient = new PatientBuilder(AMY).withAllergies().withConditions().build();
         ModelManager expectedModel = new ModelManager();
