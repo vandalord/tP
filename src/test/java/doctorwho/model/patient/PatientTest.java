@@ -4,6 +4,7 @@ import static doctorwho.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static doctorwho.logic.commands.CommandTestUtil.VALID_ALLERGY_IBUPROFEN;
 import static doctorwho.logic.commands.CommandTestUtil.VALID_CONDITION_DIABETES;
 import static doctorwho.logic.commands.CommandTestUtil.VALID_CONDITION_HYPERTENSION;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_DOB_BOB;
 import static doctorwho.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static doctorwho.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static doctorwho.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
@@ -84,6 +85,10 @@ public class PatientTest {
         editedAlice = new PatientBuilder(ALICE).withNric(VALID_NRIC_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        // different dob -> returns false
+        editedAlice = new PatientBuilder(ALICE).withDateOfBirth(VALID_DOB_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
         // different email -> returns false
         editedAlice = new PatientBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
@@ -108,9 +113,9 @@ public class PatientTest {
 
         // same allergies and conditions -> returns true
         Patient patientWithBoth = new PatientBuilder(ALICE).withAllergies(VALID_ALLERGY_IBUPROFEN)
-            .withConditions(VALID_CONDITION_DIABETES).build();
+                .withConditions(VALID_CONDITION_DIABETES).build();
         Patient patientWithSameBoth = new PatientBuilder(ALICE).withAllergies(VALID_ALLERGY_IBUPROFEN)
-            .withConditions(VALID_CONDITION_DIABETES).build();
+                .withConditions(VALID_CONDITION_DIABETES).build();
         assertTrue(patientWithBoth.equals(patientWithSameBoth));
 
         // different conditions -> returns false
@@ -120,9 +125,15 @@ public class PatientTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Patient.class.getCanonicalName() + "{name=" + ALICE.getName() + ", nric=" + ALICE.getNric()
-            + ", phone=" + ALICE.getPhone() + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
-            + ", tags=" + ALICE.getTags() + "}";
+        String expected = Patient.class.getCanonicalName()
+                + "{name=" + ALICE.getName()
+                + ", nric=" + ALICE.getNric()
+                + ", dob=" + ALICE.getDateOfBirth()
+                + ", phone=" + ALICE.getPhone()
+                + ", email=" + ALICE.getEmail()
+                + ", address=" + ALICE.getAddress()
+                + ", tags=" + ALICE.getTags()
+                + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

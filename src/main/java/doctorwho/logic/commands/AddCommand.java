@@ -3,6 +3,7 @@ package doctorwho.logic.commands;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_CONDITION;
+import static doctorwho.logic.parser.CliSyntax.PREFIX_DOB;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_NAME;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_NRIC;
@@ -26,6 +27,7 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_NRIC + "NRIC "
+            + PREFIX_DOB + "DATE_OF_BIRTH "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "

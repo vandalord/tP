@@ -55,6 +55,7 @@ public class DeleteAppointmentCommand extends Command {
         Patient updatedPatient = new Patient(
                 patientToEdit.getName(),
                 patientToEdit.getNric(),
+                patientToEdit.getDateOfBirth(),
                 patientToEdit.getPhone(),
                 patientToEdit.getEmail(),
                 patientToEdit.getAddress(),

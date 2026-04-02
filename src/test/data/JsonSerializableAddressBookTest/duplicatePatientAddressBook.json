@@ -3,6 +3,7 @@
     {
       "name": "Alice Pauline",
       "nric": "S9435125A",
+      "dob": "01-04-2003",
       "phone": "94351253",
       "email": "alice@example.com",
       "address": "123, Jurong West Ave 6, #08-111",
@@ -13,6 +14,7 @@
     {
       "name": "Alice Pauline",
       "nric": "S9435125A",
+      "dob": "02-04-2003",
       "phone": "94351253",
       "email": "pauline@example.com",
       "address": "4th street"

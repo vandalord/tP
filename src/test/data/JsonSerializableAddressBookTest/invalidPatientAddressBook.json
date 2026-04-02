@@ -2,6 +2,7 @@
   "patients": [ {
     "name": "Hans Muster",
     "nric": "S1234567A",
+    "dob": "01-04-2003",
     "phone": "9482424",
     "email": "invalid@email!3e",
     "address": "4th street"

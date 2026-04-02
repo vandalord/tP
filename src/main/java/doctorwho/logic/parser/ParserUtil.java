@@ -14,6 +14,7 @@ import doctorwho.commons.core.index.Index;
 import doctorwho.commons.util.StringUtil;
 import doctorwho.logic.parser.exceptions.ParseException;
 import doctorwho.model.patient.Address;
+import doctorwho.model.patient.DateOfBirth;
 import doctorwho.model.patient.Email;
 import doctorwho.model.patient.Name;
 import doctorwho.model.patient.Nric;
@@ -34,8 +35,8 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_DATE = "Date is invalid.";
 
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter
-        .ofPattern("dd-MM-uuuu")
-        .withResolverStyle(ResolverStyle.STRICT);
+            .ofPattern("dd-MM-uuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -79,6 +80,21 @@ public class ParserUtil {
             throw new ParseException(Nric.MESSAGE_CONSTRAINTS);
         }
         return new Nric(trimmedNric);
+    }
+
+    /**
+     * Parses a {@code String dob} into a {@code DateOfBirth}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dob} is invalid.
+     */
+    public static DateOfBirth parseDateOfBirth(String dob) throws ParseException {
+        requireNonNull(dob);
+        String trimmedDob = dob.trim();
+        if (!DateOfBirth.isValidDateOfBirth(trimmedDob)) {
+            throw new ParseException(DateOfBirth.MESSAGE_CONSTRAINTS);
+        }
+        return new DateOfBirth(trimmedDob);
     }
 
     /**

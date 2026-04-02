@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import doctorwho.logic.commands.EditCommand.EditPatientDescriptor;
 import doctorwho.model.patient.Address;
+import doctorwho.model.patient.DateOfBirth;
 import doctorwho.model.patient.Email;
 import doctorwho.model.patient.Name;
 import doctorwho.model.patient.Nric;
@@ -37,6 +38,7 @@ public class EditPatientDescriptorBuilder {
         descriptor = new EditPatientDescriptor();
         descriptor.setName(patient.getName());
         descriptor.setNric(patient.getNric());
+        descriptor.setDateOfBirth(patient.getDateOfBirth());
         descriptor.setPhone(patient.getPhone());
         descriptor.setEmail(patient.getEmail());
         descriptor.setAddress(patient.getAddress());
@@ -74,6 +76,14 @@ public class EditPatientDescriptorBuilder {
      */
     public EditPatientDescriptorBuilder withNric(String nric) {
         descriptor.setNric(new Nric(nric));
+        return this;
+    }
+
+    /**
+     * Sets the {@code DateOfBirth} of the {@code EditPatientDescriptor} that we are building.
+     */
+    public EditPatientDescriptorBuilder withDateOfBirth(String dob) {
+        descriptor.setDateOfBirth(new DateOfBirth(dob));
         return this;
     }
 

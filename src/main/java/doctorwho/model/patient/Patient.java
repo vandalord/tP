@@ -24,6 +24,7 @@ public class Patient {
     // Identity fields
     private final Name name;
     private final Nric nric;
+    private final DateOfBirth dob;
     private final Phone phone;
     private final Email email;
 
@@ -35,11 +36,12 @@ public class Patient {
     /**
      * Every field must be present and not null.
      */
-    public Patient(Name name, Nric nric, Phone phone, Email email, Address address, Set<Tag> tags,
+    public Patient(Name name, Nric nric, DateOfBirth dob, Phone phone, Email email, Address address, Set<Tag> tags,
                    Appointment appointment) {
         requireAllNonNull(name, nric, phone, email, address, tags);
         this.name = name;
         this.nric = nric;
+        this.dob = dob;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -47,8 +49,8 @@ public class Patient {
         this.appointment = appointment;
     }
 
-    public Patient(Name name, Nric nric, Phone phone, Email email, Address address, Set<Tag> tags) {
-        this(name, nric, phone, email, address, tags, null);
+    public Patient(Name name, Nric nric, DateOfBirth dob, Phone phone, Email email, Address address, Set<Tag> tags) {
+        this(name, nric, dob, phone, email, address, tags, null);
     }
 
     public Name getName() {
@@ -61,6 +63,10 @@ public class Patient {
 
     public Nric getNric() {
         return nric;
+    }
+
+    public DateOfBirth getDateOfBirth() {
+        return dob;
     }
 
     public Email getEmail() {
@@ -150,7 +156,8 @@ public class Patient {
 
         Patient otherPatient = (Patient) other;
         return name.equals(otherPatient.name)
-            && nric.equals(otherPatient.nric)
+                && nric.equals(otherPatient.nric)
+                && dob.equals(otherPatient.dob)
                 && phone.equals(otherPatient.phone)
                 && email.equals(otherPatient.email)
                 && address.equals(otherPatient.address)
@@ -160,7 +167,7 @@ public class Patient {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, nric, phone, email, address, tags);
+        return Objects.hash(name, nric, dob, phone, email, address, tags);
     }
 
     @Override
@@ -168,6 +175,7 @@ public class Patient {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("nric", nric)
+                .add("dob", dob)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)

@@ -3,6 +3,7 @@ package doctorwho.logic.commands;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_CONDITION;
+import static doctorwho.logic.parser.CliSyntax.PREFIX_DOB;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_NAME;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_NRIC;
@@ -25,6 +26,7 @@ import doctorwho.logic.Messages;
 import doctorwho.logic.commands.exceptions.CommandException;
 import doctorwho.model.Model;
 import doctorwho.model.patient.Address;
+import doctorwho.model.patient.DateOfBirth;
 import doctorwho.model.patient.Email;
 import doctorwho.model.patient.Name;
 import doctorwho.model.patient.Nric;
@@ -47,6 +49,7 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_NRIC + "NRIC] "
+            + "[" + PREFIX_DOB + "DATE_OF_BIRTH] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
@@ -64,7 +67,7 @@ public class EditCommand extends Command {
     private final EditPatientDescriptor editPatientDescriptor;
 
     /**
-     * @param index                of the patient in the filtered patient list to edit
+     * @param index                 of the patient in the filtered patient list to edit
      * @param editPatientDescriptor details to edit the patient with
      */
     public EditCommand(Index index, EditPatientDescriptor editPatientDescriptor) {
@@ -105,6 +108,7 @@ public class EditCommand extends Command {
 
         Name updatedName = editPatientDescriptor.getName().orElse(patientToEdit.getName());
         Nric updatedNric = editPatientDescriptor.getNric().orElse(patientToEdit.getNric());
+        DateOfBirth updatedDob = editPatientDescriptor.getDateOfBirth().orElse(patientToEdit.getDateOfBirth());
         Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
         Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
         Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
@@ -126,8 +130,8 @@ public class EditCommand extends Command {
         updatedTags.addAll(finalAllergies);
         updatedTags.addAll(finalConditions);
 
-        return new Patient(updatedName, updatedNric, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                patientToEdit.getAppointment().orElse(null));
+        return new Patient(updatedName, updatedNric, updatedDob, updatedPhone, updatedEmail, updatedAddress,
+                updatedTags, patientToEdit.getAppointment().orElse(null));
     }
 
     @Override
@@ -161,6 +165,7 @@ public class EditCommand extends Command {
     public static class EditPatientDescriptor {
         private Name name;
         private Nric nric;
+        private DateOfBirth dob;
         private Phone phone;
         private Email email;
         private Address address;
@@ -177,6 +182,7 @@ public class EditCommand extends Command {
         public EditPatientDescriptor(EditPatientDescriptor toCopy) {
             setName(toCopy.name);
             setNric(toCopy.nric);
+            setDateOfBirth(toCopy.dob);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
@@ -188,7 +194,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, nric, phone, email, address, allergies, conditions);
+            return CollectionUtil.isAnyNonNull(name, nric, dob, phone, email, address, allergies, conditions);
         }
 
         public void setName(Name name) {
@@ -205,6 +211,14 @@ public class EditCommand extends Command {
 
         public Optional<Nric> getNric() {
             return Optional.ofNullable(nric);
+        }
+
+        public void setDateOfBirth(DateOfBirth dob) {
+            this.dob = dob;
+        }
+
+        public Optional<DateOfBirth> getDateOfBirth() {
+            return Optional.ofNullable(dob);
         }
 
         public void setPhone(Phone phone) {
@@ -280,6 +294,7 @@ public class EditCommand extends Command {
             EditPatientDescriptor otherEditPatientDescriptor = (EditPatientDescriptor) other;
             return Objects.equals(name, otherEditPatientDescriptor.name)
                     && Objects.equals(nric, otherEditPatientDescriptor.nric)
+                    && Objects.equals(dob, otherEditPatientDescriptor.dob)
                     && Objects.equals(phone, otherEditPatientDescriptor.phone)
                     && Objects.equals(email, otherEditPatientDescriptor.email)
                     && Objects.equals(address, otherEditPatientDescriptor.address)
@@ -292,6 +307,7 @@ public class EditCommand extends Command {
             return new ToStringBuilder(this)
                     .add("name", name)
                     .add("nric", nric)
+                    .add("dob", dob)
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)

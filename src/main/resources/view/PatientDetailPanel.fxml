@@ -17,7 +17,7 @@
     <VBox spacing="2" VBox.vgrow="NEVER" styleClass="detail-header-section">
         <Label fx:id="name" styleClass="cell_big_label" text="\$patientName" minWidth="0" minHeight="-Infinity"/>
         <HBox spacing="10" alignment="CENTER_LEFT">
-<!--            <Label fx:id="age" styleClass="cell_small_label" text="\$age" />-->
+            <Label fx:id="age" styleClass="cell_small_label" text="\$age" />
             <Label styleClass="cell_small_label" text="/" />
 <!--            <Label fx:id="gender" styleClass="cell_small_label" text="\$gender" />-->
         </HBox>

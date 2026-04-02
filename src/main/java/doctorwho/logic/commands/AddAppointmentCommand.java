@@ -17,6 +17,7 @@ import doctorwho.logic.commands.exceptions.CommandException;
 import doctorwho.model.Model;
 import doctorwho.model.patient.Address;
 import doctorwho.model.patient.Appointment;
+import doctorwho.model.patient.DateOfBirth;
 import doctorwho.model.patient.Email;
 import doctorwho.model.patient.Name;
 import doctorwho.model.patient.Nric;
@@ -91,13 +92,14 @@ public class AddAppointmentCommand extends Command {
 
         Name name = patientToEdit.getName();
         Nric nric = patientToEdit.getNric();
+        DateOfBirth dob = patientToEdit.getDateOfBirth();
         Phone phone = patientToEdit.getPhone();
         Email email = patientToEdit.getEmail();
         Address address = patientToEdit.getAddress();
         Set<Tag> tags = patientToEdit.getTags();
         Appointment appointment = appointmentToAdd;
 
-        return new Patient(name, nric, phone, email, address, tags, appointmentToAdd);
+        return new Patient(name, nric, dob, phone, email, address, tags, appointmentToAdd);
     }
 
     @Override

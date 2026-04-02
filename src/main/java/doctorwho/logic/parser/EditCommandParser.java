@@ -4,6 +4,7 @@ import static doctorwho.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_CONDITION;
+import static doctorwho.logic.parser.CliSyntax.PREFIX_DOB;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_NAME;
 import static doctorwho.logic.parser.CliSyntax.PREFIX_NRIC;
@@ -32,8 +33,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_ALLERGY, PREFIX_CONDITION);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_DOB, PREFIX_PHONE,
+                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_ALLERGY, PREFIX_CONDITION);
 
         Index index;
 
@@ -43,7 +44,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_DOB, PREFIX_PHONE,
+                PREFIX_EMAIL, PREFIX_ADDRESS);
 
         EditPatientDescriptor editPatientDescriptor = new EditPatientDescriptor();
 
@@ -52,6 +54,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
             editPatientDescriptor.setNric(ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get()));
+        }
+        if (argMultimap.getValue(PREFIX_DOB).isPresent()) {
+            editPatientDescriptor.setDateOfBirth(ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB).get()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             editPatientDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));

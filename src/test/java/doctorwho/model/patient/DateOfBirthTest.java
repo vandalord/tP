@@ -240,4 +240,25 @@ public class DateOfBirthTest {
 
         assertEquals("4 years", dob.getAge(today));
     }
+
+
+    @Test
+    public void equals() {
+        DateOfBirth dob = new DateOfBirth("01-04-2003");
+
+        // same values -> returns true
+        assertTrue(dob.equals(new DateOfBirth("01-04-2003")));
+
+        // same object -> returns truenew Nric("S7654321F")
+        assertTrue(dob.equals(dob));
+
+        // null -> returns false
+        assertFalse(dob.equals(null));
+
+        // different types -> returns false
+        assertFalse(dob.equals(5.0f));
+
+        // different values -> returns false
+        assertFalse(dob.equals(new DateOfBirth("02-04-2003")));
+    }
 }

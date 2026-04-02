@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import doctorwho.model.patient.Address;
 import doctorwho.model.patient.Appointment;
+import doctorwho.model.patient.DateOfBirth;
 import doctorwho.model.patient.Email;
 import doctorwho.model.patient.Name;
 import doctorwho.model.patient.Nric;
@@ -23,12 +24,14 @@ public class PatientBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_NRIC = "S7654321F";
+    public static final String DEFAULT_DOB = "20-04-2003";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Nric nric;
+    private DateOfBirth dob;
     private Phone phone;
     private Email email;
     private Address address;
@@ -41,6 +44,7 @@ public class PatientBuilder {
     public PatientBuilder() {
         name = new Name(DEFAULT_NAME);
         nric = new Nric(DEFAULT_NRIC);
+        dob = new DateOfBirth(DEFAULT_DOB);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
@@ -53,6 +57,7 @@ public class PatientBuilder {
     public PatientBuilder(Patient patientToCopy) {
         name = patientToCopy.getName();
         nric = patientToCopy.getNric();
+        dob = patientToCopy.getDateOfBirth();
         phone = patientToCopy.getPhone();
         email = patientToCopy.getEmail();
         address = patientToCopy.getAddress();
@@ -81,6 +86,14 @@ public class PatientBuilder {
      */
     public PatientBuilder withNric(String nric) {
         this.nric = new Nric(nric);
+        return this;
+    }
+
+    /**
+     * Sets the {@code DateOfBirth} of the {@code Patient} that we are building.
+     */
+    public PatientBuilder withDateOfBirth(String dob) {
+        this.dob = new DateOfBirth(dob);
         return this;
     }
 
@@ -135,7 +148,7 @@ public class PatientBuilder {
     }
 
     public Patient build() {
-        return new Patient(name, nric, phone, email, address, tags, appointment);
+        return new Patient(name, nric, dob, phone, email, address, tags, appointment);
     }
 
 }
