@@ -27,7 +27,6 @@ public class DateOfBirthTest {
      * 8. Invalid numeric ranges (day/month)
      */
 
-    // ================= VALID INPUTS =================
     @Test
     public void constructor_validDate_success() {
         // Equivalence Class: Valid date, correct format (dd-MM-uuuu)
@@ -36,9 +35,19 @@ public class DateOfBirthTest {
     }
 
     @Test
+    public void constructor_invalidDate_throwsException() {
+        assertThrows(IllegalArgumentException.class, () -> new DateOfBirth("2002-09-05"));
+    }
+
+    // ================= VALID INPUTS =================
+    @Test
     public void isValidDateOfBirth_validNormalDate_returnsTrue() {
-        // Equivalence Class: Typical valid date
+        // Equivalence Class: Typical valid date: BVA year 0000 to now
+        assertTrue(DateOfBirth.isValidDateOfBirth("01-01-0000"));
         assertTrue(DateOfBirth.isValidDateOfBirth("15-08-1995"));
+        assertTrue(DateOfBirth.isValidDateOfBirth(LocalDate.now().minusDays(1)
+                .format(DATE_FORMATTER))); // yesterday
+        assertTrue(DateOfBirth.isValidDateOfBirth(LocalDate.now().format(DATE_FORMATTER)));
     }
 
     @Test
@@ -47,29 +56,12 @@ public class DateOfBirthTest {
         assertTrue(DateOfBirth.isValidDateOfBirth("29-02-2020"));
     }
 
-    @Test
-    public void isValidDateOfBirth_todayDate_returnsTrue() {
-        // Equivalence Class: Boundary case (today's date)
-        String today = java.time.LocalDate.now()
-                .format(DATE_FORMATTER);
-        assertTrue(DateOfBirth.isValidDateOfBirth(today));
-    }
-
     // ================= INVALID FORMAT =================
     @Test
     public void isValidDateOfBirth_wrongFormat_returnsFalse() {
-        // Equivalence Class: Wrong format (yyyy-MM-dd)
+        // Equivalence Class: Wrong format (yyyy-MM-dd) or (dd/MM/yyyy)
         assertFalse(DateOfBirth.isValidDateOfBirth("2002-09-05"));
-    }
-
-    @Test
-    public void isValidDateOfBirth_wrongSeparator_returnsFalse() {
-        // Equivalence Class: Wrong separator (/ instead of -)
         assertFalse(DateOfBirth.isValidDateOfBirth("05/09/2002"));
-    }
-
-    @Test
-    public void isValidDateOfBirth_missingLeadingZero_returnsFalse() {
         // Equivalence Class: Format violation (single digit day/month)
         assertFalse(DateOfBirth.isValidDateOfBirth("5-9-2002"));
     }
@@ -91,23 +83,17 @@ public class DateOfBirthTest {
     @Test
     public void isValidDateOfBirth_futureDate_returnsFalse() {
         // Equivalence Class: Date after today
-        assertFalse(DateOfBirth.isValidDateOfBirth("01-01-3000"));
+        assertFalse(DateOfBirth.isValidDateOfBirth(LocalDate.now().plusDays(1).format(DATE_FORMATTER)));
     }
-
 
     // ================= INVALID RANGES =================
     @Test
-    public void isValidDateOfBirth_invalidDay_returnsFalse() {
+    public void isValidDateOfBirth_invalidDate_returnsFalse() {
         // Equivalence Class: Day out of range (>31)
         assertFalse(DateOfBirth.isValidDateOfBirth("32-01-2000"));
-    }
-
-    @Test
-    public void isValidDateOfBirth_invalidMonth_returnsFalse() {
         // Equivalence Class: Month out of range (>12)
         assertFalse(DateOfBirth.isValidDateOfBirth("10-13-2000"));
     }
-
 
     // ================= NULL / EMPTY =================
     @Test
@@ -144,7 +130,6 @@ public class DateOfBirthTest {
      * This is Regression Testing with some Stubs concepts from Unit Testing.
      */
 
-
     // ================= YEARS =================
     @Test
     public void getAge_moreThanOneYear_returnsYears() {
@@ -162,6 +147,15 @@ public class DateOfBirthTest {
         LocalDate today = LocalDate.of(2025, 9, 5);
 
         assertEquals("1 year", dob.getAge(today));
+    }
+
+    @Test
+    public void getAge_oneYearMinusOneDay_returnsElevenMonths() {
+        // Boundary Case: Exactly 1 year old
+        DateOfBirth dob = new DateOfBirth("06-09-2024");
+        LocalDate today = LocalDate.of(2025, 9, 5);
+
+        assertEquals("11 months", dob.getAge(today));
     }
 
     @Test
@@ -216,6 +210,15 @@ public class DateOfBirthTest {
     public void getAge_lessThanOneMonth_returnsZeroMonths() {
         // Edge Case: Less than 1 month old
         DateOfBirth dob = new DateOfBirth("15-03-2025");
+        LocalDate today = LocalDate.of(2025, 3, 20);
+
+        assertEquals("0 months", dob.getAge(today));
+    }
+
+    @Test
+    public void getAge_today_returnsZeroMonths() {
+        // Edge Case: Less than 1 month old
+        DateOfBirth dob = new DateOfBirth("20-03-2025");
         LocalDate today = LocalDate.of(2025, 3, 20);
 
         assertEquals("0 months", dob.getAge(today));
