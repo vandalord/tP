@@ -6,6 +6,8 @@ import static doctorwho.logic.commands.CommandTestUtil.VALID_CONDITION_DIABETES;
 import static doctorwho.logic.commands.CommandTestUtil.VALID_CONDITION_HYPERTENSION;
 import static doctorwho.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static doctorwho.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static doctorwho.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static doctorwho.testutil.Assert.assertThrows;
 import static doctorwho.testutil.TypicalPatients.ALICE;
@@ -34,22 +36,22 @@ public class PatientTest {
         // null -> returns false
         assertFalse(ALICE.isSamePatient(null));
 
-        // same name, all other attributes different -> returns true
-        Patient editedAlice = new PatientBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        // same NRIC, all other attributes different -> returns true
+        Patient editedAlice = new PatientBuilder(ALICE).withName(VALID_NAME_BOB)
+            .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withAllergies(VALID_ALLERGY_IBUPROFEN).build();
         assertTrue(ALICE.isSamePatient(editedAlice));
 
-        // different name, all other attributes same -> returns false
-        editedAlice = new PatientBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        // different NRIC, all other attributes same -> returns false
+        editedAlice = new PatientBuilder(ALICE).withNric(VALID_NRIC_BOB).build();
         assertFalse(ALICE.isSamePatient(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
-        Patient editedBob = new PatientBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePatient(editedBob));
+        // NRIC differs in case, all other attributes same -> returns false
+        Patient editedBob = new PatientBuilder(BOB).withNric(VALID_NRIC_BOB.toLowerCase()).build();
+        assertTrue(BOB.isSamePatient(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new PatientBuilder(BOB).withName(nameWithTrailingSpaces).build();
+        // same name with different NRIC -> returns false
+        editedBob = new PatientBuilder(BOB).withName(VALID_NAME_BOB).withNric(VALID_NRIC_AMY).build();
         assertFalse(BOB.isSamePatient(editedBob));
     }
 
@@ -77,6 +79,10 @@ public class PatientTest {
 
         // different phone -> returns false
         editedAlice = new PatientBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different nric -> returns false
+        editedAlice = new PatientBuilder(ALICE).withNric(VALID_NRIC_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different email -> returns false
@@ -115,8 +121,9 @@ public class PatientTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Patient.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+        String expected = Patient.class.getCanonicalName() + "{name=" + ALICE.getName() + ", nric=" + ALICE.getNric()
+            + ", phone=" + ALICE.getPhone() + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
+            + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

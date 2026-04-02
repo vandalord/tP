@@ -19,6 +19,7 @@ import doctorwho.model.patient.Address;
 import doctorwho.model.patient.Appointment;
 import doctorwho.model.patient.Email;
 import doctorwho.model.patient.Name;
+import doctorwho.model.patient.Nric;
 import doctorwho.model.patient.Patient;
 import doctorwho.model.patient.Phone;
 import doctorwho.model.tag.Tag;
@@ -89,13 +90,14 @@ public class AddAppointmentCommand extends Command {
         assert patientToEdit != null;
 
         Name name = patientToEdit.getName();
+        Nric nric = patientToEdit.getNric();
         Phone phone = patientToEdit.getPhone();
         Email email = patientToEdit.getEmail();
         Address address = patientToEdit.getAddress();
         Set<Tag> tags = patientToEdit.getTags();
         Appointment appointment = appointmentToAdd;
 
-        return new Patient(name, phone, email, address, tags, appointmentToAdd);
+        return new Patient(name, nric, phone, email, address, tags, appointmentToAdd);
     }
 
     @Override

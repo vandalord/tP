@@ -37,6 +37,8 @@ public class Messages {
     public static String format(Patient patient) {
         final StringBuilder builder = new StringBuilder();
         builder.append(patient.getName())
+            .append("; NRIC: ")
+            .append(patient.getNric())
                 .append("; Phone: ")
                 .append(patient.getPhone())
                 .append("; Email: ")

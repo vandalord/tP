@@ -27,8 +27,10 @@ public class NameTest {
         // invalid name
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
-        assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("^")); // only invalid characters
+        assertFalse(Name.isValidName("peter*")); // contains invalid characters
+        assertFalse(Name.isValidName("Jäger")); // contains diacritics
+        assertFalse(Name.isValidName("Ali s/o Ahmad")); // contains slash
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
@@ -36,6 +38,12 @@ public class NameTest {
         assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.isValidName("Mary-Jane")); // hyphens
+        assertTrue(Name.isValidName("O'Brien")); // apostrophes
+        assertTrue(Name.isValidName("Henry, Tan")); // commas
+        assertTrue(Name.isValidName("Jager")); // diacritic replaced with ASCII character
+        assertTrue(Name.isValidName("so Ahmad")); // slash removed
+        assertTrue(Name.isValidName("SO Ahmad")); // slash removed
     }
 
     @Test

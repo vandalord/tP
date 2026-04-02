@@ -37,6 +37,13 @@
 
                     <HBox spacing="10" alignment="CENTER_LEFT" styleClass="cell_small_label_container">
                         <ImageView fitHeight="16" fitWidth="16" preserveRatio="true">
+                            <Image url="@/images/nric_icon.png" />
+                        </ImageView>
+                        <Label fx:id="nric" text="$nric" />
+                    </HBox>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT" styleClass="cell_small_label_container">
+                        <ImageView fitHeight="16" fitWidth="16" preserveRatio="true">
                             <Image url="@/images/phone_icon.png" />
                         </ImageView>
                         <Label fx:id="phone" text="\$phone" />
