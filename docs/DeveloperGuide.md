@@ -520,3 +520,9 @@ testers are expected to do more *exploratory* testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 2. _{ more test cases …​ }_
+
+## **Appendix: Planned Enhancements**
+1. Include support for slashes (/) in patient name. Currently, we ask the user to remove slashes when entering the 
+patient's name. However, this means that the stored patient name may not be a match their exact government name. We plan
+to implement apostrophe string enclosing to allow such special characters to be included in the name without conflicting
+with the special characters used for the argument prefixes.
