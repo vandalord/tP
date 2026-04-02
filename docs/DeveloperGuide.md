@@ -276,34 +276,44 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a ... | I want to ... | So that I can ... |
-| :--- | :--- | :--- | :--- |
-| `* * *` | Doctor | add a patient's chronic condition | provide informed care |
-| `* * *` | Doctor | add an appointment date to a patient | track my daily schedule |
-| `* * *` | Doctor | delete a patient record | keep my database clean of inactive patients |
-| `* * *` | Doctor | initialize a new empty data file | start using the system without manual setup |
-| `* * *` | Doctor | see sample usage instructions on first launch | learn the system quickly |
-| `* * *` | Doctor | load an existing data file | continue work across sessions |
-| `* * *` | Doctor | receive a clear error message and correction technique when I enter an invalid command | fix my command |
-| `* * *` | Less Tech Savvy Doctor | want the program to work immediately after opening | don't have to install or configure anything |
-| `* * *` | New User | view a list of available commands | know what actions are possible |
-| `* *` | Doctor | edit a patient's record | keep my database updated to the newest information |
-| `* *` | Doctor | be alerted if I book two appointments at the same time | avoid double-booking myself |
-| `* *` | Doctor | input command arguments in any order | don't have to memorize rigid syntax |
-| `* *` | Doctor | tag a patient with 'High Risk' | am extra cautious when reviewing their file |
-| `* *` | Doctor | mark an allergy as "Severe" | it stands out visually when I open the patient profile |
-| `* *` | Doctor | be warned before permanently deleting a patient record | don't lose data accidentally |
-| `* *` | Doctor | be told when a search returns no results | know the system is working correctly |
-| `* *` | Doctor | record a patient's blood type | provide it quickly in an emergency |
-| `*` | Doctor | list all patients with a specific allergy | avoid prescribing dangerous medication during an outbreak or shortage |
-| `*` | Doctor | search for a patient by a partial or misspelled name | find records quickly even if I don't remember the exact spelling |
-| `*` | Doctor | use command aliases (e.g., a for add) | minimize typing time while talking to a patient |
-| `*` | Doctor | list all patients taking a specific medication | contact them if that drug is recalled |
-| `*` | Doctor | add a "Next Checkup" date | follow up on chronic condition progress |
-| `*` | Doctor | scrub "soft deleted" data permanently | comply with "right to be forgotten" regulations |
-| `*` | Doctor | link related patients | review hereditary patterns |
-| `*` | Doctor | attach external specialist notes | have a full care picture |
-| `*` | Tech Savvy Doctor | chain commands together | add a patient and their first appointment in one line |
+| Priority  | As a ...               | I want to ...                                                                          | So that I can ...                                                     |
+|:----------|:-----------------------|:---------------------------------------------------------------------------------------|:----------------------------------------------------------------------|
+| `* * *`   | Doctor                 | add a patient's medical condition                                                      | provide informed care                                                 |
+| `* * *`   | Doctor                 | add an appointment date to a patient                                                   | track my daily schedule                                               |
+| `* * *`   | Doctor                 | delete a patient record                                                                | keep my database clean of inactive patients                           |
+| `* * *`   | Doctor                 | have a data file automatically created on first launch                                 | start using the system without manual setup                           |
+| `* * *`   | Doctor                 | see sample patient data on first launch                                                | understand what the app looks like in use                             |
+| ` * * * ` | Doctor                 | list all patients                                                                      | see all my patients at a glance                                       |
+| ` * * * ` | Doctor                 | find a patient by name                                                                 | quickly locate a specific patient's record                            |
+| ` * * * ` | Doctor                 | delete a patient's appointment                                                         | remove outdated or cancelled appointments                             |
+| `* * *`   | Doctor                 | list all appointments                                                                  | view my full schedule at a glance                                     |
+| `* * *`   | Doctor                 | filter appointments by a specific date                                                 | see my schedule for that day                                          |
+| `* * *`   | Doctor                 | add a patient's allergy                                                                | avoid prescribing harmful medication                                  |
+| `* * *`   | Doctor                 | add a new patient record                                                               | keep track of new patients                                            |
+| `* * *`   | Doctor                 | have my data automatically loaded on startup                                           | continue work across sessions                                         |
+| `* * *`   | Doctor                 | receive a clear error message and correction technique when I enter an invalid command | fix my command                                                        |
+| `* * *`   | Less Tech Savvy Doctor | want the program to work immediately after opening                                     | don't have to install or configure anything                           |
+| `* * *`   | New User               | access the user guide via the help command                                             | know what actions are possible                                        |
+| `* * *`   | Doctor                 | edit an existing patient's record                                                      | keep my database updated to the newest information                    |
+| `* * *`   | Doctor                 | be alerted if I book two appointments at the same time                                 | avoid double-booking myself                                           |
+| `* * *`   | Doctor                 | be told when a search returns no results                                               | know the system is working correctly                                  |
+| `* * *`   | Doctor                 | exit the application                                                                   | close the app when done                                               |
+| `* * *`   | Doctor                 | clear all patient records                                                              | start fresh with a clean database                                     |
+| `* * *`   | Doctor                 | add notes to an appointment                                                            | remember important details for the visit                              |
+| `* *`     | Doctor                 | tag a patient with 'High Risk'                                                         | am extra cautious when reviewing their file                           |
+| `* *`     | Doctor                 | mark an allergy as "Severe"                                                            | it stands out visually when I open the patient profile                |
+| `* *`     | Doctor                 | be warned before permanently deleting a patient record                                 | don't lose data accidentally                                          |
+| `* *`     | Doctor                 | input command arguments in any order                                                   | don't have to memorize rigid syntax                                   |
+| `* *`     | Doctor                 | record a patient's blood type                                                          | provide it quickly in an emergency                                    |
+| `*`       | Doctor                 | list all patients with a specific allergy                                              | avoid prescribing dangerous medication during an outbreak or shortage |
+| `*`       | Doctor                 | search for a patient by a partial or misspelled name                                   | find records quickly even if I don't remember the exact spelling      |
+| `*`       | Doctor                 | use command aliases (e.g., a for add)                                                  | minimize typing time while talking to a patient                       |
+| `*`       | Doctor                 | list all patients taking a specific medication                                         | contact them if that drug is recalled                                 |
+| `*`       | Doctor                 | add a "Next Checkup" date                                                              | follow up on chronic condition progress                               |
+| `*`       | Doctor                 | scrub "soft deleted" data permanently                                                  | comply with "right to be forgotten" regulations                       |
+| `*`       | Doctor                 | link related patients                                                                  | review hereditary patterns                                            |
+| `*`       | Doctor                 | attach external specialist notes                                                       | have a full care picture                                              |
+| `*`       | Tech Savvy Doctor      | chain commands together                                                                | add a patient and their first appointment in one line                 |
 
 ### Use cases
 
