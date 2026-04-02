@@ -34,10 +34,10 @@ public class DeleteAppointmentCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Patient patientToEdit = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
+        Patient patientWithAppointment = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
         DeleteAppointmentCommand command = new DeleteAppointmentCommand(INDEX_FIRST_PATIENT);
 
-        Patient updatedPatient = new PatientBuilder(patientToEdit)
+        Patient updatedPatient = new PatientBuilder(patientWithAppointment)
                 .withAppointment(null)
                 .build();
 
@@ -45,7 +45,7 @@ public class DeleteAppointmentCommandTest {
                 updatedPatient.getName());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPatient(patientToEdit, updatedPatient);
+        expectedModel.setPatient(patientWithAppointment, updatedPatient);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertTrue(model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased()).getAppointment().isEmpty());
@@ -60,21 +60,18 @@ public class DeleteAppointmentCommandTest {
     }
 
     @Test
-    public void execute_patientHasNoAppointment_success() {
+    public void execute_patientHasNoAppointment_failure() {
         Patient originalPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
         Patient patientWithoutAppointment = new PatientBuilder(originalPatient)
-                .withAppointment(null)
+                .withAppointment(null) // no appointment
                 .build();
         model.setPatient(originalPatient, patientWithoutAppointment);
 
         DeleteAppointmentCommand command = new DeleteAppointmentCommand(INDEX_FIRST_PATIENT);
-        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
+        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_PATIENT_HAS_NO_APPOINTMENT,
                 patientWithoutAppointment.getName());
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertTrue(model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased()).getAppointment().isEmpty());
+        assertCommandFailure(command, model, expectedMessage);
     }
 
     @Test
@@ -92,10 +89,12 @@ public class DeleteAppointmentCommandTest {
     public void execute_afterListAppointmentsCommand_resetsToShowAllPatients() {
         Patient withAppointment = new PatientBuilder()
             .withName("With Appointment")
+            .withNric("S9435125A")
             .withAppointment(new Appointment("12-03-2026 08:00", 30, "A"))
             .build();
         Patient withoutAppointment = new PatientBuilder()
             .withName("Without Appointment")
+            .withNric("S9876543C")
             .withAppointment(null)
             .build();
 
@@ -109,11 +108,11 @@ public class DeleteAppointmentCommandTest {
         DeleteAppointmentCommand command = new DeleteAppointmentCommand(INDEX_FIRST_PATIENT);
 
         Patient updatedPatient = new PatientBuilder(withAppointment)
-            .withAppointment(null)
-            .build();
+                .withAppointment(null)
+                .build();
 
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
-            updatedPatient.getName());
+                updatedPatient.getName());
 
         Model expectedModel = new ModelManager(addressBook, new UserPrefs());
         expectedModel.setPatient(withAppointment, updatedPatient);

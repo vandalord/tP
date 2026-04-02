@@ -75,10 +75,12 @@ public class DeleteCommandTest {
     public void execute_afterListAppointmentsCommand_resetsToShowAllPatients() {
         Patient withAppointment = new PatientBuilder()
             .withName("With Appointment")
+            .withNric("S9535256A")
             .withAppointment(new doctorwho.model.patient.Appointment("12-03-2026 09:00", 30, "A"))
             .build();
         Patient withoutAppointment = new PatientBuilder()
             .withName("Without Appointment")
+            .withNric("S8765253Z")
             .withAppointment(null)
             .build();
 

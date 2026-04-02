@@ -26,6 +26,7 @@ public class DeleteAppointmentCommand extends Command {
 
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS =
             "Appointment deleted for %1$s.";
+    public static final String MESSAGE_PATIENT_HAS_NO_APPOINTMENT = "The selected patient: %1$s has no appointment.";
 
     private final Index targetIndex;
 
@@ -51,6 +52,10 @@ public class DeleteAppointmentCommand extends Command {
         }
 
         Patient patientToEdit = lastShownList.get(targetIndex.getZeroBased());
+
+        if (patientToEdit.getAppointment().isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_PATIENT_HAS_NO_APPOINTMENT, patientToEdit.getName()));
+        }
 
         Patient updatedPatient = new Patient(
                 patientToEdit.getName(),

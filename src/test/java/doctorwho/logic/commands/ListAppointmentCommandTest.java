@@ -27,14 +27,17 @@ public class ListAppointmentCommandTest {
     public void execute_noDateFilter_listsAllAppointmentsSorted() {
         Patient laterAppointmentPatient = new PatientBuilder()
                 .withName("Later Appointment")
+                .withNric("S0948222I")
                 .withAppointment(new Appointment("13-03-2026 14:00", 30, "later"))
                 .build();
         Patient earlierAppointmentPatient = new PatientBuilder()
                 .withName("Earlier Appointment")
+                .withNric("S0948242C")
                 .withAppointment(new Appointment("11-03-2026 09:00", 30, "earlier"))
                 .build();
         Patient noAppointmentPatient = new PatientBuilder()
                 .withName("No Appointment")
+                .withNric("S0948244Z")
                 .withAppointment(null)
                 .build();
 
@@ -64,14 +67,17 @@ public class ListAppointmentCommandTest {
 
         Patient sameDayLaterPatient = new PatientBuilder()
                 .withName("Same Day Later")
+                .withNric("S0848242Z")
                 .withAppointment(new Appointment("12-03-2026 16:00", 30, "later same day"))
                 .build();
         Patient differentDayPatient = new PatientBuilder()
                 .withName("Different Day")
+                .withNric("S0848213F")
                 .withAppointment(new Appointment("13-03-2026 10:00", 30, "different day"))
                 .build();
         Patient sameDayEarlierPatient = new PatientBuilder()
                 .withName("Same Day Earlier")
+                .withNric("S1234567D")
                 .withAppointment(new Appointment("12-03-2026 09:00", 30, "earlier same day"))
                 .build();
 
@@ -99,8 +105,10 @@ public class ListAppointmentCommandTest {
 
     @Test
     public void execute_noAppointments_returnsEmptyList() {
-        Patient noAppointmentOne = new PatientBuilder().withName("No Appointment One").withAppointment(null).build();
-        Patient noAppointmentTwo = new PatientBuilder().withName("No Appointment Two").withAppointment(null).build();
+        Patient noAppointmentOne = new PatientBuilder().withName("No Appointment One")
+                .withNric("S2345678H").withAppointment(null).build();
+        Patient noAppointmentTwo = new PatientBuilder().withName("No Appointment Two")
+                .withNric("S9435125A").withAppointment(null).build();
 
         AddressBook addressBook = new AddressBook();
         addressBook.addPatient(noAppointmentOne);
@@ -122,10 +130,12 @@ public class ListAppointmentCommandTest {
     public void execute_thenListCommand_showsAllPatients() {
         Patient withAppointment = new PatientBuilder()
                         .withName("With Appointment")
+                        .withNric("S9876543C")
                         .withAppointment(new Appointment("12-03-2026 11:00", 30, "visit"))
                         .build();
         Patient withoutAppointment = new PatientBuilder()
                         .withName("Without Appointment")
+                        .withNric("S9535256A")
                         .withAppointment(null)
                         .build();
 

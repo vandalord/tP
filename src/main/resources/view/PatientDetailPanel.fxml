@@ -36,7 +36,9 @@
                     </padding>
 
                     <HBox spacing="10" alignment="CENTER_LEFT" styleClass="cell_small_label_container">
-                        <Label styleClass="label-bright" text="NRIC:" />
+                        <ImageView fitHeight="16" fitWidth="16" preserveRatio="true">
+                            <Image url="@/images/nric_icon.png" />
+                        </ImageView>
                         <Label fx:id="nric" text="$nric" />
                     </HBox>
 

@@ -123,6 +123,28 @@ Adds a patient to DoctorWho.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [al/ALLERGY] [c/CONDITION]…​`
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Accepted name formats**<br>
+
+DoctorWho currently accepts the following special characters in the patient's name:
+
+| Character       | Valid example |
+|-----------------|---------------|
+| Hyphens (-)     | Mary-Jane     |
+| Apostrophes (') | O'Brien       |
+| Commas (,)      | Henry, Tan    |
+
+However, there are other common special characters used in names that are not yet supported. These are some suggested
+replacements you can use if you encounter these special characters:
+
+| Character  | Invalid example | Suggested replacements (Valid) | Future support                                             |
+|------------|-----------------|--------------------------------|------------------------------------------------------------|
+| Diacritics | Jäger           | Jager                          | Not planned                                                |
+| Slash (/)  | Ali s/o Ahmad   | Ali so Ahmad<br>Ali SO Ahmad   | [Planned](DeveloperGuide.md#appendix-planned-enhancements) |
+
+</div>
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A patient can have any number of allergies or medical conditions (including 0)
 </div>

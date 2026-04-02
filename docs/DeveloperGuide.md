@@ -189,6 +189,67 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### NRIC validation feature
+
+#### Context
+
+NRIC/FIN is a core patient identifier and must be validated strictly. The app validates NRIC in two layers:
+
+1. **Structure check**: first letter + seven digits + checksum letter.
+2. **Checksum check**: Singapore NRIC/FIN modulus-11 checksum, including prefix-specific letter tables.
+
+This prevents malformed or checksum-invalid NRIC values from entering the model.
+
+#### Where validation happens
+
+Validation is centralized in `Nric` (model), instead of being duplicated in parser/storage:
+
+* `AddCommandParser` and `EditCommandParser` parse the `ic/` value and construct `Nric`.
+* `JsonAdaptedPatient` also constructs `Nric` during JSON deserialization.
+* `Nric#isValidNric(String)` is therefore the single source of truth for all input paths.
+
+This design guarantees consistent behavior for CLI input, test fixtures, and persisted data loading.
+
+#### Checksum algorithm
+
+For an NRIC/FIN value with prefix `P`, digits `d1..d7`, and suffix letter `L`:
+
+1. Compute weighted sum using weights `[2, 7, 6, 5, 4, 3, 2]`.
+2. Add prefix offset:
+   * `+4` for `T` and `G`
+   * `+3` for `M`
+   * `+0` for `S` and `F`
+3. Compute `remainder = sum mod 11`.
+4. Compute `checkDigit = 11 - (remainder + 1)`.
+5. Map `checkDigit` to letter table based on prefix group:
+   * `S/T -> ABCDEFGHIZJ`
+   * `F/G -> KLMNPQRTUWX`
+   * `M   -> KLJNPQRTUWX`
+
+NRIC is valid only if computed suffix letter equals `L`.
+
+#### Design considerations
+
+**Aspect: location of checksum logic**
+
+* **Alternative 1 (chosen):** keep checksum logic in `Nric`.
+  * Pros: one validation implementation across parser, model, and storage.
+  * Cons: parser tests must use checksum-valid NRIC fixtures.
+
+* **Alternative 2:** validate in parser only.
+  * Pros: simpler parser flow.
+  * Cons: invalid values could still enter through storage or future non-parser paths.
+
+#### Tests
+
+NRIC behavior is covered by:
+
+* `NricTest`: constructor guardrails, normalization, format checks, checksum-valid and checksum-invalid cases.
+* `AddCommandParserTest`: invalid NRIC parsing failures.
+* `JsonAdaptedPatientTest`: invalid NRIC in JSON rejected during conversion.
+
+In addition, shared test fixtures (e.g., `TypicalPatients`, `PatientBuilder`) use checksum-valid NRIC values to avoid false failures.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -520,3 +581,10 @@ testers are expected to do more *exploratory* testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 2. _{ more test cases …​ }_
+
+## **Appendix: Planned Enhancements**
+
+1. Include support for slashes (/) in patient name. Currently, we ask the user to remove slashes when entering the
+   patient's name. However, this means that the stored patient name may not be a match their exact government name. We
+   plan to implement apostrophe string enclosing to allow such special characters to be included in the name without
+   conflicting with the special characters used for the argument prefixes.
