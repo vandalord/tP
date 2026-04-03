@@ -65,7 +65,7 @@ public class PatientDetailPanel extends UiPart<Region> {
 
         name.setText(patient.getName().fullName);
         nric.setText(patient.getNric().value);
-        age.setText(patient.getDateOfBirth().getAge());
+        age.setText(patient.getDateOfBirth() + " (" + patient.getDateOfBirth().getAge() + " old)");
         phone.setText(patient.getPhone().value);
         email.setText(patient.getEmail().value);
         address.setText(patient.getAddress().value);
