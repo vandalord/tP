@@ -172,7 +172,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2526S2-CS2103T-F10-1/tp/tree/master/src/main/java/doctorwho/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -187,7 +187,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.address.commons` package.
+Classes used by multiple components are in the `doctorwho.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -284,7 +284,7 @@ saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new patient. The `add` command also calls
+Step 3. The user executes `add n/David …​` (where `…​` represents the remaining mandatory fields such as `ic/`, `x/`, `dob/`, `p/`, `e/`, `a/`) to add a new patient. The `add` command also calls
 `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
@@ -475,7 +475,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 
-* 1a. Missing mandatory fields (name, phone, email, or address)
+* 1a. Missing mandatory fields (name, NRIC, sex, date of birth, phone, email, or address)
     * 1a1. DoctorWho shows an error message
 
       Use case ends.
@@ -577,7 +577,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Post conditions:**
 * Patient's information is updated in the system
 
-**Use case 05: Schedule an appointment for an existing patient**
+**Use Case 05: Schedule an appointment for an existing patient**
 
 **Preconditions:**
 * User has launched the DoctorWho application
@@ -649,6 +649,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Post conditions:**
 * Appointment is removed from the patient's record
+
+**Use Case 07: List Appointments**
+
+**Preconditions:**
+* User has launched the DoctorWho application.
+* User is at the command prompt.
+
+**Main Success Scenario:**
+
+1. User requests to list appointments.
+2. DoctorWho displays all appointments.
+3. DoctorWho presents the appointments in ascending start date-time order.
+
+   Use case ends.
+
+**Extensions:**
+
+* 1a. User requests to list appointments for a specific date.
+    * 1a1. DoctorWho displays only appointments on the specified date.
+    * 1a2. DoctorWho presents the results in ascending start date-time order.
+
+      Use case ends.
+
+* 1b. User enters an invalid date value.
+    * 1b1. DoctorWho shows an error message.
+
+      Use case ends.
+
+* 1c. User enters an invalid date format.
+    * 1c1. DoctorWho shows an error message.
+
+      Use case ends.
+
+* 2a. There are no appointments to display.
+    * 2a1. DoctorWho shows an empty result list and a corresponding status message.
+
+      Use case ends.
+
+**Post conditions:**
+* The currently displayed list is updated to show appointment-based results.
+* If a date is provided, only appointments on that date are shown.
 
 **Use Case 08: Find Patients**
 
@@ -726,46 +767,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Use Case 07: List Appointments**
-
-**Preconditions:**
-* User has launched the DoctorWho application.
-* User is at the command prompt.
-
-**Main Success Scenario:**
-
-1. User requests to list appointments.
-2. DoctorWho displays all appointments.
-3. DoctorWho presents the appointments in ascending start date-time order.
-
-   Use case ends.
-
-**Extensions:**
-
-* 1a. User requests to list appointments for a specific date.
-    * 1a1. DoctorWho displays only appointments on the specified date.
-    * 1a2. DoctorWho presents the results in ascending start date-time order.
-
-      Use case ends.
-
-* 1b. User enters an invalid date value.
-    * 1b1. DoctorWho shows an error message.
-
-      Use case ends.
-
-* 1c. User enters an invalid date format.
-    * 1b1. DoctorWho shows an error message.
-
-      Use case ends.
-
-* 2a. There are no appointments to display.
-    * 2a1. DoctorWho shows an empty result list and a corresponding status message.
-
-      Use case ends.
-
 **Post conditions:**
-* The currently displayed list is updated to show appointment-based results.
-* If a date is provided, only appointments on that date are shown.
+* Application is closed
 
 ### Non-Functional Requirements
 
@@ -788,8 +791,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   to *Architecture/Logic*)
 * **JavaFX**: The software platform and graphical library used to build the DoctorWho desktop interface. (Relevant to
   *UI Component*)
-* **Prefix**: A short identifier followed by a forward slash (_e.g._ `d/` for date) used to define arguments in a
-  command. (Relevant to *Logic Component*)
+* **Prefix**: A short identifier followed by a forward slash (_e.g._ `n/` for name, `ic/` for NRIC) used to define arguments in a command.
 * **Prefix-based Matching**: A parsing technique where data fields are identified by short leading characters (e.g.,
   `n/` for Name) rather than by their position in a sequence. (Relevant to *Logic Component*)
 * **Medical Tag**: A general term encompassing both **Conditions** (_e.g._ Diabetes) and **Allergies** (_e.g._
@@ -842,7 +844,7 @@ testers are expected to do more *exploratory* testing.
 ### Adding a patient
 
 1. Adding a valid patient
-    1. Test case: `add n/John Doe ic/S1234567D x/M dob/01-01-2000 p/98765432 e/johnd@example.com a/123 Clementi Ave`
+    1. Test case: `add n/John Doe ic/T0123456H x/M dob/01-01-2000 p/98765432 e/johnd@example.com a/123 Clementi Ave`
 
        Expected: Patient added at the bottom of the list. Success message shown with patient name.
 
@@ -852,8 +854,8 @@ testers are expected to do more *exploratory* testing.
        Expected: No patient added. Error message shown with correct command format.
 
 3. Adding a duplicate patient
-    1. Prerequisites: Patient `John Doe` with NRIC `S1234567D` already exists.
-    2. Test case: `add n/John Doe ic/S1234567D x/M dob/01-01-2000 p/98765432 e/johnd@example.com a/123 Clementi Ave`
+    1. Prerequisites: Patient `John Doe` with NRIC `T0123456H` already exists (added in test case 1).
+    2. Test case: `add n/John Doe ic/T0123456H x/M dob/01-01-2000 p/98765432 e/johnd@example.com a/123 Clementi Ave`
 
        Expected: No patient added. Error message indicating duplicate patient.
 
@@ -883,7 +885,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Editing a patient's NRIC
     1. Prerequisites: At least one patient in the list.
-    2. Test case: `edit 1 ic/T0123456H`
+    2. Test case: `edit 1 ic/T0234567J`
 
        Expected: First patient's NRIC updated. Success message shown.
 
