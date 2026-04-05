@@ -292,6 +292,10 @@ Clears all entries from DoctorWho.
 
 Format: `clear`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This action is irreversible and will delete all patient data.
+</div>
+
 ### Exiting the program : `exit`
 
 Exits the program.

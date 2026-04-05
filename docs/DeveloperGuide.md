@@ -664,3 +664,5 @@ testers are expected to do more *exploratory* testing.
    year matches their NRIC due to complexities and edge cases. Additionally, patients born before 1968 won't have their
    birth year as the first two digits of their NRIC, making this impossible in certain cases. We plan to implement a
    best-effort check that will flag possible mismatches.
+3. Include confirmation for the `clear` command to protect the user from unintentionally clearing all their data. We
+   plan to make it so that the user has to enter two consecutive clear commands before the data is actually cleared.
