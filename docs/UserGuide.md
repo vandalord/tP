@@ -242,21 +242,6 @@ Examples:
   top, of the patient list, scheduled for 12th March 2026, at 14:00. A note will be indicated with
   `Note | Routine Checkup`
 
-### Listing appointments : `lsapt`
-
-Lists appointments, optionally filtering by a specific appointment date. The appointments are shown in ascending date-time order.
-
-Format: `lsapt [d/DATE]`
-
-* Shows all appointments if no date is provided.
-* If a date is provided, filters and shows appointments only for that specific date.
-* The date must be in the format `dd-MM-yyyy` e.g, `12-03-2026` refers to 12th March 2026.
-
-Examples:
-
-* `lsapt d/12-03-2026` lists appointments scheduled on 12th March 2026.
-* `lsapt` lists all appointments for all patients.
-
 ### Deleting an appointment : `dapt`
 
 Deletes the appointment of the patient identified by the index number used in the displayed patient list.
