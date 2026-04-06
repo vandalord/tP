@@ -67,7 +67,8 @@ public class PatientDetailPanel extends UiPart<Region> {
 
         name.setText(patient.getName().fullName);
         nric.setText(patient.getNric().value);
-        sex.setText(patient.getSex().value);
+        String sexDisplay = patient.getSex().value.equals("F") ? "Female" : "Male";
+        sex.setText(sexDisplay);
         age.setText(patient.getDateOfBirth() + " (" + patient.getDateOfBirth().getAge() + " old)");
         phone.setText(patient.getPhone().value);
         email.setText(patient.getEmail().value);
