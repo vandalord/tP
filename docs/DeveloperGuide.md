@@ -417,44 +417,44 @@ faster than a typical mouse/GUI driven app
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority  | As a ...               | I want to ...                                                                          | So that I can ...                                                     |
-|:----------|:-----------------------|:---------------------------------------------------------------------------------------|:----------------------------------------------------------------------|
-| `* * *`   | Doctor                 | add a patient's medical condition                                                      | provide informed care                                                 |
-| `* * *`   | Doctor                 | add an appointment date to a patient                                                   | track my daily schedule                                               |
-| `* * *`   | Doctor                 | delete a patient record                                                                | keep my database clean of inactive patients                           |
-| `* * *`   | Doctor                 | have a data file automatically created on first launch                                 | start using the system without manual setup                           |
-| `* * *`   | Doctor                 | see sample patient data on first launch                                                | understand what the app looks like in use                             |
-| ` * * * ` | Doctor                 | list all patients                                                                      | see all my patients at a glance                                       |
-| ` * * * ` | Doctor                 | find a patient by name                                                                 | quickly locate a specific patient's record                            |
-| ` * * * ` | Doctor                 | delete a patient's appointment                                                         | remove outdated or cancelled appointments                             |
-| `* * *`   | Doctor                 | list all appointments                                                                  | view my full schedule at a glance                                     |
-| `* * *`   | Doctor                 | filter appointments by a specific date                                                 | see my schedule for that day                                          |
-| `* * *`   | Doctor                 | add a patient's allergy                                                                | avoid prescribing harmful medication                                  |
-| `* * *`   | Doctor                 | add a new patient record                                                               | keep track of new patients                                            |
-| `* * *`   | Doctor                 | have my data automatically loaded on startup                                           | continue work across sessions                                         |
-| `* * *`   | Doctor                 | receive a clear error message and correction technique when I enter an invalid command | fix my command                                                        |
-| `* * *`   | Less Tech Savvy Doctor | want the program to work immediately after opening                                     | don't have to install or configure anything                           |
-| `* * *`   | New User               | access the user guide via the help command                                             | know what actions are possible                                        |
-| `* * *`   | Doctor                 | edit an existing patient's record                                                      | keep my database updated to the newest information                    |
-| `* * *`   | Doctor                 | be alerted if I book two appointments at the same time                                 | avoid double-booking myself                                           |
-| `* * *`   | Doctor                 | be told when a search returns no results                                               | know the system is working correctly                                  |
-| `* * *`   | Doctor                 | exit the application                                                                   | close the app when done                                               |
-| `* * *`   | Doctor                 | clear all patient records                                                              | start fresh with a clean database                                     |
-| `* * *`   | Doctor                 | add notes to an appointment                                                            | remember important details for the visit                              |
-| `* *`     | Doctor                 | tag a patient with 'High Risk'                                                         | am extra cautious when reviewing their file                           |
-| `* *`     | Doctor                 | mark an allergy as "Severe"                                                            | it stands out visually when I open the patient profile                |
-| `* *`     | Doctor                 | be warned before permanently deleting a patient record                                 | don't lose data accidentally                                          |
-| `* *`     | Doctor                 | input command arguments in any order                                                   | don't have to memorize rigid syntax                                   |
-| `* *`     | Doctor                 | record a patient's blood type                                                          | provide it quickly in an emergency                                    |
-| `*`       | Doctor                 | list all patients with a specific allergy                                              | avoid prescribing dangerous medication during an outbreak or shortage |
-| `*`       | Doctor                 | search for a patient by a partial or misspelled name                                   | find records quickly even if I don't remember the exact spelling      |
-| `*`       | Doctor                 | use command aliases (e.g., a for add)                                                  | minimize typing time while talking to a patient                       |
-| `*`       | Doctor                 | list all patients taking a specific medication                                         | contact them if that drug is recalled                                 |
-| `*`       | Doctor                 | add a "Next Checkup" date                                                              | follow up on chronic condition progress                               |
-| `*`       | Doctor                 | scrub "soft deleted" data permanently                                                  | comply with "right to be forgotten" regulations                       |
-| `*`       | Doctor                 | link related patients                                                                  | review hereditary patterns                                            |
-| `*`       | Doctor                 | attach external specialist notes                                                       | have a full care picture                                              |
-| `*`       | Tech Savvy Doctor      | chain commands together                                                                | add a patient and their first appointment in one line                 |
+| Priority  | As an ...   | I want to ...                                                                          | So that I can ...                                                     |
+|:----------|:------------|:---------------------------------------------------------------------------------------|:----------------------------------------------------------------------|
+| `* * *`   | Admin Staff | add a patient's medical condition                                                      | provide informed care                                                 |
+| `* * *`   | Admin Staff | add an appointment date to a patient                                                   | track my daily schedule                                               |
+| `* * *`   | Admin Staff | delete a patient record                                                                | keep my database clean of inactive patients                           |
+| `* * *`   | Admin Staff | have a data file automatically created on first launch                                 | start using the system without manual setup                           |
+| `* * *`   | Admin Staff | see sample patient data on first launch                                                | understand what the app looks like in use                             |
+| ` * * * ` | Admin Staff | list all patients                                                                      | see all my patients at a glance                                       |
+| ` * * * ` | Admin Staff | find a patient by name                                                                 | quickly locate a specific patient's record                            |
+| ` * * * ` | Admin Staff | delete a patient's appointment                                                         | remove outdated or cancelled appointments                             |
+| `* * *`   | Admin Staff | list all appointments                                                                  | view my full schedule at a glance                                     |
+| `* * *`   | Admin Staff | filter appointments by a specific date                                                 | see my schedule for that day                                          |
+| `* * *`   | Admin Staff | add a patient's allergy                                                                | avoid prescribing harmful medication                                  |
+| `* * *`   | Admin Staff | add a new patient record                                                               | keep track of new patients                                            |
+| `* * *`   | Admin Staff | have my data automatically loaded on startup                                           | continue work across sessions                                         |
+| `* * *`   | Admin Staff | receive a clear error message and correction technique when I enter an invalid command | fix my command                                                        |
+| `* * *`   | Admin Staff | want the program to work immediately after opening                                     | don't have to install or configure anything                           |
+| `* * *`   | Admin Staff | access the user guide via the help command                                             | know what actions are possible                                        |
+| `* * *`   | Admin Staff | edit an existing patient's record                                                      | keep my database updated to the newest information                    |
+| `* * *`   | Admin Staff | be alerted if I book two appointments at the same time                                 | avoid double-booking myself                                           |
+| `* * *`   | Admin Staff | be told when a search returns no results                                               | know the system is working correctly                                  |
+| `* * *`   | Admin Staff | exit the application                                                                   | close the app when done                                               |
+| `* * *`   | Admin Staff | clear all patient records                                                              | start fresh with a clean database                                     |
+| `* * *`   | Admin Staff | add notes to an appointment                                                            | remember important details for the visit                              |
+| `* *`     | Admin Staff | tag a patient with 'High Risk'                                                         | am extra cautious when reviewing their file                           |
+| `* *`     | Admin Staff | mark an allergy as "Severe"                                                            | it stands out visually when I open the patient profile                |
+| `* *`     | Admin Staff | be warned before permanently deleting a patient record                                 | don't lose data accidentally                                          |
+| `* *`     | Admin Staff | input command arguments in any order                                                   | don't have to memorize rigid syntax                                   |
+| `* *`     | Admin Staff | record a patient's blood type                                                          | provide it quickly in an emergency                                    |
+| `*`       | Admin Staff | list all patients with a specific allergy                                              | avoid prescribing dangerous medication during an outbreak or shortage |
+| `*`       | Admin Staff | search for a patient by a partial or misspelled name                                   | find records quickly even if I don't remember the exact spelling      |
+| `*`       | Admin Staff | use command aliases (e.g., a for add)                                                  | minimize typing time while talking to a patient                       |
+| `*`       | Admin Staff | list all patients taking a specific medication                                         | contact them if that drug is recalled                                 |
+| `*`       | Admin Staff | add a "Next Checkup" date                                                              | follow up on chronic condition progress                               |
+| `*`       | Admin Staff | scrub "soft deleted" data permanently                                                  | comply with "right to be forgotten" regulations                       |
+| `*`       | Admin Staff | link related patients                                                                  | review hereditary patterns                                            |
+| `*`       | Admin Staff | attach external specialist notes                                                       | have a full care picture                                              |
+| `*`       | Admin Staff | chain commands together                                                                | add a patient and their first appointment in one line                 |
 
 ### Use cases
 
@@ -877,11 +877,11 @@ testers are expected to do more *exploratory* testing.
 
        Expected: First patient's phone number updated. Success message shown.
 
-2. Editing a patient's NRIC
+2. Editing multiple fields of a patient (NRIC, phone, allergies, and medical condition)
     1. Prerequisites: At least one patient in the list.
-    2. Test case: `edit 1 ic/T0234567J`
+    2. Test case: `edit 1 ic/T0234567J p/98557988 al/ mc/High BP`
 
-       Expected: First patient's NRIC updated. Success message shown.
+   Expected: First patient's NRIC and phone are updated, existing allergies are cleared, and the medical condition "High BP" is added. Success message shown.
 
 3. Editing a patient's date of birth
     1. Prerequisites: At least one patient in the list.
@@ -889,18 +889,12 @@ testers are expected to do more *exploratory* testing.
 
        Expected: First patient's date of birth updated. Success message shown.
 
-4. Editing a patient's sex
-    1. Prerequisites: At least one patient in the list.
-    2. Test case: `edit 1 x/M`
-
-       Expected: First patient's sex updated. Success message shown.
-
-5. Clearing all allergies
+4. Clearing all allergies
     1. Test case: `edit 1 al/`
 
        Expected: All allergies removed from first patient. Success message shown.
 
-6. Editing with no fields provided
+5. Editing with no fields provided
     1. Test case: `edit 1`
 
        Expected: No changes made. Error message shown.
@@ -954,23 +948,6 @@ testers are expected to do more *exploratory* testing.
 
        Expected: Error message showing correct date format.
 
-### Finding patients
-
-1. Finding by name keyword
-    1. Test case: `find John`
-
-       Expected: All patients whose names contain the full word "John" listed. Success message shows number of patients found.
-
-2. Finding with no matches
-    1. Test case: `find ZZZZZ`
-
-       Expected: Empty list shown. Success message shows 0 patients found.
-
-3. Finding with missing keyword
-    1. Test case: `find`
-
-       Expected: Error message shown with correct command format.
-
 ### Clearing all patients
 
 1. Test case: `clear`
@@ -996,16 +973,44 @@ testers are expected to do more *exploratory* testing.
    
 ## **Appendix: Planned Enhancements**
 
+### **Data Handling & Validation**
 1. Include support for slashes (/) in patient name. Currently, we ask the user to remove slashes when entering the
-   patient's name. However, this means that the stored patient name may not be a match their exact government name. We
+   patient's name. However, this means that the stored patient name may not match their exact government name. We
    plan to implement apostrophe string enclosing to allow such special characters to be included in the name without
    conflicting with the special characters used for the argument prefixes.
 2. Include cross-checks between a patient's date of birth and NRIC. Currently, we don't check that the patient's birth
    year matches their NRIC due to complexities and edge cases. Additionally, patients born before 1968 won't have their
    birth year as the first two digits of their NRIC, making this impossible in certain cases. We plan to implement a
    best-effort check that will flag possible mismatches.
+
+### **Safety & Error Prevention**
 3. Include confirmation for the `clear` command to protect the user from unintentionally clearing all their data. We
    plan to make it so that the user has to enter two consecutive clear commands before the data is actually cleared.
+
+### **Patient Information Enhancements**
+4. Include support for tagging patients as "High Risk". This feature allows doctors to quickly identify patients who 
+   require extra caution. We plan to implement this as a visual indicator (e.g., tags or highlights) in the patient 
+   profile to improve visibility and awareness during consultations.
+5. Include support for marking allergies as "Severe". Currently, all allergies are treated equally.
+   We plan to allow certain allergies to be flagged as severe so that they stand out more prominently in the patient profile.
+6. Include a confirmation step before permanently deleting a patient record. This will help prevent accidental data 
+   loss by requiring the user to confirm their intent before deletion is executed.
+7. Include support for recording a patient's blood type. This feature would allow doctors to quickly access critical 
+   information in emergency situations.
+
+### **Search & Analysis Features**
+8. Include functionality to list all patients taking a specific medication. This would be useful in scenarios such as 
+   drug recalls or supply shortages, allowing doctors to quickly identify affected patients.
+
+### **Advanced Medical Context**
+9. Include support for linking related patients. This would allow doctors to identify family members and observe
+   potential hereditary patterns in medical conditions.
+10. Include support for attaching external specialist notes to a patient's record. This would provide a more 
+    comprehensive view of the patient's medical history and ongoing care.
+
+### **Advanced User Features**
+11. Include support for chaining commands together. This would allow advanced users to execute multiple actions in a 
+    single command (e.g., adding a patient and scheduling their first appointment), improving efficiency for advanced users.
 
 ## **Appendix: Effort**
 
