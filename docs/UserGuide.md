@@ -5,7 +5,7 @@ title: User Guide
 
 DoctorWho is designed for clinic receptionists and administrative staff at small to mid-sized GP clinics. 
 This guide assumes you are comfortable using a computer for everyday tasks, but no programming or technical experience is required.
-
+q
 Do you prefer typing information to having to click on multiple things? DoctorWho is for you!
 
 DoctorWho is a **desktop app for managing patient information and appointments, optimized for use via a Command Line
