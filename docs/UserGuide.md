@@ -3,6 +3,9 @@ layout: page
 title: User Guide
 ---
 
+DoctorWho is designed for clinic receptionists and administrative staff at small to mid-sized GP clinics. 
+This guide assumes you are comfortable using a computer for everyday tasks, but no programming or technical experience is required.
+
 Do you prefer typing information to having to click on multiple things? DoctorWho is for you!
 
 DoctorWho is a **desktop app for managing patient information and appointments, optimized for use via a Command Line
@@ -34,7 +37,7 @@ Don't worry if you're not tech-savvy — just follow these steps one by one and 
 
 2. Next, download the latest `doctorwho.jar` file from [here](https://github.com/AY2526S2-CS2103T-F10-1/tp/releases). You'll find it under the **Assets** section of the latest release — just click on `doctorwho.jar` to download it.
 
-3. Move the `doctorwho.jar` file to the folder where you'd like to store your patient data. We recommend creating a brand new empty folder for this (e.g. a folder named `DoctorWho` on your Desktop), so everything stays neat and tidy.
+3. Move the `doctorwho.jar` file to the folder where you'd like to store your patient data. We recommend creating a brand new empty folder for this (e.g., a folder named `DoctorWho` on your Desktop), so everything stays neat and tidy.
 
    ![Moving .jar file to folder](images/ShiftingJarFile.png)
 
@@ -76,19 +79,19 @@ Don't worry if you're not tech-savvy — just follow these steps one by one and 
 Here is a quick reference list for the commands DoctorWho provides, more detailed information about all of the commands
 can be found in [Features](#features).
 
-| Action                  | Format, Examples                                                                                                                                                                                                                             |
-|-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                 | `add n/NAME ic/NRIC x/SEX dob/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS [al/ALLERGY] [mc/CONDITION]…​` <br> e.g., `add n/James Ho ic/S1234567D x/M dob/01-04-2003 p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 al/dust mc/allergic rhinitis` |
-| **List**                | `list`                                                                                                                                                                                                                                       |
-| **Edit**                | `edit PATIENT_NUMBER [n/NAME] [ic/NRIC] [x/SEX] [dob/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [al/ALLERGY] [mc/CONDITION]…​`<br> e.g.,`edit 2 n/James Lee ic/S1234567D x/M e/jameslee@example.com`                                                                 |
-| **Find**                | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                   |
-| **Delete**              | `delete PATIENT_NUMBER`<br> e.g., `delete 3`                                                                                                                                                                                                 |
-| **Add appointments**    | `apt PATIENT_NUMBER d/DATETIME dur/DURATION [note/NOTE]`<br> e.g., `apt 2 d/01-04-2026 09:00 dur/60 note/Follow-up for diabetes review`                                                                                                     |
-| **Delete appointments** | `dapt PATIENT_NUMBER`<br> e.g., `dapt 1`                                                                                                                                                                                                     |
-| **List appointments**   | `lsapt [d/DATE]`<br> e.g., `lsapt`, `lsapt d/14-03-2026`                                                                                                                                                                                     |
-| **Clear**               | `clear`                                                                                                                                                                                                                                      |
-| **Help**                | `help`                                                                                                                                                                                                                                       |
-| **Exit**                | `exit`                                                                                                                                                                                                                                       |
+| Action                                                   | Format, Examples                                                                                                                                                                                                                                   |
+|----------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Add**](#adding-a-patient-add)                         | `add n/NAME ic/NRIC x/SEX dob/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS [al/ALLERGY] [mc/CONDITION]…​` <br> e.g., `add n/James Ho ic/S1234567D dob/01-04-2003 p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 al/dust c/allergic rhinitis` |
+| [**List**](#listing-all-patients-list)                   | `list`                                                                                                                                                                                                                                             |
+| [**Edit**](#editing-a-patient-edit)                      | `edit PATIENT_NUMBER [n/NAME] [ic/NRIC] [x/SEX] [dob/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [al/ALLERGY] [mc/CONDITION]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                       |
+| [**Find**](#locating-patients-by-name-find)              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                         |
+| [**Delete**](#deleting-a-patient-delete)                 | `delete PATIENT_NUMBER`<br> e.g., `delete 3`                                                                                                                                                                                                       |
+| [**Add appointment**](#adding-an-appointment-apt)        | `apt PATIENT_NUMBER d/DATETIME dur/DURATION [note/NOTE]`<br> e.g., `apt 2 d/01-04-2026 09:00 dur/60 note/Follow-up for diabetes review `                                                                                                           |
+| [**Delete appointment**](#deleting-an-appointment-dapt)  | `dapt PATIENT_NUMBER`<br> e.g., `dapt 1`                                                                                                                                                                                                           |
+| [**List appointments**](#listing-all-appointments-lsapt) | `lsapt [d/DATE]`<br> e.g., `lsapt`, `lsapt d/14-03-2026`                                                                                                                                                                                           |
+| [**Clear**](#clearing-all-entries-clear)                 | `clear`                                                                                                                                                                                                                                            |
+| [**Help**](#viewing-help-help)                           | `help`                                                                                                                                                                                                                                             |
+| [**Exit**](#exiting-the-program-exit)                    | `exit`                                                                                                                                                                                                                                             |
 
 ## Features
 
@@ -100,17 +103,17 @@ can be found in [Features](#features).
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [al/ALLERGY]` can be used as `n/John Doe al/Aspirin` or as `n/John Doe`.
-  E.g `n/NAME [mc/CONDITION]` can be used as `n/Johnny mc/High BP` or as `n/Johnny`
+  e.g., `n/NAME [al/ALLERGY]` can be used as `n/John Doe al/Aspirin` or as `n/John Doe`.
+  E.g., `n/NAME [mc/CONDITION]` can be used as `n/Johnny mc/High BP` or as `n/Johnny`
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[al/ALLERGY]…​` can be used as ` ` (i.e. 0 times), `al/Penicillin`, `al/Ibuprofen al/Aspirin` etc.
+  e.g., `[al/ALLERGY]…​` can be used as ` ` (i.e., 0 times), `al/Penicillin`, `al/Ibuprofen al/Aspirin` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g., if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  e.g., if the command specifies `help 123`, it will be interpreted as `help`.
 
 * Date format is `dd-MM-yyyy` for `add` and `edit` commands, `dd-MM-yyyy HH:mm` for appointment commands.
 
@@ -126,7 +129,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-## DoctorWho Operations:
+## DoctorWho Operations
 
 ### Adding a patient: `add`
 
@@ -179,7 +182,7 @@ Shows a list of all patients in DoctorWho.
 
 Format: `list`
 
-### Editing a patient : `edit`
+### Editing a patient: `edit`
 
 Edits an existing patient in DoctorWho.
 
@@ -189,7 +192,7 @@ Format: `edit PATIENT_NUMBER [n/NAME] [ic/NRIC] [x/SEX] [dob/DOB] [p/PHONE_NUMBE
   patient list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing conditions and allergies, the existing ones of the patient will be removed i.e adding is not cumulative.
+* When editing conditions and allergies, the existing ones of the patient will be removed i.e., adding is not cumulative.
 * You can remove all the patient’s allergies or medical conditions by typing `al/` or `mc/` respectively, without
   specifying anything after it.
 
@@ -206,12 +209,18 @@ Finds patients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g., `hans` will match `Hans`
+* The order of the keywords does not matter. e.g., `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Only full words will be matched e.g., `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e., `OR` search).
+  e.g., `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Use `find` before `delete` or `edit` to locate the right patient 
+first. This reduces the risk of accidentally modifying the wrong 
+patient's records.
+</div>
 
 Examples:
 
@@ -228,22 +237,34 @@ Format: `delete PATIENT_NUMBER`
 * Deletes the patient at the specified `PATIENT_NUMBER`.
 * The PATIENT_NUMBER **must be a positive integer** 1, 2, 3, …​
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This action is irreversible. Once a patient is deleted, all their 
+information and appointments cannot be recovered. Use `find` first 
+to confirm you have the right patient before deleting.
+</div>
+
 Examples:
 
 * `list` followed by `delete 2` deletes the 2nd patient in DoctorWho.
 * `find Betsy` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
 
-### Adding an appointment : `apt`
+### Adding an appointment: `apt`
 
-Adds an appointment to the patient identified by the index number used in the displayed patient list. Supply the start date and time, duration and an optional note. Existing appointment will be overwritten by the new appointment.
+Adds an appointment to the patient identified by the index number used in the displayed patient list. Supply the start date and time, duration and an optional note.
 
 Format: `apt PATIENT_NUMBER d/DATETIME dur/DURATION [note/NOTE]`
 
 * Creates and adds an appointment for the patient at the specified `PATIENT_NUMBER`.
 * The `PATIENT_NUMBER` **must be a positive integer** 1, 2, 3, …​
-* The date and time must be in the format `dd-MM-yyyy HH:mm` e.g, `12-03-2026 14:00` refers to 12th March 2026, 14:00.
+* The date and time must be in the format `dd-MM-yyyy HH:mm` e.g., `12-03-2026 14:00` refers to 12th March 2026, 14:00.
 * The duration **must be a positive integer** in **minutes**.
 * The note is optional.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If the patient already has an existing appointment, it will be 
+silently overwritten with no confirmation prompt. Check the 
+patient's current appointment before using this command.
+</div>
 
 Examples:
 
@@ -251,7 +272,9 @@ Examples:
   top, of the patient list, scheduled for 12th March 2026, at 14:00. A note will be indicated with
   `Note | Routine Checkup`
 
-### Deleting an appointment : `dapt`
+![img.png](images/aptOutput.png)
+
+### Deleting an appointment: `dapt`
 
 Deletes the appointment of the patient identified by the index number used in the displayed patient list.
 
@@ -265,7 +288,7 @@ Examples:
 
 * `list` followed by `dapt 1` deletes the appointment for the 1st patient in the displayed patient list.
 
-### Listing all appointments : `lsapt`
+### Listing all appointments: `lsapt`
 
 Shows all appointments across all patients, sorted by date-time in ascending order, to give a daily schedule view.
 
@@ -275,12 +298,20 @@ Format: `lsapt [d/DATE]`
 * If `d/DATE` is provided, only appointments on that date will be shown, and listed from earliest to latest.
 * `DATE` must be in the format `dd-MM-yyyy` e.g., `14-03-2026` refers to 14th March 2026.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Run `lsapt d/TODAY'S DATE` at the start of your shift to get a 
+quick overview of all appointments for the day, sorted from 
+earliest to latest.
+</div>
+
 Examples:
 
 * `lsapt` returns all appointments across all patients, sorted by date-time ascending.
 * `lsapt d/14-03-2026` returns all appointments on 14th March 2026.
 
-### Clearing all entries : `clear`
+![img.png](images/lsaptOutput.png)
+
+### Clearing all entries: `clear`
 
 Clears all entries from DoctorWho.
 
@@ -290,13 +321,13 @@ Format: `clear`
 This action is irreversible and will delete all patient data.
 </div>
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
 Format: `exit`
 
-## Storage:
+## Storage
 
 ### Saving the data
 
@@ -315,7 +346,10 @@ Furthermore, certain edits can cause the DoctorWho to behave in unexpected ways 
 
 ### Archiving data files `[coming in v2.0]`
 
-_Details coming soon ..._
+Automatic archiving is not yet supported. In the meantime, we recommend
+periodically making a manual copy of your data file located at
+`[JAR file location]/data/DoctorWho.json` and storing it in a separate
+folder as a backup.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -332,9 +366,28 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous DoctorWho home folder.
+**Q**: What happens if I accidentally delete a patient?<br>
+**A**: Deletion is irreversible and the patient's data cannot be
+recovered from within the app. To safeguard against accidental
+deletion, we recommend periodically making a manual copy of your
+data file located at `[JAR file location]/data/DoctorWho.json`
+and storing it in a separate folder. If you have a copy, you can
+restore it by replacing the current data file with your backup.
+
+--------------------------------------------------------------------------------------------------------------------
+
+**Q**: Can I schedule multiple appointments for one patient?<br>
+**A**: Currently, DoctorWho supports one active appointment per
+patient at a time. To schedule a new appointment, use the `apt`
+command which will replace the existing one. Support for multiple
+appointments per patient is planned for a future version.
+
+--------------------------------------------------------------------------------------------------------------------
+
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app on the other computer and overwrite the
+empty data file it creates with the file from your previous
+DoctorWho folder, located at `[JAR file location]/data/DoctorWho.json`.
 
 --------------------------------------------------------------------------------------------------------------------
 
