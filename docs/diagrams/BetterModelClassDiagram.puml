@@ -15,7 +15,10 @@ UniquePatientList -right-> "*" Patient
 Patient -up-> "*" Tag
 
 Patient *--> "1" Name
+Patient *--> "1" Nric
 Patient *--> "1" Phone
+Patient *--> "1" Sex
+Patient *--> "1" DateOfBirth
 Patient *--> "1" Email
 Patient *--> "1" Address
 Patient *--> "0..1" Appointment

@@ -17,7 +17,10 @@ Class Patient
 Class Address
 Class Email
 Class Name
+Class Nric
 Class Phone
+Class Sex
+Class DateOfBirth
 Class Appointment
 Class "{abstract}\nTag" as Tag
 Class Allergy
@@ -41,7 +44,10 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 AddressBook *--> "1" UniquePatientList
 UniquePatientList --> "~* all" Patient
 Patient *--> "1" Name
+Patient *--> "1" Nric
 Patient *--> "1" Phone
+Patient *--> "1" Sex
+Patient *--> "1" DateOfBirth
 Patient *--> "1" Email
 Patient *--> "1" Address
 Patient *--> "0..1" Appointment
@@ -54,7 +60,10 @@ Patient -[hidden]up--> I
 UniquePatientList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
+Phone -[hidden]right-> Nric
+Nric -[hidden]right-> Sex
+Sex -[hidden]right-> DateOfBirth
+DateOfBirth -[hidden]right-> Address
 Address -[hidden]right-> Email
 Email -[hidden]right-> Appointment
 
