@@ -26,8 +26,7 @@ class JsonAdaptedTag {
             this.tagType = parts[0];
             this.tagName = parts[1];
         } else {
-            this.tagName = tagName;
-            this.tagType = "general";
+            throw new IllegalArgumentException("Invalid tag format: " + tagName);
         }
     }
 
@@ -43,15 +42,12 @@ class JsonAdaptedTag {
         } else if (source instanceof Condition) {
             tagType = "condition";
         } else {
-            tagType = "general";
+            throw new IllegalArgumentException("Unknown tag subclass: " + source.getClass());
         }
     }
 
     @JsonValue
     public String toJson() {
-        if (tagType.equals("general")) {
-            return tagName;
-        }
         return tagType + ":" + tagName;
     }
 

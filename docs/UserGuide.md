@@ -12,11 +12,13 @@ can get your patient management tasks done faster than traditional GUI apps.
 <h2 style="margin-top: 0;">Can DoctorWho help you?</h2>
 
 Yes, if your clinic is still:
-
 - Using paper filing to keep track of your patients and their appointments.
 - Dealing with long search times in Excel.
 - Paying exorbitant fees for enterprise grade software to track a handful of patients.
 
+--------------------------------------------------------------------------------------------------------------------
+
+<h2 style="margin-top: 0;">Table of Contents</h2>
 
 * Table of Contents
 {:toc}

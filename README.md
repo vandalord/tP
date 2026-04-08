@@ -40,8 +40,7 @@
 6. **List Appointments**
    Display all scheduled appointments across patients in chronological order, with an optional date filter.
 
-* For the detailed documentation of this project, see the *
-  *[DoctorWho Product Website](https://ay2526s2-cs2103t-f10-1.github.io/tp/)**.
+* For the detailed documentation of this project, see the **[DoctorWho Product Website](https://ay2526s2-cs2103t-f10-1.github.io/tp/)**.
 
 ---
 

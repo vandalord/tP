@@ -363,7 +363,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is `DoctorWho` and the **Actor** is the `Doctor`, unless specified otherwise)
+(For all use cases below, the **System** is `DoctorWho` and the **Actor** is the `Staff`, unless specified otherwise)
 
 **Use Case 01: Add a Patient**
 
@@ -558,12 +558,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use Case 07: List Appointments**
 
 **Preconditions:**
-* User has launched the DoctorWho application.
-* User is at the command prompt.
+* Staff has launched the DoctorWho application.
+* Staff is at the command prompt.
 
 **Main Success Scenario:**
 
-1. User requests to list appointments.
+1. Staff requests to list appointments.
 2. DoctorWho displays all appointments.
 3. DoctorWho presents the appointments in ascending start date-time order.
 

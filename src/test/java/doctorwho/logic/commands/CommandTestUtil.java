@@ -74,9 +74,9 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_ALLERGY_DESC = " "
-                                            + PREFIX_ALLERGY + "ibuprofen*"; // '*' not allowed in allergies
+            + PREFIX_ALLERGY + "ibuprofen*"; // '*' not allowed in allergies
     public static final String INVALID_CONDITION_DESC = " "
-                                            + PREFIX_CONDITION + "diab*"; // '*' not allowed in conditions
+            + PREFIX_CONDITION + "diab*"; // '*' not allowed in conditions
 
     public static final String VALID_ALLERGY_SULFONAMIDES = "Sulfonamides";
     public static final String VALID_CONDITION_DIABETES = "Diabetes";
@@ -99,6 +99,13 @@ public class CommandTestUtil {
     public static final String VALID_APPOINTMENT_NOTE = "Routine Checkup";
     public static final String INVALID_APPOINTMENT_STARTTIME = "2026/03/12";
     public static final String INVALID_APPOINTMENT_DURATION = "-10";
+    public static final String INVALID_APPOINTMENT_NOTE = // 501 characters
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse cursus lectus ac leo iaculis, at posu"
+                    + "ere massa maximus. Phasellus bibendum, lacus non posuere sodales, odio massa aliquam mi, vel sod"
+                    + "ales nunc est ut neque. Sed quis est ac nisi accumsan pellentesque. Quisque gravida tortor et ma"
+                    + "ssa posuere egestas. Vestibulum interdum nibh dui, a accumsan libero condimentum id. Maecenas in"
+                    + " vestibulum sem. Donec ac erat sodales, accumsan nisi non, elementum erat. Cras enim risus, semp"
+                    + "er sit nam. ";
 
     // Starts at 14:15 — within the 14:00–14:30 window
     public static final String VALID_APPOINTMENT_STARTTIME_OVERLAPPING = "12-03-2026 14:15";

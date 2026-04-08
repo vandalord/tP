@@ -12,24 +12,9 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 public class DateOfBirthTest {
-    /**
-     * Key Equivalent Partitions for date formats
-     * Valid Inputs
-     * 1. Correct format + valid date (normal case)
-     * 2. Boundary valid dates (e.g. today)
-     * 3. Leap year valid date
-     * <p>
-     * Invalid Inputs
-     * 4. Wrong format
-     * 5. Non-existent dates
-     * 6. Future dates
-     * 7. Null / empty input
-     * 8. Invalid numeric ranges (day/month)
-     */
-
     @Test
     public void constructor_validDate_success() {
-        // Equivalence Class: Valid date, correct format (dd-MM-uuuu)
+        // EP: Valid date, correct format (dd-MM-uuuu)
         DateOfBirth dob = new DateOfBirth("05-09-2002");
         assertEquals("05-09-2002", dob.toString());
     }
@@ -39,10 +24,22 @@ public class DateOfBirthTest {
         assertThrows(IllegalArgumentException.class, () -> new DateOfBirth("2002-09-05"));
     }
 
-    // ================= VALID INPUTS =================
+    // Key Equivalent Partitions and Boundary Values for date formats
+    // Valid Inputs
+    // 1. Correct format + valid date (normal case)
+    // 2. Boundary valid dates (e.g. "today")
+    // 3. Leap year valid date
+    // Invalid Inputs
+    // 4. Wrong format
+    // 5. Non-existent dates and invalid numeric ranges (day/month)
+    // 6. Future dates
+    // 7. Null input
+    // 8. Empty input
+
+    // EP: Valid date normal
     @Test
     public void isValidDateOfBirth_validNormalDate_returnsTrue() {
-        // Equivalence Class: Typical valid date: BVA year 0000 to now
+        // BVA year 0000 to now
         assertTrue(DateOfBirth.isValidDateOfBirth("01-01-0000"));
         assertTrue(DateOfBirth.isValidDateOfBirth("15-08-1995"));
         assertTrue(DateOfBirth.isValidDateOfBirth(LocalDate.now().minusDays(1)
@@ -50,90 +47,67 @@ public class DateOfBirthTest {
         assertTrue(DateOfBirth.isValidDateOfBirth(LocalDate.now().format(DATE_FORMATTER)));
     }
 
+    // EP: Valid leap year date
     @Test
     public void isValidDateOfBirth_validLeapYear_returnsTrue() {
-        // Equivalence Class: Valid leap year date
         assertTrue(DateOfBirth.isValidDateOfBirth("29-02-2020"));
     }
 
-    // ================= INVALID FORMAT =================
+    // EP: Wrong format
     @Test
     public void isValidDateOfBirth_wrongFormat_returnsFalse() {
-        // Equivalence Class: Wrong format (yyyy-MM-dd) or (dd/MM/yyyy)
+        // Wrong format (yyyy-MM-dd) or (dd/MM/yyyy)
         assertFalse(DateOfBirth.isValidDateOfBirth("2002-09-05"));
         assertFalse(DateOfBirth.isValidDateOfBirth("05/09/2002"));
-        // Equivalence Class: Format violation (single digit day/month)
+        // Valid format violation (single digit day/month)
         assertFalse(DateOfBirth.isValidDateOfBirth("5-9-2002"));
     }
 
-    // ================= INVALID DATES =================
+    // EP: Non-existent dates
     @Test
     public void isValidDateOfBirth_nonExistentDate_returnsFalse() {
-        // Equivalence Class: Invalid calendar date
+        // Non-existent (February doesn't have 31st)
         assertFalse(DateOfBirth.isValidDateOfBirth("31-02-2020"));
-    }
-
-    @Test
-    public void isValidDateOfBirth_invalidLeapDate_returnsFalse() {
-        // Equivalence Class: Not a leap year
-        assertFalse(DateOfBirth.isValidDateOfBirth("29-02-2019"));
-    }
-
-    // ================= FUTURE DATES =================
-    @Test
-    public void isValidDateOfBirth_futureDate_returnsFalse() {
-        // Equivalence Class: Date after today
-        assertFalse(DateOfBirth.isValidDateOfBirth(LocalDate.now().plusDays(1).format(DATE_FORMATTER)));
-    }
-
-    // ================= INVALID RANGES =================
-    @Test
-    public void isValidDateOfBirth_invalidDate_returnsFalse() {
-        // Equivalence Class: Day out of range (>31)
+        // Day out of range (>31)
         assertFalse(DateOfBirth.isValidDateOfBirth("32-01-2000"));
-        // Equivalence Class: Month out of range (>12)
+        // Month out of range (>12)
         assertFalse(DateOfBirth.isValidDateOfBirth("10-13-2000"));
     }
 
-    // ================= NULL / EMPTY =================
+    // EP: Invalid leap date
+    @Test
+    public void isValidDateOfBirth_invalidLeapDate_returnsFalse() {
+        assertFalse(DateOfBirth.isValidDateOfBirth("29-02-2019"));
+    }
+
+    // EP: Future dates
+    @Test
+    public void isValidDateOfBirth_futureDate_returnsFalse() {
+        // BVA: tomorrow til max
+        assertFalse(DateOfBirth.isValidDateOfBirth(LocalDate.now().plusDays(1).format(DATE_FORMATTER)));
+    }
+
+    // EP: Null input
     @Test
     public void constructor_null_throwsNullPointerException() {
-        // Equivalence Class: Null input
+        // EP: Null input
         assertThrows(NullPointerException.class, () -> new DateOfBirth(null));
     }
 
+    // EP: Empty input
     @Test
     public void isValidDateOfBirth_emptyString_returnsFalse() {
-        // Equivalence Class: Empty string
+        // EP: Empty string
         assertFalse(DateOfBirth.isValidDateOfBirth(""));
     }
 
-    // ================= EQUALITY =================
-    @Test
-    public void equals_sameValues_returnsTrue() {
-        // Equivalence Class: Same date values
-        DateOfBirth dob1 = new DateOfBirth("05-09-2002");
-        DateOfBirth dob2 = new DateOfBirth("05-09-2002");
-        assertEquals(dob1, dob2);
-    }
-
-    @Test
-    public void equals_differentValues_returnsFalse() {
-        // Equivalence Class: Different valid dates
-        DateOfBirth dob1 = new DateOfBirth("05-09-2002");
-        DateOfBirth dob2 = new DateOfBirth("06-09-2002");
-        assertNotEquals(dob1, dob2);
-    }
-
-    /**
-     * Hard code the "today" date in tests to that expected outputs stay static.
-     * This is Regression Testing with some Stubs concepts from Unit Testing.
-     */
+    // Hard code the "today" date in tests to that expected outputs stay static.
+    // This is Regression Testing with some Stubs concepts from Unit Testing.
 
     // ================= YEARS =================
     @Test
     public void getAge_moreThanOneYear_returnsYears() {
-        // Equivalence Class: Age > 1 year
+        // EP: Age > 1 year
         DateOfBirth dob = new DateOfBirth("05-09-2000");
         LocalDate today = LocalDate.of(2025, 9, 6);
 
@@ -179,7 +153,7 @@ public class DateOfBirthTest {
     // ================= MONTHS =================
     @Test
     public void getAge_lessThanOneYear_returnsMonths() {
-        // Equivalence Class: Age < 1 year
+        // EP: Age < 1 year
         DateOfBirth dob = new DateOfBirth("01-01-2025");
         LocalDate today = LocalDate.of(2025, 4, 1);
 
@@ -197,13 +171,12 @@ public class DateOfBirthTest {
 
     @Test
     public void getAge_multipleMonths_returnsCorrectMonths() {
-        // Equivalence Class: Multiple months (< 1 year)
+        // EP: Multiple months (< 1 year)
         DateOfBirth dob = new DateOfBirth("01-01-2025");
         LocalDate today = LocalDate.of(2025, 6, 1);
 
         assertEquals("5 months", dob.getAge(today));
     }
-
 
     // ================= LESS THAN 1 MONTH =================
     @Test
@@ -224,7 +197,6 @@ public class DateOfBirthTest {
         assertEquals("0 months", dob.getAge(today));
     }
 
-
     // ================= LEAP YEAR =================
     @Test
     public void getAge_leapYearBirthday_nonLeapYear() {
@@ -244,6 +216,29 @@ public class DateOfBirthTest {
         assertEquals("4 years", dob.getAge(today));
     }
 
+    @Test
+    public void getAge_actualToday_returnsZeroMonths() {
+        LocalDate today = LocalDate.now();
+        DateOfBirth dob = new DateOfBirth(today.format(DATE_FORMATTER));
+
+        assertEquals("0 months", dob.getAge(today));
+    }
+
+    @Test
+    public void equals_sameValues_returnsTrue() {
+        // EP: Same date values
+        DateOfBirth dob1 = new DateOfBirth("05-09-2002");
+        DateOfBirth dob2 = new DateOfBirth("05-09-2002");
+        assertEquals(dob1, dob2);
+    }
+
+    @Test
+    public void equals_differentValues_returnsFalse() {
+        // EP: Different valid dates
+        DateOfBirth dob1 = new DateOfBirth("05-09-2002");
+        DateOfBirth dob2 = new DateOfBirth("06-09-2002");
+        assertNotEquals(dob1, dob2);
+    }
 
     @Test
     public void equals() {

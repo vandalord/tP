@@ -1,6 +1,7 @@
 package doctorwho.storage;
 
 import static doctorwho.logic.commands.CommandTestUtil.VALID_ALLERGY_ASPIRIN;
+import static doctorwho.logic.commands.CommandTestUtil.VALID_CONDITION_ASTHMA;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -12,39 +13,37 @@ import doctorwho.model.tag.Condition;
 import doctorwho.model.tag.Tag;
 
 public class JsonAdaptedTagTest {
-
-    /**
-     * Tests that a valid allergy tag string is correctly converted to an Allergy model type.
-     */
-    @Test
-    public void toJson_allergyTagString_returnsCorrectFormat() throws Exception {
-        JsonAdaptedTag adaptedTag = new JsonAdaptedTag("allergy:Aspirin");
-        assertEquals("allergy:Aspirin", adaptedTag.toJson());
-    }
-
     /**
      * Tests that a valid condition tag string is correctly converted to a Condition model type.
      */
     @Test
     public void toModelType_validConditionTag_returnsCondition() throws Exception {
-        JsonAdaptedTag adaptedTag = new JsonAdaptedTag("condition:asthma");
+        JsonAdaptedTag adaptedTag = new JsonAdaptedTag("condition:" + VALID_CONDITION_ASTHMA);
         Tag modelTag = adaptedTag.toModelType();
 
         assertEquals(Condition.class, modelTag.getClass());
     }
 
     /**
-     * Tests that an invalid tag string throws an IllegalValueException.
+     * Tests that an invalid allergy tag string throws an IllegalValueException.
+     */
+    @Test
+    public void toModelType_invalidAllergyTag_throwsException() {
+        JsonAdaptedTag adaptedTag = new JsonAdaptedTag("allergy:#invalid");
+
+        assertThrows(IllegalValueException.class, adaptedTag::toModelType);
+    }
+
+    /**
+     * Tests that an invalid condition tag string throws an IllegalValueException.
      */
     @Test
     public void toModelType_invalidTag_throwsException() {
-        JsonAdaptedTag adaptedTag = new JsonAdaptedTag("allergy:#invalid");
+        JsonAdaptedTag adaptedTag = new JsonAdaptedTag("condition:#invalid");
 
-        assertThrows(
-                IllegalValueException.class,
-                adaptedTag::toModelType
-        );
+        assertThrows(IllegalValueException.class, adaptedTag::toModelType);
     }
+
 
     /**
      * Tests that a tag string with an unknown prefix throws an IllegalValueException.
@@ -53,26 +52,14 @@ public class JsonAdaptedTagTest {
     public void toModelType_unknownPrefix_throwsException() {
         JsonAdaptedTag adaptedTag = new JsonAdaptedTag("unknown:sometag");
 
-        assertThrows(
-                IllegalValueException.class,
-                adaptedTag::toModelType
-        );
-    }
-
-    /**
-     * Tests that the JSON creator constructor returns the tag name without a prefix.
-     */
-    @Test
-    public void toJson_jsonCreatorConstructor_returnsTagNameOnly() throws Exception {
-        JsonAdaptedTag adaptedTag = new JsonAdaptedTag(VALID_ALLERGY_ASPIRIN);
-        assertEquals(VALID_ALLERGY_ASPIRIN, adaptedTag.toJson());
+        assertThrows(IllegalValueException.class, adaptedTag::toModelType);
     }
 
     /**
      * Tests that constructing a JsonAdaptedTag from a model Allergy tag preserves the correct type.
      */
     @Test
-    public void constructor_fromModelTag_createsCorrectType() throws Exception {
+    public void constructor_validTag_createsCorrectType() throws Exception {
         Tag allergy = new Allergy(VALID_ALLERGY_ASPIRIN);
         JsonAdaptedTag adaptedTag = new JsonAdaptedTag(allergy);
 
@@ -82,22 +69,39 @@ public class JsonAdaptedTagTest {
     }
 
     /**
+     * Tests that the JSON creator constructor fails if the tag is without a prefix.
+     */
+    @Test
+    public void constructor_invalidTagFormat_throwsException() {
+        assertThrows(IllegalArgumentException.class, () -> new JsonAdaptedTag(VALID_ALLERGY_ASPIRIN));
+    }
+
+    /**
+     * Tests that a valid allergy tag string is correctly converted to an Allergy model type.
+     */
+    @Test
+    public void toJson_allergyTagString_returnsCorrectFormat() {
+        JsonAdaptedTag adaptedTag = new JsonAdaptedTag("allergy:" + VALID_ALLERGY_ASPIRIN);
+        assertEquals("allergy:" + VALID_ALLERGY_ASPIRIN, adaptedTag.toJson());
+    }
+
+    /**
      * Tests that a Condition tag is serialised to JSON with the correct condition prefix.
      */
     @Test
-    public void toJson_conditionTag_returnsConditionPrefix() throws Exception {
-        Tag condition = new Condition("asthma");
+    public void toJson_conditionTag_returnsConditionPrefix() {
+        Tag condition = new Condition(VALID_CONDITION_ASTHMA);
         JsonAdaptedTag adaptedTag = new JsonAdaptedTag(condition);
-        assertEquals("condition:asthma", adaptedTag.toJson());
+        assertEquals("condition:" + VALID_CONDITION_ASTHMA, adaptedTag.toJson());
     }
 
     /**
      * Tests that an Allergy tag is serialised to JSON with the correct allergy prefix.
      */
     @Test
-    public void toJson_allergyTag_returnsAllergyPrefix() throws Exception {
+    public void toJson_allergyTag_returnsAllergyPrefix() {
         Tag allergy = new Allergy(VALID_ALLERGY_ASPIRIN);
         JsonAdaptedTag adaptedTag = new JsonAdaptedTag(allergy);
-        assertEquals("allergy:Aspirin", adaptedTag.toJson());
+        assertEquals("allergy:" + VALID_ALLERGY_ASPIRIN, adaptedTag.toJson());
     }
 }

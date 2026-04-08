@@ -45,10 +45,6 @@ public class ListAppointmentCommand extends Command {
         this.appointmentDate = Optional.of(appointmentDate);
     }
 
-    public Optional<LocalDate> getAppointmentDate() {
-        return appointmentDate;
-    }
-
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
