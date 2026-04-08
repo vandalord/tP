@@ -130,10 +130,11 @@ Format: `help`
 
 Adds a patient to DoctorWho.
 
+Format: `add n/NAME ic/NRIC x/SEX dob/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS [al/ALLERGY] [mc/CONDITION]…​`
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Accepted name formats**<br>
-Format: `add n/NAME ic/NRIC x/SEX dob/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS [al/ALLERGY] [mc/CONDITION]…​`
 
 DoctorWho currently accepts the following special characters in the patient's name:
 
