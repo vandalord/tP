@@ -697,8 +697,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. Data must be saved locally in a human-readable JSON format to allow for manual inspection or external backup without
    using the app.
 5. The system should handle corrupted data files by notifying the user and failing gracefully rather than crashing.
-6. The system should be fully functional in an offline environment with no dependency on external servers or internet
-   connectivity.
+6. The system shall support full operation of all core application features in an offline environment without dependency 
+   on external servers or internet connectivity. Non-core features (e.g., external help resources or documentation
+   links) may require internet access.
 
 ### Glossary
 
