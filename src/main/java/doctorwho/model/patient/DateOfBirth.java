@@ -16,7 +16,7 @@ import doctorwho.logic.parser.exceptions.ParseException;
 public class DateOfBirth {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Date of birth must be in the format 'dd-mm-yyy' and be a valid past date.";
+            "Date of birth must be in the format 'dd-mm-yyyy' and be a valid past date.";
 
     public final LocalDate value;
 
