@@ -897,6 +897,8 @@ testers are expected to do more *exploratory* testing.
    
 ## **Appendix: Planned Enhancements**
 
+Team size: 5
+
 ### **Data Handling & Validation**
 1. Include support for slashes (/) in patient name. Currently, we ask the user to remove slashes when entering the
    patient's name. However, this means that the stored patient name may not match their exact government name. We
