@@ -164,6 +164,9 @@ DoctorWho prevents invalid NRIC/FIN entries. For both `add` and `edit`, the `ic/
 **Sex:**<br/>
 Limited to male or female values only; `x/` accepts `M` or `F` case-insensitively (for example, `x/M`, `x/F`, `x/m`, and `x/f` are valid), though edits are allowed.
 
+**Allergies and Conditions:**<br/>
+Allergy and condition names do not support consecutive spaces.
+
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
