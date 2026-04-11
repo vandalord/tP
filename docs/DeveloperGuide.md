@@ -882,14 +882,14 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing data file
     1. Close the app.
-    2. Navigate to `[JAR file location]/data/` and delete `DoctorWho.json`.
+    2. Navigate to `[JAR file location]/data/` and delete `doctorwho.json`.
     3. Re-launch the app.
 
-       Expected: App starts with sample patient data. A new `DoctorWho.json` is created.
+       Expected: App starts with sample patient data. A new `doctorwho.json` is created.
 
 2. Dealing with corrupted data file
     1. Close the app.
-    2. Open `[JAR file location]/data/DoctorWho.json` in a text editor.
+    2. Open `[JAR file location]/data/doctorwho.json` in a text editor.
     3. Delete a random line in the middle of the file and save.
     4. Re-launch the app.
 
