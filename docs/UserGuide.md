@@ -280,7 +280,7 @@ Format: `apt PATIENT_NUMBER d/DATETIME dur/DURATION [note/NOTE]`
 * Creates and adds an appointment for the patient at the specified `PATIENT_NUMBER`.
 * The `PATIENT_NUMBER` **must be a positive integer** 1, 2, 3, …​
 * The date and time must be in the format `dd-MM-yyyy HH:mm` e.g., `12-03-2026 14:00` refers to 12th March 2026, 14:00.
-* The duration **must be a positive integer** in **minutes**.
+* The duration **must be between 1 and 600 minutes inclusive**.
 * The note is optional.
 * If provided, `NOTE` must be at most **500 characters**.
 

@@ -15,12 +15,13 @@ import java.util.Objects;
  * Guarantees: immutable; is valid as declared in {@link #isValidDateTime(String)}
  */
 public class Appointment {
+    public static final int MAX_DUR = 10 * 60; // 10 hours
 
     public static final String STARTTIME_CONSTRAINTS =
             "Appointments should be a valid date and have a start time in 'dd-MM-yyyy HH:mm' format";
 
     public static final String DURATION_CONSTRAINTS =
-            "Appointments should have a finite positive integer for duration (minutes).";
+            "Appointments should have a duration of more than 0 and less than or equal to " + MAX_DUR + " (minutes).";
 
     public static final String NOTE_CONSTRAINTS =
             STARTTIME_CONSTRAINTS + ", "
@@ -46,7 +47,7 @@ public class Appointment {
     public Appointment(String startTimeStr, int duration, String note) {
         requireAllNonNull(startTimeStr, duration);
         checkArgument(isValidDateTime(startTimeStr), STARTTIME_CONSTRAINTS);
-        checkArgument(duration > 0 && duration < Integer.MAX_VALUE, DURATION_CONSTRAINTS);
+        checkArgument(duration > 0 && duration <= MAX_DUR, DURATION_CONSTRAINTS);
         checkArgument(isValidNote(note), NOTE_CONSTRAINTS);
 
         this.startTime = LocalDateTime.parse(startTimeStr, FORMATTER);
@@ -73,7 +74,7 @@ public class Appointment {
      * Returns true if the duration is a positive integer.
      */
     public static boolean isValidDuration(int duration) {
-        return duration > 0 & duration <= Integer.MAX_VALUE;
+        return duration > 0 & duration <= MAX_DUR;
     }
 
     /**

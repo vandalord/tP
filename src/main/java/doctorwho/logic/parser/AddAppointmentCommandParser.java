@@ -54,7 +54,7 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
                 PREFIX_APPOINTMENT_DURATION, PREFIX_APPOINTMENT_NOTE);
 
         String startTimeStr = argMultimap.getValue(PREFIX_APPOINTMENT_STARTTIME).get();
-        int duration = ParserUtil.parsePositiveInteger(argMultimap.getValue(PREFIX_APPOINTMENT_DURATION).get());
+        int duration = ParserUtil.parseAppointmentDuration(argMultimap.getValue(PREFIX_APPOINTMENT_DURATION).get());
         String note = argMultimap.getValue(PREFIX_APPOINTMENT_NOTE).orElse("");
 
         if (note.length() > Appointment.MAX_LENGTH) {

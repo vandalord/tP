@@ -110,7 +110,7 @@ public class AddAppointmentCommandParserTest {
                 + INVALID_APPOINTMENT_DURATION_DESC;
 
         assertParseFailure(parser, userInput,
-                ParserUtil.MESSAGE_INVALID_POSITIVE_INTEGER);
+                ParserUtil.MESSAGE_INVALID_DUR);
     }
 
     @Test

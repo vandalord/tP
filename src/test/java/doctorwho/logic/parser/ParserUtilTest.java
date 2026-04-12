@@ -4,6 +4,7 @@ import static doctorwho.logic.commands.CommandTestUtil.VALID_ALLERGY_ASPIRIN;
 import static doctorwho.logic.parser.ParserUtil.MESSAGE_INVALID_DATE;
 import static doctorwho.logic.parser.ParserUtil.MESSAGE_INVALID_DATE_FORMAT;
 import static doctorwho.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static doctorwho.model.patient.Appointment.MAX_DUR;
 import static doctorwho.testutil.Assert.assertThrows;
 import static doctorwho.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -331,15 +332,15 @@ public class ParserUtilTest {
     @Test
     public void parseConditions_collectionWithValidTags_returnsconditionSet() throws Exception {
         Set<Condition> expected = new HashSet<>(Arrays.asList(
-            new Condition(VALID_CONDITION_2), new Condition("asthma")));
+                new Condition(VALID_CONDITION_2), new Condition("asthma")));
         assertEquals(expected, ParserUtil.parseConditions(
-            Arrays.asList(VALID_CONDITION_2, "asthma")));
+                Arrays.asList(VALID_CONDITION_2, "asthma")));
     }
 
     @Test
     public void parseConditions_collectionWithInvalidTags_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseConditions(
-            Arrays.asList(VALID_CONDITION_2, INVALID_ALLERGY)));
+                Arrays.asList(VALID_CONDITION_2, INVALID_ALLERGY)));
     }
 
     @Test
@@ -370,6 +371,32 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseAppointmentDuration_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAppointmentDuration(null));
+    }
+
+    // BVA for duration
+    // 0 : invalid
+    // 1 to MAX_DUR : valid
+    // >MAX_DUR : invalid
+
+    @Test
+    public void parseAppointmentDuration_validDuration_success() throws ParseException {
+        assertEquals(1, ParserUtil.parseAppointmentDuration(String.valueOf(1)));
+        assertEquals(MAX_DUR, ParserUtil.parseAppointmentDuration(String.valueOf(MAX_DUR)));
+    }
+
+    @Test
+    public void parseAppointmentDuration_invalidDuration_throwsParseException() {
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseAppointmentDuration(String.valueOf(Integer.MAX_VALUE)));
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseAppointmentDuration(String.valueOf(MAX_DUR + 1)));
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseAppointmentDuration(String.valueOf(0)));
+    }
+
+    @Test
     public void parseAppointmentDate_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseDate(null));
     }
@@ -377,13 +404,13 @@ public class ParserUtilTest {
     @Test
     public void parseAppointmentDate_invalidFormat_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_DATE_FORMAT, () ->
-            ParserUtil.parseDate(INVALID_APPOINTMENT_DATE));
+                ParserUtil.parseDate(INVALID_APPOINTMENT_DATE));
     }
 
     @Test
     public void parseAppointmentDate_nonLeapDate_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_DATE, () ->
-            ParserUtil.parseDate(INVALID_APPOINTMENT_DATE_NON_LEAP));
+                ParserUtil.parseDate(INVALID_APPOINTMENT_DATE_NON_LEAP));
     }
 
     @Test

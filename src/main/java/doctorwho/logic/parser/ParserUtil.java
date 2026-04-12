@@ -1,5 +1,6 @@
 package doctorwho.logic.parser;
 
+import static doctorwho.model.patient.Appointment.MAX_DUR;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
@@ -32,6 +33,8 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_POSITIVE_INTEGER = "Number is not a non-zero unsigned integer. "
             + "Ensure the number is more than 0 and less than or equal to " + Integer.MAX_VALUE;
+    public static final String MESSAGE_INVALID_DUR = "Duration should be more than 0 and less than or equal to "
+            + MAX_DUR + " (minutes).";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Date should be in 'dd-MM-yyyy' format.";
     public static final String MESSAGE_INVALID_DATE = "Date is invalid.";
 
@@ -208,6 +211,25 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_POSITIVE_INTEGER);
         }
         return Integer.parseInt(candidate);
+    }
+
+    /**
+     * Parses {@code candidate} integer into an appointment duration and returns it. Leading and trailing
+     * whitespaces will be trimmed.
+     *
+     * @throws ParseException if the specified candidate is invalid (not non-zero unsigned integer).
+     */
+    public static int parseAppointmentDuration(String candidate) throws ParseException {
+        int dur;
+        try {
+            dur = parsePositiveInteger(candidate);
+        } catch (ParseException e) {
+            throw new ParseException(MESSAGE_INVALID_DUR);
+        }
+        if (dur > MAX_DUR) {
+            throw new ParseException(MESSAGE_INVALID_DUR);
+        }
+        return dur;
     }
 
     /**
