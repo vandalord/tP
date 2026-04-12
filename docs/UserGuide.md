@@ -64,7 +64,7 @@ Don't worry if you're not tech-savvy — just follow these steps one by one and 
 6. Type a command in the command box at the top and press **Enter** to run it. Here are a few to try out:
 
    * `list` — Lists all patients.
-   * `add n/John Doe ic/S1234567D x/M dob/01-04-2003 p/98765432 e/johnd@example.com a/John street, block 123, #01-01` — Adds a patient named `John Doe`.
+   * `add n/John Doe ic/S0843959A x/M dob/01-04-2003 p/98765432 e/johnd@example.com a/John street, block 123, #01-01` — Adds a patient named `John Doe`.
    * `delete 3` — Deletes the 3rd patient in the current list.
    * `apt 3 d/01-04-2026 09:00 dur/60 note/Follow-up for diabetes review` — Schedules an appointment for the 3rd patient.
    * `lsapt d/12-03-2026` — List appointments for 12th March 2026.
@@ -81,7 +81,7 @@ can be found in [Features](#features).
 
 | Action                                                   | Format, Examples                                                                                                                                                                                                                                           |
 |----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Add**](#adding-a-patient-add)                         | `add n/NAME ic/NRIC x/SEX dob/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS [al/ALLERGY]…​ [mc/CONDITION]…​` <br> e.g., `add n/James Ho ic/S1234567D x/M dob/01-04-2003 p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 al/dust mc/allergic rhinitis` |
+| [**Add**](#adding-a-patient-add)                         | `add n/NAME ic/NRIC x/SEX dob/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS [al/ALLERGY]…​ [mc/CONDITION]…​` <br> e.g., `add n/James Ho ic/S5844149Z x/M dob/01-04-2003 p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 al/dust mc/allergic rhinitis` |
 | [**List**](#listing-all-patients-list)                   | `list`                                                                                                                                                                                                                                                     |
 | [**Edit**](#editing-a-patient-edit)                      | `edit PATIENT_NUMBER [n/NAME] [ic/NRIC] [x/SEX] [dob/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [al/ALLERGY]…​ [mc/CONDITION]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                    |
 | [**Find**](#locating-patients-by-name-find)              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                 |
@@ -195,9 +195,9 @@ A patient can have any number of allergies or medical conditions (including 0)
 
 Examples:
 
-* `add n/John Doe ic/S1234567D x/M dob/01-04-2003 p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe ic/S2345678H x/F dob/02-04-2003 e/bcrowe@example.com a/Newgate Prison p/1234567 al/Penicillin mc/cold`
-* `add n/Tim Chal ic/S4567890C x/M dob/03-04-2003 e/betsycrowe@example.com a/Newgate Prison p/1234567 al/Morphine`
+* `add n/John Doe ic/S5730374C x/M dob/01-04-2003 p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/Betsy Crowe ic/T1799192I x/F dob/02-04-2003 e/bcrowe@example.com a/Newgate Prison p/1234567 al/Penicillin mc/cold`
+* `add n/Tim Chal ic/T4920802I x/M dob/03-04-2003 e/betsycrowe@example.com a/Newgate Prison p/1234567 al/Morphine`
 
 ### Listing all patients: `list`
 
