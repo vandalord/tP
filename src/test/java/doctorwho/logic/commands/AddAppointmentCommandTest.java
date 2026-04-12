@@ -150,35 +150,6 @@ public class AddAppointmentCommandTest {
     }
 
     @Test
-    public void execute_replaceWithOriginalAppointment_success() {
-        // Give patient 1 an appointment first
-        Patient patientToEdit = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
-        Patient patientWithAppointment = new PatientBuilder(patientToEdit)
-                .withAppointment(appointment)
-                .build();
-        model.setPatient(patientToEdit, patientWithAppointment);
-
-        // Re-assign the same appointment to the same patient.
-        // hasOverlappingAppointmentInList filters by isSamePatient, so this must succeed.
-        Patient editedPatient = new PatientBuilder(patientWithAppointment)
-                .withAppointment(appointment)
-                .build();
-
-        AddAppointmentCommand command =
-                new AddAppointmentCommand(INDEX_FIRST_PATIENT, appointment);
-
-        String expectedMessage = String.format(
-                AddAppointmentCommand.MESSAGE_EDIT_PATIENT_SUCCESS,
-                Messages.format(editedPatient));
-
-        Model expectedModel = new ModelManager(
-                new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPatient(patientWithAppointment, editedPatient);
-
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_replaceAppointmentWithOverlap_success() {
         // Re-assigning the same patient's appointment should not flag overlap with itself
         Patient patientToEdit = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
@@ -204,6 +175,21 @@ public class AddAppointmentCommandTest {
         expectedModel.setPatient(patientWithAppointment, editedPatient);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_replaceWithOriginalAppointment_failure() {
+        // Give patient 1 an appointment first
+        Patient patientToEdit = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
+        Patient patientWithAppointment = new PatientBuilder(patientToEdit)
+                .withAppointment(appointment)
+                .build();
+        model.setPatient(patientToEdit, patientWithAppointment);
+
+        AddAppointmentCommand command =
+                new AddAppointmentCommand(INDEX_FIRST_PATIENT, appointment);
+
+        assertCommandFailure(command, model, AddAppointmentCommand.MESSAGE_UHCHANGED);
     }
 
     @Test

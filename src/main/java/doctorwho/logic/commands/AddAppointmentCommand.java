@@ -48,6 +48,7 @@ public class AddAppointmentCommand extends Command {
     public static final String MESSAGE_HAS_OVERLAPPING_APPOINTMENT =
             "The appointment clashes with an existing appointment";
     public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Added appointment to: %1$s";
+    public static final String MESSAGE_UHCHANGED = "The appointment is identical to the patient's current appointment.";
 
     private final Index index;
     private final Appointment appointment;
@@ -72,6 +73,9 @@ public class AddAppointmentCommand extends Command {
         }
 
         Patient patientToEdit = lastShownList.get(index.getZeroBased());
+        if (appointment.equals(patientToEdit.getAppointment().orElse(null))) {
+            throw new CommandException(MESSAGE_UHCHANGED);
+        }
         Patient editedPatient = addAppointmentToPatient(patientToEdit, appointment);
 
         List<Patient> fullList = model.getFullPatientList();
