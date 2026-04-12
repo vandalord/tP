@@ -141,13 +141,18 @@ Format: `add n/NAME ic/NRIC x/SEX dob/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS [al/A
 
 **:information_source: Accepted name formats**<br>
 
-Names are limited to 100 characters. DoctorWho currently accepts the following special characters in the patient's name:
+For both `add` and `edit`, names are limited to **1 to 100 characters**.
+Names must start and end with an alphanumeric character.
+DoctorWho accepts the following separators only **between** alphanumeric name parts:
+only one separator is allowed at a time (i.e., no consecutive separators such as `- `, `''`, or double spaces).
 
 | Character       | Valid example |
 |-----------------|---------------|
 | Hyphens (-)     | Mary-Jane     |
 | Apostrophes (') | O'Brien       |
 | Commas (,)      | Henry, Tan    |
+
+Examples of invalid name values: `n/-David`, `n/'Aisha`, `n/,Tan`, `n/David-`, `n/O''Brien`, `n/asdj- -sads`.
 
 However, there are other common special characters used in names that are not yet supported. These are some suggested
 replacements you can use if you encounter these special characters:
