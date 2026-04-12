@@ -382,15 +382,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
+The use cases operate with the following implicit preconditions, in addition to any ones stated explicitly:
+* Staff has launched the DoctorWho application.
+* Staff is at the DoctorWho command prompt.
+
 (For all use cases below, the **System** is `DoctorWho` and the **Actor** is the `Staff`, unless specified otherwise)
 
 **Use Case 01: Add a Patient**
 
-**Preconditions:**
-* Staff has launched the DoctorWho application.
-* Staff is at the command prompt.
-
-**Main Success Scenario:**
+**MSS:**
 1. Staff requests to add a new patient with the required details.
 2. DoctorWho adds the patient to the system.
 3. DoctorWho shows a success message with the added patient's details.
@@ -414,17 +414,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Post conditions:**
+**Postconditions:**
 * New patient appears at the bottom of the patient list.
 
 **Use Case 02: Delete a Patient**
 
 **Preconditions:**
-* Staff has launched the DoctorWho application.
-* Staff is at the command prompt.
 * At least one patient exists in the list.
 
-**Main Success Scenario:**
+**MSS:**
 1. Staff requests to delete a specific patient using the index.
 2. DoctorWho removes the patient from the system.
 3. DoctorWho shows a success message.
@@ -438,33 +436,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Post conditions:**
+**Postconditions:**
 * Patient is removed from the system.
 
 **Use Case 03: List Patients**
 
-**Preconditions:**
-* Staff has launched the DoctorWho application.
-* Staff is at the command prompt.
-
-**Main Success Scenario:**
+**MSS:**
 1. Staff requests to list all patients.
 2. DoctorWho displays all patients in the list panel.
 3. DoctorWho shows a success message.
 
    Use case ends.
 
-**Post conditions:**
+**Extensions:**
+
+* 2a. No patients in the system.
+    * 2a1. DoctorWho shows an empty list and a success message indicating that there are no patients.
+
+      Use case ends.
+
+**Postconditions:**
 * All patients are displayed in the list panel.
 
 **Use Case 04: Edit a Patient's Information**
 
 **Preconditions:**
-* Staff has launched the DoctorWho application.
-* Staff is at the command prompt.
 * At least one patient exists in the list.
 
-**Main Success Scenario:**
+**MSS:**
 1. Staff requests to edit a specific patient's information using the index.
 2. DoctorWho updates the patient's information.
 3. DoctorWho shows a success message with the updated details.
@@ -493,22 +492,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1e. Staff provides allergies or conditions field with no value.
-    * 1e1. DoctorWho clears all existing conditions or allergies respectively.
+* 1e. Edited details are same as original patient.
+    * 1e1. DoctorWho shows an error message.
+
+      Use case ends.
+
+* 1f. Staff provides allergies or conditions field with no value.
+    * 1f1. DoctorWho clears all existing conditions or allergies respectively.
 
       Use case resumes from step 3.
 
-**Post conditions:**
+**Postconditions:**
 * Patient's information is updated in the system.
 
 **Use Case 05: Schedule an appointment for an existing patient**
 
 **Preconditions:**
-* Staff has launched the DoctorWho application.
-* Staff is at the command prompt.
 * At least one patient exists in the list.
 
-**Main Success Scenario:**
+**MSS:**
 1. Staff requests to add an appointment for a specific patient using the index.
 2. DoctorWho adds the appointment to the patient's record.
 3. DoctorWho shows a success message with the appointment details.
@@ -537,17 +539,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Post conditions:**
+* 1e. New appointment is identical to the current appointment of the selected patient (i.e., start time, duration, and note are identical).
+    * 1e1. DoctorWho shoes an error message.
+
+      Use case ends.
+
+**Postconditions:**
 * Appointment is added and visible in the patient detail panel.
 
 **Use Case 06: Delete Appointment**
 
 **Preconditions:**
-* Staff has launched the DoctorWho application.
-* Staff is at the command prompt.
 * At least one patient exists in the list.
 
-**Main Success Scenario:**
+**MSS:**
 1. Staff requests to delete the appointment of a specific patient using the index.
 2. DoctorWho removes the appointment from the patient's record.
 3. DoctorWho shows a success message.
@@ -566,16 +571,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Post conditions:**
+**Postconditions:**
 * Appointment is removed from the patient's record.
 
 **Use Case 07: List Appointments**
 
-**Preconditions:**
-* Staff has launched the DoctorWho application.
-* Staff is at the command prompt.
-
-**Main Success Scenario:**
+**MSS:**
 
 1. Staff requests to list appointments.
 2. DoctorWho displays all appointments.
@@ -602,21 +603,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 * 2a. There are no appointments to display.
-    * 2a1. DoctorWho shows an empty result list and a corresponding status message.
+    * 2a1. DoctorWho shows an empty result list and a success message with 0 patients listed.
 
       Use case ends.
 
-**Post conditions:**
+**Postconditions:**
 * The currently displayed list is updated to show appointment-based results.
 * If a date is provided, only appointments on that date are shown.
 
 **Use Case 08: Find Patients**
 
-**Preconditions:**
-* Staff has launched the DoctorWho application.
-* Staff is at the command prompt.
-
-**Main Success Scenario:**
+**MSS:**
 1. Staff requests to find patients by specifying a name keyword.
 2. DoctorWho displays all patients whose names contain the input keyword.
 3. DoctorWho shows a success message with the number of patients found.
@@ -635,52 +632,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Post conditions:**
+**Postconditions:**
 * Patient list panel displays only patients matching the input name.
 
 **Use Case 09: Clear All Patients**
 
-**Preconditions:**
-* Staff has launched the DoctorWho application.
-* Staff is at the command prompt.
-
-**Main Success Scenario:**
+**MSS:**
 1. Staff requests to clear all patient records.
 2. DoctorWho removes all patients and their appointments from the system.
 3. DoctorWho shows a success message.
 
    Use case ends.
 
-**Post conditions:**
+**Postconditions:**
 * Patient list is empty.
 
 **Use Case 10: View Help**
 
-**Preconditions:**
-* Staff has launched the DoctorWho application.
-* Staff is at the command prompt.
-
-**Main Success Scenario:**
+**MSS:**
 1. Staff requests to view help.
 2. DoctorWho opens a help window with a link to the User Guide.
 
    Use case ends.
 
-**Post conditions:**
+**Postconditions:**
 * Help window is displayed to the staff.
 
 **Use Case 11: Exit Application**
 
-**Preconditions:**
-* Staff has launched the DoctorWho application.
-
-**Main Success Scenario:**
+**MSS:**
 1. Staff requests to exit the application.
 2. DoctorWho closes the application.
 
    Use case ends.
 
-**Post conditions:**
+**Postconditions:**
 * Application is closed.
 
 ### Non-Functional Requirements

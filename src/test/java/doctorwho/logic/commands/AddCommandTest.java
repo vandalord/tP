@@ -225,6 +225,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean isEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Patient> getFullPatientList() {
             throw new AssertionError("This method should not be called.");
         }

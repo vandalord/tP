@@ -83,6 +83,11 @@ public interface Model {
     void setPatient(Patient target, Patient editedPatient);
 
     /**
+     * Returns true if there are no {@code patient} in the address book.
+     */
+    boolean isEmpty();
+
+    /**
      * Returns an unmodifiable view of the full patient list
      */
     ObservableList<Patient> getFullPatientList();

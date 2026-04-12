@@ -116,6 +116,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isEmpty() {
+        return addressBook.getPatientList().isEmpty();
+    }
+
+    @Override
     public ObservableList<Patient> getFullPatientList() {
         return this.addressBook.getPatientList();
     }

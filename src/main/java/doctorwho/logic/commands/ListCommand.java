@@ -13,11 +13,14 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_SUCCESS = "Listed all patients.";
-
+    public static final String MESSAGE_EMPTY = "Patient book is empty.";
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        if (model.isEmpty()) {
+            return new CommandResult(MESSAGE_EMPTY);
+        }
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
