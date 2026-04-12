@@ -182,13 +182,20 @@ Examples of valid values: `e/alex.tan+clinic@example.com`, `e/a_b-c@sub-domain.e
 Examples of invalid values: `e/.alex@example.com`, `e/alex@-example.com`, `e/alex@example.c`.
 
 **Address (`a/`):**<br/>
-Is limited to 200 characters and can include alphabets, numbers, spaces and the following special characters `#.,()\-`.
+For both `add` and `edit`, address must be **1 to 200 characters** long and not blank after trimming leading/trailing spaces.<br/>
+It may contain only alphanumeric characters, single spaces between words, and these special characters: `#`, `.`, `,`, `(`, `)`, `\`, `-`.<br/>
+Examples of valid values: `a/123 Clementi Rd`, `a/Blk 123, #01-01 (Tower A)`, `a/Jurong\West Ave 2`.<br/>
+Examples of invalid values: `a/`, `a/   `, `a/Blk  123` (double spaces), `a/Bedok@Ave` (`@` not allowed).
 
-**Drug Allergies (`al/`) and Medical Conditions (`mc/`):**<br/>
-Allergy and condition names do not support consecutive spaces and/or hyphens.
+**Drug Allergies (`al/`):**<br/>
+For both `add` and `edit`, allergy names must be **1 to 30 characters** long and contain only alphanumeric characters, single spaces between words, and single hyphens within a word.<br/>
+Examples of valid values: `al/Penicillin`, `al/Beta-lactam`, `al/Type 2`.<br/>
+Examples of invalid values: `al/Beta--lactam` (consecutive hyphens), `al/Beta- lactam` (space after hyphen), `al/Aspirin!` (`!` not allowed).
 
-Examples of valid values: `Beta-lactam`, `Type 2 diabetes`, `Post-traumatic stress disorder`.<br/>
-Examples of invalid values: `Beta- lactam`, `Type ​ 2 ​ diabetes`, `Post--traumatic stress disorder`.
+**Medical Conditions (`mc/`):**<br/>
+For both `add` and `edit`, condition names must be **1 to 50 characters** long and contain only alphanumeric characters, single spaces between words, and single hyphens within a word.<br/>
+Examples of valid values: `mc/Type 2 diabetes`, `mc/Post-traumatic stress disorder`, `mc/High BP`.<br/>
+Examples of invalid values: `mc/Post--traumatic stress disorder` (consecutive hyphens), `mc/Type  2 diabetes` (consecutive spaces), `mc/Diabetes?` (`?` not allowed).
 
 </div>
 
