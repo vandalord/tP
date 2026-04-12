@@ -123,16 +123,7 @@ public class MainWindow extends UiPart<Stage> {
         patientListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
 
         patientListPanel.getPatientListView().getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        patientDetailPanel.setPatient(newValue);
-                    }
-                    if (newValue == null) {
-                        patientDetailPanel.clearPatient();
-                        return;
-                    }
-                    patientDetailPanel.setPatient(newValue);
-                });
+                .addListener((obs, oldV, newV) -> patientDetailPanel.setPatient(newV));
 
         patientDetailPanel = new PatientDetailPanel();
         patientDetailPanelPlaceholder.getChildren().add(patientDetailPanel.getRoot());
@@ -202,8 +193,7 @@ public class MainWindow extends UiPart<Stage> {
      * @see Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
-        Patient previouslySelectedPatient =
-                patientListPanel.getPatientListView().getSelectionModel().getSelectedItem();
+        Patient prev = patientListPanel.getPatientListView().getSelectionModel().getSelectedItem();
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
@@ -213,7 +203,7 @@ public class MainWindow extends UiPart<Stage> {
             if (selected != null) {
                 patientDetailPanel.setPatient(selected);
             }
-            refreshPatientDetailPanel(previouslySelectedPatient);
+            refreshPatientDetailPanel(prev);
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -238,17 +228,10 @@ public class MainWindow extends UiPart<Stage> {
     private void refreshPatientDetailPanel(Patient previouslySelectedPatient) {
         var selectionModel = patientListPanel.getPatientListView().getSelectionModel();
         ObservableList<Patient> currentDisplayedPatients = logic.getFilteredPatientList();
-
-        if (previouslySelectedPatient == null) {
-            selectionModel.clearSelection();
-            patientDetailPanel.clearPatient();
-            return;
-        }
-
         int refreshedPatientIndex = findPatientIndex(currentDisplayedPatients, previouslySelectedPatient);
-        if (refreshedPatientIndex == -1) {
+
+        if (refreshedPatientIndex == -1 || previouslySelectedPatient == null) {
             selectionModel.clearSelection();
-            patientDetailPanel.clearPatient();
             return;
         }
 

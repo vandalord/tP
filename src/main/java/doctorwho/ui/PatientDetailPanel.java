@@ -53,16 +53,12 @@ public class PatientDetailPanel extends UiPart<Region> {
      */
     public void setPatient(Patient patient) {
         this.patient = patient;
+        if (patient == null) {
+            detailPane.setVisible(false);
+            return;
+        }
         updateView();
         detailPane.setVisible(true); // Show panel
-    }
-
-    /**
-     * Clears the currently displayed patient details.
-     */
-    public void clearPatient() {
-        this.patient = null;
-        detailPane.setVisible(false);
     }
 
     /**
