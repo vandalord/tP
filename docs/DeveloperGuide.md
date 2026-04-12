@@ -29,13 +29,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams are in this document `docs/diagrams` folder. Refer to the [
-_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create
-and edit diagrams.
-</div>
-
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
@@ -91,7 +84,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PatientListPanel`,
+The UI consists of a `MainWindow` that is made up of parts e.g., `CommandBox`, `ResultDisplay`, `PatientListPanel`,
 `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
 the commonalities between classes that represent parts of the visible GUI.
 
@@ -128,7 +121,7 @@ How the `Logic` component works:
    a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
    is executed by the `LogicManager`.
-3. The command can communicate with the `Model` when it is executed (e.g. to delete a patient).<br>
+3. The command can communicate with the `Model` when it is executed (e.g., to delete a patient).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take
    several interactions (between the command object and the `Model`) to achieve.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -157,7 +150,7 @@ The `Model` component,
 
 * stores the address book data i.e., all `Patient` objects (which are contained in a `UniquePatientList` object).
 * stores the currently 'selected' `Patient` objects (e.g., results of a search query) as a separate _filtered_ list
-  which is exposed to outsiders as an unmodifiable `ObservableList<Patient>` that can be 'observed' e.g. the UI can be
+  which is exposed to outsiders as an unmodifiable `ObservableList<Patient>` that can be 'observed' e.g., the UI can be
   bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a
   `ReadOnlyUserPref` objects.
@@ -327,7 +320,7 @@ The proposed appointment reminder feature will alert the doctor of any upcoming 
 
 **Target user profile**:
 
-* has a need to manage a significant number of patient contacts, and appointments.
+* has a need to manage a significant number of patient contacts and appointments
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -527,7 +520,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1c. Invalid field values (e.g. invalid datetime format or duration out of range).
+* 1c. Invalid field values (e.g., invalid datetime format or duration out of range).
     * 1c1. DoctorWho shows an error message.
 
       Use case ends.
@@ -936,8 +929,8 @@ testers are expected to do more *exploratory* testing.
 **Difficulty level**: DoctorWho is significantly more complex than AB3. While AB3 manages a single entity type (Person), DoctorWho manages two entity types (Patient and Appointment) with relationships between them, requiring changes across all architectural layers.
 
 **Challenges faced**:
-- Implementing the `Appointment` entity required changes across Logic, Model, Storage and UI layers simultaneously
-- Refactoring the generic `Tag` class into two specialised subclasses (`Allergy` and `Condition`) with separate validation rules, character limits and regex patterns required careful design to maintain extensibility
+- Implementing the `Appointment` entity required changes across Logic, Model, Storage, and UI layers simultaneously
+- Refactoring the generic `Tag` class into two specialised subclasses (`Allergy` and `Condition`) with separate validation rules, character limits, and regex patterns required careful design to maintain extensibility
 - Implementing overlap detection across all patients' appointments required non-trivial logic in the Model layer
 - Updating the UI to include a dedicated `PatientDetailPanel` alongside the existing list panel required significant JavaFX work
 

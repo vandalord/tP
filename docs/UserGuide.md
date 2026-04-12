@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-DoctorWho is designed for clinic receptionists and administrative staff at small to mid-sized General Practitioners (GP) clinics. 
+DoctorWho is designed for clinic receptionists and administrative staff at single-doctor General Practitioner (GP) clinics. 
 This guide assumes you are comfortable using a computer for everyday tasks, but no programming or technical experience is required.
 
 Do you prefer typing information to having to click on multiple things? DoctorWho is for you!
@@ -17,7 +17,7 @@ can get your patient management tasks done faster than traditional GUI apps.
 Yes, if your clinic is still:
 - Using paper filing to keep track of your patients and their appointments.
 - Dealing with long search times in Excel.
-- Paying exorbitant fees for enterprise grade software to track a handful of patients.
+- Paying exorbitant fees for enterprise grade software to only track a handful of patients.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -32,7 +32,7 @@ Yes, if your clinic is still:
 
 Don't worry if you're not tech-savvy — just follow these steps one by one and you'll be up and running in no time!
 
-1. First, make sure you have Java `17` or above installed on your computer. Not sure if you have it? Open a terminal and type `java -version` — if you see a version number of 17 or higher, you're good to go!<br>
+1. First, make sure you have Java `17` installed on your computer. Not sure if you have it? Open a terminal and type `java -version` — if you see the version number 17, you're good to go!<br>
    **Mac users:** Check out [this guide](https://se-education.org/guides/tutorials/javaInstallationMac.html) to get the exact JDK version you need.
 
 2. Next, download the latest `doctorwho.jar` file from [here](https://github.com/AY2526S2-CS2103T-F10-1/tp/releases). You'll find it under the **Assets** section of the latest release — just click on `doctorwho.jar` to download it.
@@ -68,7 +68,7 @@ Don't worry if you're not tech-savvy — just follow these steps one by one and 
    * `delete 3` — Deletes the 3rd patient in the current list.
    * `apt 3 d/01-04-2026 09:00 dur/60 note/Follow-up for diabetes review` — Schedules an appointment for the 3rd patient.
    * `lsapt d/12-03-2026` — List appointments for 12th March 2026.
-   * `dapt 3` — Removes the appointment from the 3rd patient.
+   * `dapt 1` — Removes the appointment from the 1st patient.
 
 7. When you're ready to explore more, check out the [Features](#features) section for the full command details, or jump to the [Command Summary](#command-summary) for a quick cheatsheet!
 
@@ -79,19 +79,19 @@ Don't worry if you're not tech-savvy — just follow these steps one by one and 
 Here is a quick reference list for the commands DoctorWho provides, more detailed information about all of the commands
 can be found in [Features](#features).
 
-| Action                                                   | Format, Examples                                                                                                                                                                                                                                           |
-|----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action                                                   | Format, Examples                                                                                                                                                                                                                                          |
+|----------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [**Add**](#adding-a-patient-add)                         | `add n/NAME ic/NRIC x/SEX dob/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS [al/ALLERGY]…​ [mc/CONDITION]…​` <br> e.g., `add n/James Ho ic/S5844149Z x/M dob/01-04-2003 p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 al/dust mc/allergic rhinitis` |
-| [**List**](#listing-all-patients-list)                   | `list`                                                                                                                                                                                                                                                     |
-| [**Edit**](#editing-a-patient-edit)                      | `edit PATIENT_NUMBER [n/NAME] [ic/NRIC] [x/SEX] [dob/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [al/ALLERGY]…​ [mc/CONDITION]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                    |
-| [**Find**](#locating-patients-by-name-find)              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                 |
-| [**Delete**](#deleting-a-patient-delete)                 | `delete PATIENT_NUMBER`<br> e.g., `delete 3`                                                                                                                                                                                                               |
-| [**Add appointment**](#adding-an-appointment-apt)        | `apt PATIENT_NUMBER d/DATETIME dur/DURATION [note/NOTE]`<br> e.g., `apt 2 d/01-04-2026 09:00 dur/60 note/Follow-up for diabetes review `                                                                                                                   |
-| [**Delete appointment**](#deleting-an-appointment-dapt)  | `dapt PATIENT_NUMBER`<br> e.g., `dapt 1`                                                                                                                                                                                                                   |
-| [**List appointments**](#listing-all-appointments-lsapt) | `lsapt [d/DATE]`<br> e.g., `lsapt`, `lsapt d/14-03-2026`                                                                                                                                                                                                   |
-| [**Clear**](#clearing-all-entries-clear)                 | `clear`                                                                                                                                                                                                                                                    |
-| [**Help**](#viewing-help-help)                           | `help`                                                                                                                                                                                                                                                     |
-| [**Exit**](#exiting-the-program-exit)                    | `exit`                                                                                                                                                                                                                                                     |
+| [**List**](#listing-all-patients-list)                   | `list`                                                                                                                                                                                                                                                    |
+| [**Edit**](#editing-a-patient-edit)                      | `edit PATIENT_NUMBER [n/NAME] [ic/NRIC] [x/SEX] [dob/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [al/ALLERGY]…​ [mc/CONDITION]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                                                                   |
+| [**Find**](#locating-patients-by-name-find)              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                |
+| [**Delete**](#deleting-a-patient-delete)                 | `delete PATIENT_NUMBER`<br> e.g., `delete 3`                                                                                                                                                                                                              |
+| [**Add appointment**](#adding-an-appointment-apt)        | `apt PATIENT_NUMBER d/DATETIME dur/DURATION [note/NOTE]`<br> e.g., `apt 2 d/01-04-2026 09:00 dur/60 note/Follow-up for diabetes review `                                                                                                                  |
+| [**Delete appointment**](#deleting-an-appointment-dapt)  | `dapt PATIENT_NUMBER`<br> e.g., `dapt 1`                                                                                                                                                                                                                  |
+| [**List appointments**](#listing-all-appointments-lsapt) | `lsapt [d/DATE]`<br> e.g., `lsapt`, `lsapt d/14-03-2026`                                                                                                                                                                                                  |
+| [**Clear**](#clearing-all-entries-clear)                 | `clear`                                                                                                                                                                                                                                                   |
+| [**Help**](#viewing-help-help)                           | `help`                                                                                                                                                                                                                                                    |
+| [**Exit**](#exiting-the-program-exit)                    | `exit`                                                                                                                                                                                                                                                    |
 
 ## Features
 
@@ -100,41 +100,41 @@ can be found in [Features](#features).
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g., in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g., `n/NAME [al/ALLERGY]` can be used as `n/John Doe al/Aspirin` or as `n/John Doe`.
   e.g., `n/NAME [mc/CONDITION]` can be used as `n/Johnny mc/High BP` or as `n/Johnny`
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g., `[al/ALLERGY]…​` can be used as ` ` (i.e., 0 times), `al/Penicillin`, `al/Ibuprofen al/Aspirin` etc.
+  e.g., `[al/ALLERGY]…​` can be used as `​ ​` (i.e., 0 times), `al/Penicillin`, `al/Ibuprofen al/Aspirin` etc.
 
 * Parameters can be in any order.<br>
   e.g., if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Prefixes can be surrounded by any number of spaces.<br>
-  e.g., `add     n/NAME` and `add n/     NAME`, will be interpreted as `add n/NAME`.
+* Prefixes can be surrounded by any number of spaces, these excess spaces will be trimmed from the .<br>
+  e.g., `add     n/NAME    ic/NRIC` and `add n/     NAME ic/NRIC`, will be interpreted as `add n/NAME ic/NRIC`.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, and `clear`) will be ignored.<br>
   e.g., if the command specifies `help 123`, it will be interpreted as `help`.
 
 * Date format is `dd-MM-yyyy` for `add` and `edit` commands, `dd-MM-yyyy HH:mm` for appointment commands.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application. 
 
-* Also take note that the zero-width space(ZWSP) character is used in some examples showing consecutive spaces in an effort to fix HTML collapsing the whitespace. Therefore, you may face some issues directly copying those examples as the ZWSP is considered an invalid character for most parameters, we recommend typing out those examples.
+* Note that the zero-width space(ZWSP) character is used in some examples showing consecutive spaces in an effort to fix HTML collapsing the whitespace. Therefore, you may face some issues directly copying and pasting those examples as the ZWSP is considered an invalid character for most parameters, we recommend typing out those examples.
 
 </div>
 
+## DoctorWho Operations
+
 ### Viewing help: `help`
 
-Shows a message explaining how to access the help page.
+Opens a window that provides a summary of available commands and explains how to access the help page. (Pressing the F1 key will also open this window)
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
-## DoctorWho Operations
 
 ### Adding a patient: `add`
 
@@ -142,64 +142,9 @@ Adds a patient to DoctorWho.
 
 Format: `add n/NAME ic/NRIC x/SEX dob/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS [al/ALLERGY]… [mc/CONDITION]…​`
 
-* Will fail if there is an existing patient with the same NRIC, however other fields allow duplicates ie., two patients may have the same name.
+* Will fail if there is an existing patient with the same NRIC, however other fields allow duplicates i.e., two patients may have the same name.
 * The date of birth(dob) must be in the format `dd-MM-yyyy` and must be either the current date or earlier e.g., `12-03-2026` refers to 12th March 2026.
 * All parameters are compulsory.
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Note on accepted parameter values:**<br>
-
-**Name (`n/`):**<br>
-DoctorWho currently accepts the following special characters in the patient's name:<br>
-
-| Character       | Valid example |
-|-----------------|---------------|
-| Hyphens (-)     | Mary-Jane     |
-| Apostrophes (') | O'Brien       |
-| Commas (,)      | Henry, Tan    |
-
-However, there are other common special characters used in names that are not yet supported. These are some suggested
-replacements you can use if you encounter these special characters:
-
-| Character  | Invalid example | Suggested replacements (Valid) | Future support                                             |
-|------------|-----------------|--------------------------------|------------------------------------------------------------|
-| Diacritics | Jäger           | Jager                          | Not planned                                                |
-| Slash (/)  | Ali s/o Ahmad   | Ali so Ahmad<br>Ali SO Ahmad   | [Planned](DeveloperGuide.md#appendix-planned-enhancements) |
-
-**NRIC (`ic/`):**<br>
-DoctorWho prevents invalid NRIC/FIN entries. For both `add` and `edit`, the `ic/` value must contain a valid NRIC/FIN in the required format; otherwise, the command is rejected.<br>
-* More information on the NRIC/FIN validation can be found in the [Developer Guide](DeveloperGuide.md#nric-validation-feature).
-
-**Sex (`x/`):**<br>
-Limited to male or female values only; `x/` accepts `M` or `F` case-insensitively (for example, `x/M`, `x/F`, `x/m`, and `x/f` are valid), though edits are allowed.
-
-**Phone number (`p/`):**<br>
-For both `add` and `edit`, must contain only digits and be between **3 and 15 digits** long (inclusive).<br/>
-Examples of valid values: `p/123`, `p/98765432`, `p/651234567890123`.<br>
-Examples of invalid values: `p/+6598765432`, `p/12`, `p/123-4567`.
-
-**Email (`e/`):**<br>
-For both `add` and `edit`, emails should be of the format `local-part@domain` and adhere to the following constraints:
-1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
-The domain name must:
-  * end with a domain label at least 2 characters long
-  * have each domain label start and end with alphanumeric characters
-  * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
-
-Examples of valid values: `e/alex.tan+clinic@example.com`, `e/a_b-c@sub-domain.example`.<br>
-Examples of invalid values: `e/.alex@example.com`, `e/alex@-example.com`, `e/alex@example.c`.
-
-In the case that the user is unable to provide an email address, DoctorWho accepts a dead-end email address such as, `user@example.com`.
-
-**Drug Allergies (`al/`) and Medical Conditions (`mc/`):**<br>
-Allergy and condition names do not support consecutive spaces and/or hyphens.
-
-Examples of valid values: `Beta-lactam`, `Type 2 diabetes`, `Post-traumatic stress disorder`.<br>
-Examples of invalid values: `Beta- lactam`, `Type ​ 2 ​ diabetes`, `Post--traumatic stress disorder`.
-
-</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A patient can have any number of allergies or medical conditions (including 0)
@@ -221,7 +166,7 @@ Format: `list`
 
 Edits an existing patient in DoctorWho.
 
-Format: `edit PATIENT_NUMBER [n/NAME] [ic/NRIC] [x/SEX] [dob/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [al/ALLERGY] [mc/CONDITION]…​`
+Format: `edit PATIENT_NUMBER [n/NAME] [ic/NRIC] [x/SEX] [dob/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [al/ALLERGY]… [mc/CONDITION]…​`
 
 * Edits the patient at the specified `PATIENT_NUMBER`. The index refers to the index number shown in the displayed
   patient list. The index **must be a positive integer** 1, 2, 3, …​
@@ -234,7 +179,7 @@ Format: `edit PATIENT_NUMBER [n/NAME] [ic/NRIC] [x/SEX] [dob/DOB] [p/PHONE_NUMBE
 
 Examples:
 
-* `edit 1 x/F p/91234567 e/johndoe@example.com` Edits the sex, phone number and email address of the 1st patient to be `F`, `91234567`
+* `edit 1 x/F p/91234567 e/johndoe@example.com` Edits the sex, phone number, and email address of the 1st patient to be `F`, `91234567`,
   and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower al/ mc/` Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing
   allergies and medical conditions.
@@ -249,7 +194,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g., `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g., `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e., `OR` search).
+* Patients matching at least one keyword will be returned (i.e., `OR` search).
   e.g., `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -286,7 +231,7 @@ Examples:
 
 ### Adding an appointment: `apt`
 
-Adds an appointment to the patient identified by the index number used in the displayed patient list. Supply the start date and time, duration and an optional note.
+Adds an appointment to the patient identified by the index number used in the displayed patient list. Supply the start date and time, duration, and an optional note.
 
 Format: `apt PATIENT_NUMBER d/DATETIME dur/DURATION [note/NOTE]`
 
@@ -364,6 +309,67 @@ Exits the program.
 
 Format: `exit`
 
+### Command parameters
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note on accepted parameter values:**<br>
+
+#### For the `add` and `edit` commands:
+
+**Name (`n/`):**<br>
+DoctorWho currently accepts the following special characters in the patient's name:<br>
+
+| Character       | Valid example |
+|-----------------|---------------|
+| Hyphens (-)     | Mary-Jane     |
+| Apostrophes (') | O'Brien       |
+| Commas (,)      | Henry, Tan    |
+
+However, names should not start or end with these special characters or space.<br>
+
+There are other common special characters used in names that are not yet supported. This a non-exhaustive list of some suggested
+replacements you can use if you encounter these special characters:
+
+| Character  | Invalid example | Suggested replacements (Valid) | Future support                                             |
+|------------|-----------------|--------------------------------|------------------------------------------------------------|
+| Diacritics | Jäger           | Jager                          | Not planned                                                |
+| Slash (/)  | Ali s/o Ahmad   | Ali so Ahmad<br>Ali SO Ahmad   | [Planned](DeveloperGuide.md#appendix-planned-enhancements) |
+
+**NRIC (`ic/`):**<br>
+DoctorWho prevents invalid NRIC/FIN entries. The `ic/` value must contain a valid NRIC/FIN in the required format; otherwise, the command is rejected.<br>
+* More information on the NRIC/FIN validation can be found in the [Developer Guide](DeveloperGuide.md#nric-validation-feature).
+
+**Sex (`x/`):**<br>
+Limited to male or female values only; `x/` accepts `M` or `F` case-insensitively (for example, `x/M`, `x/F`, `x/m`, and `x/f` are valid), though edits are allowed.
+
+**Phone number (`p/`):**<br>
+Must contain only digits and be between **3 to 15 digits** long (inclusive).<br/>
+Examples of valid values: `p/123`, `p/98765432`, `p/651234567890123`.<br>
+Examples of invalid values: `p/+6598765432`, `p/12`, `p/123-4567`.
+
+**Email (`e/`):**<br>
+Should be of the format `local-part@domain` and adhere to the following constraints:
+1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+   The domain name must:
+* end with a domain label at least 2 characters long
+* have each domain label start and end with alphanumeric characters
+* have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+
+Examples of valid values: `e/alex.tan+clinic@example.com`, `e/a_b-c@sub-domain.example`.<br>
+Examples of invalid values: `e/.alex@example.com`, `e/alex@-example.com`, `e/alex@example.c`.
+
+In the case that the user is unable to provide an email address, DoctorWho accepts a dead-end email address such as, `user@example.com`.
+
+**Drug Allergies (`al/`) and Medical Conditions (`mc/`):**<br>
+Allergy and condition names do not support consecutive spaces and/or hyphens.
+
+Examples of valid values: `Beta-lactam`, `Type 2 diabetes`, `Post-traumatic stress disorder`.<br>
+Examples of invalid values: `Beta- lactam`, `Type ​ 2 ​ diabetes`, `Post--traumatic stress disorder`.
+
+</div>
+
 ## Storage
 
 ### Saving the data
@@ -411,24 +417,6 @@ If your changes to the data file makes its format invalid, DoctorWho will discar
 Furthermore, certain edits can cause the DoctorWho to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-Automatic archiving is not yet supported. In the meantime, we recommend
-periodically making a manual copy of your data file located at
-`[JAR file location]/data/doctorwho.json` and storing it in a separate
-folder as a backup.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Known issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only
-   the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the
-   application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut
-   `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to
-   manually restore the minimized Help Window.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -458,19 +446,16 @@ DoctorWho folder, located at `[JAR file location]/data/doctorwho.json`.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Glossary
+## Known issues
 
-* Allergy: A hypersensitivity to a substance that causes the body to react with an immune response.
-* CLI: Command Line Interface. A text-based interface where users interact with a program by typing commands.
-* Command: An instruction given to a computer program to perform a specific task.
-* GUI: Graphical User Interface. A visual-based interface where users interact with a program by interacting with
-  windows, icons and menus.
-* Index: A number that refers to the position of a patient in the displayed list.
-* Java: The programming language used to implement this application.
-* JSON: JavaScript Object Notation. A lightweight, text-based data interchange format, easily parsable by machines.
-* Keyword: A word or a phrase that is used to search for a patient.
-* Medical Condition: A health problem that requires ongoing management.
-* NRIC: National Registration Identity Card. A unique identification number assigned to citizens and permanent residents.
-* Parameters: Inputs provided to a command. A command may have zero or more parameters depending on its functionality.
-* Patient: A person receiving medical care whose information and appointments are managed within DoctorWho.
-* UTF-8: The standard for how Unicode numbers are translated into binary numbers to be stored in the computer.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only
+   the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the
+   application before running the application again.
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut
+   `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to
+   manually restore the minimized Help Window.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Final word
+Thank you once again for using **DoctorWho**! We hope that you will find our product beneficial to managing your patients seamlessly! For your reference here is a link to the [Command Summary](#command-summary). Should you have any queries, please do not hesitate to reach out to any of us! Our details can be found in our [About Us Page](AboutUs.md).
