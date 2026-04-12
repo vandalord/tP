@@ -118,7 +118,7 @@ public class Appointment {
     @Override
     public String toString() {
         return String.format("At: %s (%d mins) | Note: %s",
-                startTime.format(FORMATTER), duration, note.isEmpty() ? "NA" : note);
+                startTime.format(FORMATTER), duration, note.isEmpty() ? "N/A" : note);
     }
 
     @Override
