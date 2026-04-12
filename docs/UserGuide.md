@@ -141,7 +141,7 @@ Format: `add n/NAME ic/NRIC x/SEX dob/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS [al/A
 
 **:information_source: Accepted name formats**<br>
 
-DoctorWho currently accepts the following special characters in the patient's name:
+Names are limited to 100 characters. DoctorWho currently accepts the following special characters in the patient's name:
 
 | Character       | Valid example |
 |-----------------|---------------|
@@ -180,6 +180,9 @@ The domain name must:
 
 Examples of valid values: `e/alex.tan+clinic@example.com`, `e/a_b-c@sub-domain.example`.<br/>
 Examples of invalid values: `e/.alex@example.com`, `e/alex@-example.com`, `e/alex@example.c`.
+
+**Address (`a/`):**<br/>
+Is limited to 200 characters and can include alphabets, numbers, spaces and the following special characters `#.,()\-`.
 
 **Drug Allergies (`al/`) and Medical Conditions (`mc/`):**<br/>
 Allergy and condition names do not support consecutive spaces and/or hyphens.

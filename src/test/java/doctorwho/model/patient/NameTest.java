@@ -31,6 +31,8 @@ public class NameTest {
         assertFalse(Name.isValidName("peter*")); // contains invalid characters
         assertFalse(Name.isValidName("Jäger")); // contains diacritics
         assertFalse(Name.isValidName("Ali s/o Ahmad")); // contains slash
+        assertFalse(Name.isValidName("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWX"
+                + "YZABCDEFGHIJKLMNOPQRSTUVW")); // 101 characters
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
@@ -44,6 +46,8 @@ public class NameTest {
         assertTrue(Name.isValidName("Jager")); // diacritic replaced with ASCII character
         assertTrue(Name.isValidName("so Ahmad")); // slash removed
         assertTrue(Name.isValidName("SO Ahmad")); // slash removed
+        assertTrue(Name.isValidName("ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWX"
+                + "YZABCDEFGHIJKLMNOPQRSTUV")); // 100 characters
     }
 
     @Test
