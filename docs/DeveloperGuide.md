@@ -711,7 +711,7 @@ testers are expected to do more *exploratory* testing.
 ### Adding a patient
 
 1. Adding a valid patient
-    1. Test case: `add n/John Doe ic/S9876543C x/M dob/01-01-2000 p/98765432 e/johnd@example.com a/123 Clementi Ave`
+    1. Test case: `add n/John Doe ic/T0300000H x/M dob/01-01-2003 p/98765432 e/johnd@example.com a/123 Clementi Ave`
 
        Expected: Patient added at the bottom of the list. Success message shown with patient name.
 
@@ -721,8 +721,8 @@ testers are expected to do more *exploratory* testing.
        Expected: No patient added. Error message shown with correct command format.
 
 3. Adding a duplicate patient
-    1. Prerequisites: Patient `John Doe` with NRIC `S9876543C` already exists (added in test case 1).
-    2. Test case: `add n/John Doe ic/S9876543C x/M dob/01-01-2000 p/98765432 e/johnd@example.com a/123 Clementi Ave`
+    1. Prerequisites: Patient `John Doe` with NRIC `T0300000H` already exists (added in test case 1).
+    2. Test case: `add n/John Doe ic/T0300000H x/M dob/01-01-2003 p/98765432 e/johnd@example.com a/123 Clementi Ave`
 
        Expected: No patient added. Error message indicating duplicate patient.
 
@@ -878,7 +878,7 @@ Team size: 5
 8. **Make email an optional field.** Currently, email is a mandatory field. Since not all patients have an email, this
    forces users to enter placeholder values like `test@example.com` for patients without an email. We plan to make the
    email parameter optional when using the add command, so that
-   `add n/John Doe ic/T0123456H x/M dob/01-01-2000 p/9876ND-base5432 a/123 Clementi Ave`  (without `e/`)   is accepted.
+   `add n/John Doe ic/T0300000H x/M dob/01-01-2003 p/98765432 a/123 Clementi Ave`  (without `e/`)   is accepted.
 9. **Enhance the find command to support AND-based keyword matching.** Currently, the `find` command performs OR-based
    matching, meaning `find James Lee` returns any patient whose name contains either `James` or `Lee`. This can return
    too many unrelated results when the user intends to search for a specific patient. We plan to add toggleable
