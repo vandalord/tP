@@ -18,6 +18,7 @@ public class DeleteAppointmentCommandParser implements Parser<DeleteAppointmentC
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteAppointmentCommand parse(String args) throws ParseException {
+        ArgumentTokenizer.tokenize(args);
         try {
             Index index = ParserUtil.parseIndex(args);
             return new DeleteAppointmentCommand(index);

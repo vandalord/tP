@@ -85,9 +85,13 @@ public class EditCommandParserTest {
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+    }
 
+    @Test
+    void parse_invalidPrexi_failure() {
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        String prefix = "i/";
+        assertParseFailure(parser, "1 " + prefix + " string", "Unknown prefix: " + prefix);
     }
 
     @Test
@@ -124,9 +128,9 @@ public class EditCommandParserTest {
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + ALLERGY_DESC_ASPIRIN + CONDITION_DESC_DIABETES;
 
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY)
-            .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-            .withAllergies(VALID_ALLERGY_IBUPROFEN, VALID_ALLERGY_ASPIRIN)
-            .withConditions(VALID_CONDITION_DIABETES).build();
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withAllergies(VALID_ALLERGY_IBUPROFEN, VALID_ALLERGY_ASPIRIN)
+                .withConditions(VALID_CONDITION_DIABETES).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -138,7 +142,7 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_AMY).build();
+                .withEmail(VALID_EMAIL_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
