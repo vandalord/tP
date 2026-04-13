@@ -80,7 +80,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g., `CommandBox`, `ResultDisplay`, `PatientListPanel`,
+The UI consists of a `MainWindow` that is made up of parts _e.g.,_ `CommandBox`, `ResultDisplay`, `PatientListPanel`,
 `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
 the commonalities between classes that represent parts of the visible GUI.
 
@@ -112,10 +112,10 @@ call as an example.
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates
-   a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
+   a parser that matches the command (_e.g.,_ `DeleteCommandParser`) and uses it to parse the command.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses _e.g.,_ `DeleteCommand`) which
    is executed by the `LogicManager`.
-3. The command can communicate with the `Model` when it is executed (e.g., to delete a patient).<br>
+3. The command can communicate with the `Model` when it is executed (_e.g.,_ to delete a patient).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take
    several interactions (between the command object and the `Model`) to achieve.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -127,11 +127,11 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
-  placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
-  the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a
+  placeholder for the specific command name _e.g.,_ `AddCommandParser`) which uses the other classes shown above to parse
+  the user command and create a `XYZCommand` object (_e.g.,_ `AddCommand`) which the `AddressBookParser` returns back as a
   `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
-  interface so that they can be treated similarly where possible e.g, during testing.
+* All `XYZCommandParser` classes (_e.g.,_ `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
+  interface so that they can be treated similarly where possible _e.g.,_ during testing.
 
 ### Model component
 
@@ -142,9 +142,9 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Patient` objects (which are contained in a `UniquePatientList` object).
-* stores the currently 'selected' `Patient` objects (e.g., results of a search query) as a separate _filtered_ list
-  which is exposed to outsiders as an unmodifiable `ObservableList<Patient>` that can be 'observed' e.g., the UI can be
+* stores the address book data _i.e.,_ all `Patient` objects (which are contained in a `UniquePatientList` object).
+* stores the currently 'selected' `Patient` objects (_e.g.,_ results of a search query) as a separate _filtered_ list
+  which is exposed to outsiders as an unmodifiable `ObservableList<Patient>` that can be 'observed' _e.g.,_ the UI can be
   bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a
   `ReadOnlyUserPref` object.
@@ -241,7 +241,7 @@ NRIC behavior is covered by:
 * `AddCommandParserTest`: invalid NRIC parsing failures.
 * `JsonAdaptedPatientTest`: invalid NRIC in JSON rejected during conversion.
 
-In addition, shared test fixtures (e.g., `TypicalPatients`, `PatientBuilder`) use checksum-valid NRIC values to avoid
+In addition, shared test fixtures (_e.g.,_ `TypicalPatients`, `PatientBuilder`) use checksum-valid NRIC values to avoid
 false failures.
 
 **Additional checksum-valid NRIC test values (You may copy and use these):**
@@ -272,7 +272,7 @@ upon launching the application or while it is running.
 
 * A `ReminderManager` class will be added to the `Logic` component.
 * `ReminderManager` will periodically query the `Model` for patients with an `Appointment` whose start time falls within
-  a specific threshold (e.g., next 24 hours).
+  a specific threshold (_e.g.,_ next 24 hours).
 * The `UI` will be updated to include a `ReminderPanel` that observes the `ReminderManager` and displays upcoming
   appointments in a dedicated side panel or via visual indicators next to patient names.
 
@@ -502,7 +502,7 @@ The use cases operate with the following implicit preconditions, in addition to 
 
       Use case ends.
 
-* 1c. Invalid field values (e.g., invalid datetime format or duration out of range).
+* 1c. Invalid field values (_e.g.,_ invalid datetime format or duration out of range).
     * 1c1. DoctorWho shows an error message.
 
       Use case ends.
@@ -512,7 +512,7 @@ The use cases operate with the following implicit preconditions, in addition to 
 
       Use case ends.
 
-* 1e. New appointment is identical to the current appointment of the selected patient (i.e., start time, duration, and note are identical).
+* 1e. New appointment is identical to the current appointment of the selected patient (_i.e.,_ start time, duration, and note are identical).
     * 1e1. DoctorWho shows an error message.
 
       Use case ends.
@@ -646,19 +646,19 @@ The use cases operate with the following implicit preconditions, in addition to 
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2. Should be able to hold up to 1000 patient records without a noticeable sluggishness in performance for typical usage.
-3. A user with a typing speed of at least 50 WPM should be able to complete any mandatory CRUD task (e.g., adding a
+3. A user with a typing speed of at least 50 WPM should be able to complete any mandatory CRUD task (_e.g.,_ adding a
    patient) faster than an equivalent GUI.
 4. Data must be saved locally in a human-readable JSON format to allow for manual inspection or external backup without
    using the app.
 5. The system should handle corrupted data files gracefully by notifying the user via a log message, ensuring continued operation without crashing, the corrupted file should not be overridden immediately to give the user a chance to rectify the issue.
 6. The system shall support full operation of all core application features in an offline environment without dependency 
-   on external servers or internet connectivity. Non-core features (e.g., external help resources or documentation
+   on external servers or internet connectivity. Non-core features (_e.g.,_ external help resources or documentation
    links) may require internet access.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, macOS. (Relevant to *Setting up*)
-* **Medical Tag**: A general term encompassing both **Medical Conditions** (_e.g._ Diabetes) and **Drug Allergies** (_e.g.,_
+* **Medical Tag**: A general term encompassing both **Medical Conditions** (_e.g.,_ Diabetes) and **Drug Allergies** (_e.g.,_
   Penicillin). (Relevant to *Model Component*)
 * **Overlap**: A situation where a new appointment's time interval (start time + duration) intersects with an existing
   appointment's interval. (Relevant to *Use Cases*)
@@ -830,7 +830,7 @@ testers are expected to do more *exploratory* testing.
 
 Team size: 5
 
-1. **Include support for slashes (/) in patient name.** Currently, we ask the user to remove slashes (e.g., `s/o`
+1. **Include support for slashes (/) in patient name.** Currently, we ask the user to remove slashes (_e.g.,_ `s/o`
    becomes `so`) when entering the patient's name. However, this means that the stored patient name may not match their
    exact government name. We plan to implement apostrophe string enclosing to allow such special characters to be
    included in the name without conflicting with the special characters used for the argument prefixes.
@@ -851,7 +851,7 @@ Team size: 5
    will then grant the user greater flexibility to track appointments by doctor and have concurrent appointments with
    different doctors.
 6. **Enhance the `find` command to support more precise string matching.** Currently, the `find` command performs
-   OR-based matching against space separated keywords (e.g., `find James Lee` finds `James Lee`, `James Tan` and
+   OR-based matching against space separated keywords (_e.g.,_ `find James Lee` finds `James Lee`, `James Tan` and
    `Max Lee`). We intend to allow users to enclose search keywords in apostrophes to get a more precise match, such that
    `find "James Lee"` only finds `James Lee`.
 7. **Enhance the `find` command to search for NRIC.** Currently, it performs matching across the name field only. Since
