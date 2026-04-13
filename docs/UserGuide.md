@@ -132,7 +132,7 @@ can be found in [Features](#features).
 
 Adds a patient to DoctorWho.
 
-Format: `add n/NAME ic/NRIC x/SEX dob/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS [al/ALLERGY] [mc/CONDITION]…​`
+Format: `add n/NAME ic/NRIC x/SEX dob/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS [al/ALLERGY]… [mc/CONDITION]…​`
 
 <div markdown="block" class="alert alert-info">
 
