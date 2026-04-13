@@ -238,6 +238,8 @@ Format: `apt PATIENT_NUMBER d/DATETIME dur/DURATION [note/NOTE]`
 If the patient already has an existing appointment, it will be 
 silently overwritten with no confirmation prompt. Check the 
 patient's current appointment before using this command.
+
+If the system has an overlapping appointment, it will not create an appointment, and display an error.
 </div>
 
 Examples:
