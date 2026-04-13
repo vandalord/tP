@@ -7,7 +7,7 @@ title: vandalord's Project Portfolio Page
 
 DoctorWho is a desktop application for managing patient records and appointments in a clinical setting. It targets clinic receptionists and administrative staff at single-doctor GP clinics, offering a fast Command Line Interface (CLI) with a JavaFX GUI. It is written in Java, and has about 10 kLoC.
 
-As the team lead, I was responsible for overall project coordination, as well as taking on some development responsibilites myelf.
+As the team lead, I was responsible for overall project coordination, as well as taking on some development responsibilities myself.
 
 Given below are my contributions to the project.
 
