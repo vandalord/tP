@@ -9,8 +9,9 @@ import static java.util.Objects.requireNonNull;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses should only contain alphanumeric characters, spaces and"
-            + " the special characters #.,()\\-, and it should not be blank, max 200 characters";
+    public static final String MESSAGE_CONSTRAINTS = "Addresses should be 1 to 200 characters long, not blank, and "
+            + "contain only alphanumeric characters. Also, there can only be single spaces between words, "
+            + "and these special characters: #.,()\\-";
 
     /*
      * The first character of the address must not be a whitespace,

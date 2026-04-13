@@ -318,13 +318,16 @@ Format: `exit`
 #### For the `add` and `edit` commands:
 
 **Name (`n/`):**<br>
-Names should be no more than 100 characters. DoctorWho currently accepts the following special characters in the patient's name:<br>
+Must be **1 to 100 characters** long and start and end with an alphanumeric character.
+DoctorWho currently accepts the following special characters in the patient's name:<br>
 
 | Character       | Valid example |
 |-----------------|---------------|
 | Hyphens (-)     | Mary-Jane     |
 | Apostrophes (') | O'Brien       |
 | Commas (,)      | Henry, Tan    |
+
+Examples of invalid name values: `n/-David`, `n/'Aisha`, `n/,Tan`, `n/David-`, `n/O''Brien`, `n/asdj- -sads`.
 
 However, names should not start or end with these special characters or space.<br>
 
@@ -349,7 +352,7 @@ Examples of valid values: `p/123`, `p/98765432`, `p/651234567890123`.<br>
 Examples of invalid values: `p/+6598765432`, `p/12`, `p/123-4567`.
 
 **Email (`e/`):**<br>
-Should be of the format `local-part@domain` and adhere to the following constraints:
+Must be of the format `local-part@domain` and adhere to the following constraints:
 1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
 2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
    The domain name must:
@@ -363,20 +366,29 @@ Examples of invalid values: `e/.alex@example.com`, `e/alex@-example.com`, `e/ale
 In the case that the user is unable to provide an email address, DoctorWho accepts a dead-end email address such as, `user@example.com`.
 
 **Address (`a/`):**<br/>
-Is limited to 200 characters and can include alphabets, numbers, spaces and the following special characters `#.,()\-`.
+Must be **1 to 200 characters** long and not blank after trimming leading/trailing spaces.<br/>
+It may contain only alphanumeric characters, single spaces between words, and these special characters: `#`, `.`, `,`, `(`, `)`, `\`, `-`.<br/>
+Examples of valid values: `a/123 Clementi Rd`, `a/Blk 123, #01-01 (Tower A)`, `a/Jurong\West Ave 2`.<br/>
+Examples of invalid values: `a/`, `a/   `, `a/Blk  123` (double spaces), `a/Bedok@Ave` (`@` not allowed).
 
-**Drug Allergies (`al/`) and Medical Conditions (`mc/`):**<br>
-Allergy and condition names do not support consecutive spaces and/or hyphens.
+**Drug Allergies (`al/`):**<br/>
+Must be **1 to 30 characters** long and contain only alphanumeric characters, single spaces between words, and single hyphens within a word.<br/>
+Examples of valid values: `al/Penicillin`, `al/Beta-lactam`, `al/Type 2`.<br/>
+Examples of invalid values: `al/Beta--lactam` (consecutive hyphens), `al/Beta- lactam` (space after hyphen), `al/Aspirin!` (`!` not allowed).
 
-Examples of valid values: `Beta-lactam`, `Type 2 diabetes`, `Post-traumatic stress disorder`.<br>
-Examples of invalid values: `Beta- lactam`, `Type ​ 2 ​ diabetes`, `Post--traumatic stress disorder`.
+The parser also conducts a case-sensitive duplicate check so, `mc/penicillin mc/penicillin` will create one `penicillin` medical condition, but `al/penicillin al/Penicillin` will create both `penicillin` and `Penicillin`.
 
-The parser also conducts a case-sensitive duplicate check so, `al/diabetes al/diabetes` will create one `diabetes` allergy, but `al/diabetes al/Diabetes` will create both `diabetes` and `Diabetes`.
+**Medical Conditions (`mc/`):**<br/>
+Must be **1 to 50 characters** long and contain only alphanumeric characters, single spaces between words, and single hyphens within a word.<br/>
+Examples of valid values: `mc/Type 2 diabetes`, `mc/Post-traumatic stress disorder`, `mc/High BP`.<br/>
+Examples of invalid values: `mc/Post--traumatic stress disorder` (consecutive hyphens), `mc/Type ​ 2 ​ diabetes` (consecutive spaces), `mc/Diabetes?` (`?` not allowed).
+
+The parser also conducts a case-sensitive duplicate check so, `mc/diabetes mc/diabetes` will create one `diabetes` medical condition, but `mc/diabetes mc/Diabetes` will create both `diabetes` and `Diabetes`.
 
 #### For the `apt` command:
 
 **Note (`note/`):**<br>
-Is limited to 500 characters and can include any character that you can type on your keyboard except the `/` character, we recommend replacing it with the `\` or `|` characters.
+Is limited to 500 characters and can include any character that you can type on your keyboard, except the `/` character, we recommend replacing it with the `\` or `|` characters.
 
 </div>
 

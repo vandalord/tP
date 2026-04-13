@@ -9,11 +9,12 @@ import static java.util.Objects.requireNonNull;
  */
 public class Name {
 
-    public static final String MESSAGE_CONSTRAINTS = "Names should only contain alphanumeric characters and spaces, and"
-            + " it should not be blank, max 100 characters";
+    public static final String MESSAGE_CONSTRAINTS = "Names should be 1 to 100 characters long as well as start and "
+        + "end with an alphanumeric character. Also, they can only use alphanumeric characters separated by a "
+        + "single space, hyphen (-), apostrophe ('), or comma (optionally followed by one space).";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "^(?=.{1,100}$)\\p{Alnum}+(?:([ '-]|, ?)\\p{Alnum}+)*$";
