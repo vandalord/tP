@@ -146,8 +146,8 @@ The `Model` component,
 * stores the currently 'selected' `Patient` objects (_e.g.,_ results of a search query) as a separate _filtered_ list
   which is exposed to outsiders as an unmodifiable `ObservableList<Patient>` that can be 'observed' _e.g.,_ the UI can be
   bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a
-  `ReadOnlyUserPref` object.
+* stores a `UserPrefs` object that represents the user’s preferences. This is exposed to the outside as a
+  `ReadOnlyUserPrefs` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
