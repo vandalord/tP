@@ -169,6 +169,7 @@ code {
 
 code {
   padding: 1px 5px;
+  white-space: pre-wrap;
 }
 
 pre {
@@ -288,7 +289,7 @@ table {
     text-align: center;
   }
   .site-header:before {
-    content: "AB-3";
+    content: "DoctorWho";
     font-size: 32px;
   }
 }

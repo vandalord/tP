@@ -4,7 +4,7 @@ package doctorwho.logic.parser;
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
 public class CliSyntax {
-
+    public static final String PREFIX_REGEX = "[a-zA-Z]+/";
     /* Prefix definitions */
     // used by add, edit
     public static final Prefix PREFIX_NAME = new Prefix("n/");

@@ -63,7 +63,7 @@ public class EditCommand extends Command {
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NOT_EDITED = "At least one modified field must be provided.";
     public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the patient book.";
 
     private final Index index;
@@ -92,6 +92,10 @@ public class EditCommand extends Command {
 
         Patient patientToEdit = lastShownList.get(index.getZeroBased());
         Patient editedPatient = createEditedPatient(patientToEdit, editPatientDescriptor);
+
+        if (patientToEdit.equals(editedPatient)) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
+        }
 
         if (!patientToEdit.isSamePatient(editedPatient) && model.hasPatient(editedPatient)) {
             throw new CommandException(MESSAGE_DUPLICATE_PATIENT);

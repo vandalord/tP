@@ -30,7 +30,7 @@ public class Appointment {
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm")
             .withResolverStyle(ResolverStyle.STRICT);
 
-    public static final String VALIDATION_REGEX = "[^\\x00-\\x1F]*";
+    public static final String VALIDATION_REGEX = "[^\\x00-\\x1F\\x7F/]*";
     public static final int MAX_LENGTH = 500;
 
     private final LocalDateTime startTime;
@@ -118,7 +118,7 @@ public class Appointment {
     @Override
     public String toString() {
         return String.format("At: %s (%d mins) | Note: %s",
-                startTime.format(FORMATTER), duration, note.isEmpty() ? "NA" : note);
+                startTime.format(FORMATTER), duration, note.isEmpty() ? "N/A" : note);
     }
 
     @Override

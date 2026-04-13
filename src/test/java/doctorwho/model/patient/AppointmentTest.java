@@ -161,7 +161,7 @@ public class AppointmentTest {
         assertTrue(Appointment.isValidNote("Patient is recovering well."));
 
         // notes with symbols and command-like prefixes
-        assertTrue(Appointment.isValidNote("Temp: 38.5°C, BP: 120/80. Check d/c status."));
+        assertTrue(Appointment.isValidNote("Temp: 38.5°C, BP: 120|80. Check d|c status."));
 
         // notes with HTML-like tags (ensuring no aggressive escaping happens here)
         assertTrue(Appointment.isValidNote("Patient needs a <break>"));

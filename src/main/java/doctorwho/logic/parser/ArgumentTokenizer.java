@@ -3,7 +3,12 @@ package doctorwho.logic.parser;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import doctorwho.logic.parser.exceptions.ParseException;
 
 /**
  * Tokenizes arguments string of the form: {@code preamble <prefix>value <prefix>value ...}<br>
@@ -14,6 +19,7 @@ import java.util.stream.Collectors;
  * in the above example.<br>
  */
 public class ArgumentTokenizer {
+    private static final Pattern PREFIX_PATTERN = Pattern.compile("(?<=\\s|^)(" + CliSyntax.PREFIX_REGEX + ")");
 
     /**
      * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps prefixes to their
@@ -23,9 +29,23 @@ public class ArgumentTokenizer {
      * @param prefixes   Prefixes to tokenize the arguments string with
      * @return ArgumentMultimap object that maps prefixes to their arguments
      */
-    public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
+    public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) throws ParseException {
+        validateNoUnknownPrefixes(argsString, prefixes);
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
         return extractArguments(argsString, positions);
+    }
+
+    private static void validateNoUnknownPrefixes(String argsString, Prefix... prefixes) throws ParseException {
+        Set<String> allowed = Arrays.stream(prefixes)
+                .map(Prefix::getPrefix)
+                .collect(Collectors.toSet());
+        Matcher matcher = PREFIX_PATTERN.matcher(argsString);
+        while (matcher.find()) {
+            String found = matcher.group(1);
+            if (!allowed.contains(found)) {
+                throw new ParseException("Unknown prefix: " + found);
+            }
+        }
     }
 
     /**

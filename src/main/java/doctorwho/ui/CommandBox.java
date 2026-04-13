@@ -30,6 +30,16 @@ public class CommandBox extends UiPart<Region> {
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        commandTextField.setOnScroll(event -> {
+            double delta = event.getDeltaX() != 0 ? event.getDeltaX() : event.getDeltaY();
+            if (delta == 0 || commandTextField.getText().isEmpty()) {
+                return;
+            }
+            int target = commandTextField.getCaretPosition() + (delta > 0 ? -2 : 2);
+            target = Math.max(0, Math.min(commandTextField.getText().length(), target));
+            commandTextField.positionCaret(target);
+            event.consume();
+        });
     }
 
     /**

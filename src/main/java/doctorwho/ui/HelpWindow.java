@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * Controller for a help page
@@ -34,6 +35,7 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
+        root.initStyle(StageStyle.UTILITY);
         helpMessage.setText(HELP_MESSAGE);
     }
 
@@ -64,6 +66,8 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing help page about the application.");
+        getRoot().setMaximized(false);
+        getRoot().setFullScreen(false);
         getRoot().show();
         getRoot().centerOnScreen();
     }

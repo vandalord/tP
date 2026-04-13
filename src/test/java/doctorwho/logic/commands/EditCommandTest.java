@@ -75,19 +75,6 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PATIENT, new EditPatientDescriptor());
-        Patient editedPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PATIENT_SUCCESS,
-            Messages.format(editedPatient));
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_filteredList_success() {
         showPatientAtIndex(model, INDEX_FIRST_PATIENT);
 
@@ -103,6 +90,23 @@ public class EditCommandTest {
         expectedModel.setPatient(model.getFilteredPatientList().get(0), editedPatient);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_noFieldSpecifiedUnfilteredList_failure() {
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PATIENT, new EditPatientDescriptor());
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_NOT_EDITED);
+    }
+
+    @Test
+    public void execute_unchangedFieldUnfilteredList_failure() {
+        Patient firstPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
+        EditPatientDescriptor descriptor = new EditPatientDescriptor();
+        descriptor.setName(firstPatient.getName());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PATIENT, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test
