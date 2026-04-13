@@ -30,14 +30,14 @@ Yes, if your clinic is still:
 
 ## Quick start
 
-Don't worry if you're not tech-savvy — just follow these steps one by one and you'll be up and running in no time!
+Don't worry if you're not tech-savvy — just follow these steps one by one, and you'll be up and running in no time!
 
 1. First, make sure you have Java `17` installed on your computer. Not sure if you have it? Open a terminal and type `java -version` — if you see the version number 17, you're good to go!<br>
    **Mac users:** Check out [this guide](https://se-education.org/guides/tutorials/javaInstallationMac.html) to get the exact JDK version you need.
 
 2. Next, download the latest `doctorwho.jar` file from [here](https://github.com/AY2526S2-CS2103T-F10-1/tp/releases). You'll find it under the **Assets** section of the latest release — just click on `doctorwho.jar` to download it.
 
-3. Move the `doctorwho.jar` file to the folder where you'd like to store your patient data. We recommend creating a brand new empty folder for this (e.g., a folder named `DoctorWho` on your Desktop), so everything stays neat and tidy.
+3. Move the `doctorwho.jar` file to the folder where you'd like to store your patient data. We recommend creating a brand-new empty folder for this (e.g., a folder named `DoctorWho` on your Desktop), so everything stays neat and tidy.
 
    ![Moving .jar file to folder](images/ShiftingJarFile.png)
 
@@ -128,19 +128,11 @@ can be found in [Features](#features).
 
 ## DoctorWho Operations
 
-### Viewing help: `help`
-
-Opens a window that provides a summary of available commands and explains how to access the help page. (Pressing the F1 key will also open this window)
-
-![help message](images/helpMessage.png)
-
-Format: `help`
-
 ### Adding a patient: `add`
 
 Adds a patient to DoctorWho.
 
-Format: `add n/NAME ic/NRIC x/SEX dob/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS [al/ALLERGY]… [mc/CONDITION]…​`
+Format: `add n/NAME ic/NRIC x/SEX dob/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS [al/ALLERGY]…​ [mc/CONDITION]…​`
 
 * Will fail if there is an existing patient with the same NRIC, however other fields allow duplicates i.e., two patients may have the same name.
 * The date of birth(dob) must be in the format `dd-MM-yyyy` and must be either the current date or earlier e.g., `12-03-2026` refers to 12th March 2026.
@@ -166,7 +158,7 @@ Format: `list`
 
 Edits an existing patient in DoctorWho.
 
-Format: `edit PATIENT_NUMBER [n/NAME] [ic/NRIC] [x/SEX] [dob/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [al/ALLERGY]… [mc/CONDITION]…​`
+Format: `edit PATIENT_NUMBER [n/NAME] [ic/NRIC] [x/SEX] [dob/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [al/ALLERGY]…​ [mc/CONDITION]…​`
 
 * Edits the patient at the specified `PATIENT_NUMBER`. The index refers to the index number shown in the displayed
   patient list. The index **must be a positive integer** 1, 2, 3, …​
@@ -303,6 +295,15 @@ Format: `clear`
 This action is irreversible and will delete all patient data.
 </div>
 
+
+### Viewing help: `help`
+
+Opens a window that provides a summary of available commands and explains how to access the help page. (Pressing the `F1` key will also open this window)
+
+![help message](images/helpMessage.png)
+
+Format: `help`
+
 ### Exiting the program: `exit`
 
 Exits the program.
@@ -313,12 +314,12 @@ Format: `exit`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note on accepted parameter values:**<br>
+**:information_source: Additional details for on accepted parameter values:**<br>
 
 #### For the `add` and `edit` commands:
 
 **Name (`n/`):**<br>
-DoctorWho currently accepts the following special characters in the patient's name:<br>
+Names should be no more than 100 characters. DoctorWho currently accepts the following special characters in the patient's name:<br>
 
 | Character       | Valid example |
 |-----------------|---------------|
@@ -362,11 +363,21 @@ Examples of invalid values: `e/.alex@example.com`, `e/alex@-example.com`, `e/ale
 
 In the case that the user is unable to provide an email address, DoctorWho accepts a dead-end email address such as, `user@example.com`.
 
+**Address (`a/`):**<br/>
+Is limited to 200 characters and can include alphabets, numbers, spaces and the following special characters `#.,()\-`.
+
 **Drug Allergies (`al/`) and Medical Conditions (`mc/`):**<br>
 Allergy and condition names do not support consecutive spaces and/or hyphens.
 
 Examples of valid values: `Beta-lactam`, `Type 2 diabetes`, `Post-traumatic stress disorder`.<br>
 Examples of invalid values: `Beta- lactam`, `Type ​ 2 ​ diabetes`, `Post--traumatic stress disorder`.
+
+The parser also conducts a case-sensitive duplicate check so, `al/diabetes al/diabetes` will create one `diabetes` allergy, but `al/diabetes al/Diabetes` will create both `diabetes` and `Diabetes`.
+
+#### For the `apt` command:
+
+**Note (`note/`):**<br>
+Is limited to 500 characters and can include any character that you can type on your keyboard except the `/` character.
 
 </div>
 
@@ -422,27 +433,17 @@ Furthermore, certain edits can cause the DoctorWho to behave in unexpected ways 
 ## FAQ
 
 **Q**: What happens if I accidentally delete a patient?<br>
-**A**: Deletion is irreversible and the patient's data cannot be
-recovered from within the app. To safeguard against accidental
-deletion, we recommend periodically making a manual copy of your
-data file located at `[JAR file location]/data/doctorwho.json`
-and storing it in a separate folder. If you have a copy, you can
-restore it by replacing the current data file with your backup.
+**A**: When a patient is deleted, their details are shown in the GUI, therefore it is possible to re-add the patient before another command is run. Subsequently, deletion is irreversible and the patient's data cannot be recovered from within the app. To further safeguard against accidental deletion, we recommend periodically making a manual copy of your data file located at `[JAR file location]/data/doctorwho.json` and storing it in a separate folder. If you have a copy, you can restore it by replacing the current data file with your backup.
 
 --------------------------------------------------------------------------------------------------------------------
 
 **Q**: Can I schedule multiple appointments for one patient?<br>
-**A**: Currently, DoctorWho supports one active appointment per
-patient at a time. To schedule a new appointment, use the `apt`
-command which will replace the existing one. Support for multiple
-appointments per patient is planned for a future version.
+**A**: Currently, DoctorWho supports one active appointment per patient at a time. To schedule a new appointment, use the `apt` command which will replace the existing one. Support for multiple appointments per patient is planned for a future version.
 
 --------------------------------------------------------------------------------------------------------------------
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app on the other computer and overwrite the
-empty data file it creates with the file from your previous
-DoctorWho folder, located at `[JAR file location]/data/doctorwho.json`.
+**A**: Install the app on the other computer and overwrite the empty data file it creates with the file from your previous DoctorWho folder, located at `[JAR file location]/data/doctorwho.json`.
 
 --------------------------------------------------------------------------------------------------------------------
 

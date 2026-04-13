@@ -219,7 +219,7 @@ For an NRIC/FIN value with prefix `P`, digits `d1..d7`, and suffix letter `L`:
     * `F/G -> KLMNPQRTUWX`
     * `M   -> KLJNPQRTUWX`
 
-NRIC is valid only if computed suffix letter equals `L`.
+NRIC is valid only if the computed suffix letter equals the provided letter `L`.
 
 #### Design considerations
 
@@ -362,7 +362,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Admin Staff | input command arguments in any order                                                   | avoid memorising rigid syntax                                                            |
 | `* *`    | Admin Staff | record a patient's blood type                                                          | help the doctor provide it quickly in an emergency                                       |
 | `*`      | Admin Staff | list all patients with a specific allergy                                              | ensure the doctor avoids prescribing dangerous medication during an outbreak or shortage |
-| `*`      | Admin Staff | search for a patient by a partial or misspelled name                                   | find records quickly even if I don't remember the exact spelling                         |
+| `*`      | Admin Staff | search for a patient by a partial or misspelled name                                   | find records quickly even if I do not remember the exact spelling                        |
 | `*`      | Admin Staff | use command aliases (e.g., a for add)                                                  | minimize typing time while talking to a patient                                          |
 | `*`      | Admin Staff | list all patients taking a specific medication                                         | contact them if that drug is recalled                                                    |
 | `*`      | Admin Staff | add a "Next Checkup" date                                                              | follow up on chronic condition progress                                                  |
