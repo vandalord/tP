@@ -4,16 +4,17 @@ title: Developer Guide
 ---
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
 * AddressBook-Level3 (AB3): The original source code for this application was adapted from the
-[AddressBook-Level3](https://github.com/se-edu/addressbook-level3)
- project created by the SE-EDU initiative.
-* NRIC Checksum: Introduce documentation for NRIC checksum. [Link](https://userapps.support.sap.com/sap/support/knowledge/en/2572734)
+  [AddressBook-Level3](https://github.com/se-edu/addressbook-level3)
+  project created by the SE-EDU initiative.
+* NRIC Checksum: Introduce documentation for NRIC
+  checksum. [Link](https://userapps.support.sap.com/sap/support/knowledge/en/2572734)
 * JavaFX: Used for the Graphical User Interface (GUI). [Link](https://openjfx.io/)
 * JUnit5: Used for the unit testing framework. [Link](https://junit.org/junit5/)
 * PlantUML: Used to generate the diagrams in this documentation. [Link](https://plantuml.com/)
@@ -87,7 +88,8 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/AY2526S2-CS2103T-F10-1/tp/tree/master/src/main/java/doctorwho/ui/Ui.java)
+The **API** of this component is specified in [
+`Ui.java`](https://github.com/AY2526S2-CS2103T-F10-1/tp/tree/master/src/main/java/doctorwho/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -96,8 +98,10 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
-are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2526S2-CS2103T-F10-1/tp/tree/master/src/main/java/doctorwho/ui/MainWindow.java)
-is specified in [`MainWindow.fxml`](https://github.com/AY2526S2-CS2103T-F10-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
+are in the `src/main/resources/view` folder. For example, the layout of the [
+`MainWindow`](https://github.com/AY2526S2-CS2103T-F10-1/tp/tree/master/src/main/java/doctorwho/ui/MainWindow.java)
+is specified in [
+`MainWindow.fxml`](https://github.com/AY2526S2-CS2103T-F10-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -108,7 +112,8 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/AY2526S2-CS2103T-F10-1/tp/tree/master/src/main/java/doctorwho/logic/Logic.java)
+**API** : [
+`Logic.java`](https://github.com/AY2526S2-CS2103T-F10-1/tp/tree/master/src/main/java/doctorwho/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -148,7 +153,8 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/AY2526S2-CS2103T-F10-1/tp/tree/master/src/main/java/doctorwho/model/Model.java)
+**API** : [
+`Model.java`](https://github.com/AY2526S2-CS2103T-F10-1/tp/tree/master/src/main/java/doctorwho/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="800" />
 
@@ -172,7 +178,8 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2526S2-CS2103T-F10-1/tp/tree/master/src/main/java/doctorwho/storage/Storage.java)
+**API** : [
+`Storage.java`](https://github.com/AY2526S2-CS2103T-F10-1/tp/tree/master/src/main/java/doctorwho/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -222,15 +229,15 @@ For an NRIC/FIN value with prefix `P`, digits `d1..d7`, and suffix letter `L`:
 
 1. Compute weighted sum using weights `[2, 7, 6, 5, 4, 3, 2]`.
 2. Add prefix offset:
-   * `+4` for `T` and `G`
-   * `+3` for `M`
-   * `+0` for `S` and `F`
+    * `+4` for `T` and `G`
+    * `+3` for `M`
+    * `+0` for `S` and `F`
 3. Compute `remainder = sum mod 11`.
 4. Compute `checkDigit = 11 - (remainder + 1)`.
 5. Map `checkDigit` to letter table based on prefix group:
-   * `S/T -> ABCDEFGHIZJ`
-   * `F/G -> KLMNPQRTUWX`
-   * `M   -> KLJNPQRTUWX`
+    * `S/T -> ABCDEFGHIZJ`
+    * `F/G -> KLMNPQRTUWX`
+    * `M   -> KLJNPQRTUWX`
 
 NRIC is valid only if computed suffix letter equals `L`.
 
@@ -239,12 +246,12 @@ NRIC is valid only if computed suffix letter equals `L`.
 **Aspect: location of checksum logic**
 
 * **Alternative 1 (chosen):** keep checksum logic in `Nric`.
-  * Pros: one validation implementation across parser, model, and storage.
-  * Cons: parser tests must use checksum-valid NRIC fixtures.
+    * Pros: one validation implementation across parser, model, and storage.
+    * Cons: parser tests must use checksum-valid NRIC fixtures.
 
 * **Alternative 2:** validate in parser only.
-  * Pros: simpler parser flow.
-  * Cons: invalid values could still enter through storage or future non-parser paths.
+    * Pros: simpler parser flow.
+    * Cons: invalid values could still enter through storage or future non-parser paths.
 
 #### Tests
 
@@ -254,7 +261,8 @@ NRIC behavior is covered by:
 * `AddCommandParserTest`: invalid NRIC parsing failures.
 * `JsonAdaptedPatientTest`: invalid NRIC in JSON rejected during conversion.
 
-In addition, shared test fixtures (e.g., `TypicalPatients`, `PatientBuilder`) use checksum-valid NRIC values to avoid false failures.
+In addition, shared test fixtures (e.g., `TypicalPatients`, `PatientBuilder`) use checksum-valid NRIC values to avoid
+false failures.
 
 **Additional checksum-valid NRIC test values (You may copy and use these):**
 
@@ -277,37 +285,40 @@ M3594121L
 
 ### \[Proposed\] Automated Appointment Reminders
 
-The proposed appointment reminder feature will alert the doctor of any upcoming appointments within the next 24 hours upon launching the application or while it is running.
+The proposed appointment reminder feature will alert the user of any upcoming appointments within the next 24 hours
+upon launching the application or while it is running.
 
 #### Proposed Implementation
 
 * A `ReminderManager` class will be added to the `Logic` component.
-* `ReminderManager` will periodically query the `Model` for patients with an `Appointment` whose start time falls within a specific threshold (e.g., next 24 hours).
-* The `UI` will be updated to include a `ReminderPanel` that observes the `ReminderManager` and displays upcoming appointments in a dedicated side panel or via visual indicators next to patient names.
+* `ReminderManager` will periodically query the `Model` for patients with an `Appointment` whose start time falls within
+  a specific threshold (e.g., next 24 hours).
+* The `UI` will be updated to include a `ReminderPanel` that observes the `ReminderManager` and displays upcoming
+  appointments in a dedicated side panel or via visual indicators next to patient names.
 
 #### Design considerations
 
 **Aspect: trigger mechanism for reminder refresh**
 
 * **Alternative 1 (chosen):** hybrid trigger (`Model` change events + periodic refresh).
-  * Pros: reminders stay up to date after command execution and remain accurate as time passes.
-  * Pros: avoids heavy continuous polling while app is idle.
-  * Cons: requires careful scheduling/lifecycle management to avoid duplicate refreshes.
+    * Pros: reminders stay up to date after command execution and remain accurate as time passes.
+    * Pros: avoids heavy continuous polling while app is idle.
+    * Cons: requires careful scheduling/lifecycle management to avoid duplicate refreshes.
 
 * **Alternative 2:** fixed-interval polling only.
-  * Pros: simpler implementation model.
-  * Cons: can introduce stale reminders between poll intervals or unnecessary background work.
+    * Pros: simpler implementation model.
+    * Cons: can introduce stale reminders between poll intervals or unnecessary background work.
 
 **Aspect: reminder presentation strategy**
 
 * **Alternative 1 (chosen):** non-blocking reminder panel with optional visual markers.
-  * Pros: supports continuous workflow without forcing modal interactions.
-  * Pros: allows users to review reminders alongside patient data.
-  * Cons: reminders may be less noticeable if users ignore side panels.
+    * Pros: supports continuous workflow without forcing modal interactions.
+    * Pros: allows users to review reminders alongside patient data.
+    * Cons: reminders may be less noticeable if users ignore side panels.
 
 * **Alternative 2:** modal pop-up alerts.
-  * Pros: high visibility for urgent reminders.
-  * Cons: interrupts command flow and can be intrusive when multiple reminders are due.
+    * Pros: high visibility for urgent reminders.
+    * Cons: interrupts command flow and can be intrusive when multiple reminders are due.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -387,10 +398,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use Case 01: Add a Patient**
 
 **Preconditions:**
+
 * Staff has launched the DoctorWho application.
 * Staff is at the command prompt.
 
 **Main Success Scenario:**
+
 1. Staff requests to add a new patient with the required details.
 2. DoctorWho adds the patient to the system.
 3. DoctorWho shows a success message with the added patient's details.
@@ -415,16 +428,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 **Post conditions:**
+
 * New patient appears at the bottom of the patient list.
 
 **Use Case 02: Delete a Patient**
 
 **Preconditions:**
+
 * Staff has launched the DoctorWho application.
 * Staff is at the command prompt.
 * At least one patient exists in the list.
 
 **Main Success Scenario:**
+
 1. Staff requests to delete a specific patient using the index.
 2. DoctorWho removes the patient from the system.
 3. DoctorWho shows a success message.
@@ -439,15 +455,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 **Post conditions:**
+
 * Patient is removed from the system.
 
 **Use Case 03: List Patients**
 
 **Preconditions:**
+
 * Staff has launched the DoctorWho application.
 * Staff is at the command prompt.
 
 **Main Success Scenario:**
+
 1. Staff requests to list all patients.
 2. DoctorWho displays all patients in the list panel.
 3. DoctorWho shows a success message.
@@ -455,16 +474,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 **Post conditions:**
+
 * All patients are displayed in the list panel.
 
 **Use Case 04: Edit a Patient's Information**
 
 **Preconditions:**
+
 * Staff has launched the DoctorWho application.
 * Staff is at the command prompt.
 * At least one patient exists in the list.
 
 **Main Success Scenario:**
+
 1. Staff requests to edit a specific patient's information using the index.
 2. DoctorWho updates the patient's information.
 3. DoctorWho shows a success message with the updated details.
@@ -499,16 +521,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes from step 3.
 
 **Post conditions:**
+
 * Patient's information is updated in the system.
 
 **Use Case 05: Schedule an appointment for an existing patient**
 
 **Preconditions:**
+
 * Staff has launched the DoctorWho application.
 * Staff is at the command prompt.
 * At least one patient exists in the list.
 
 **Main Success Scenario:**
+
 1. Staff requests to add an appointment for a specific patient using the index.
 2. DoctorWho adds the appointment to the patient's record.
 3. DoctorWho shows a success message with the appointment details.
@@ -543,16 +568,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 **Post conditions:**
+
 * Appointment is added and visible in the patient detail panel.
 
 **Use Case 06: Delete Appointment**
 
 **Preconditions:**
+
 * Staff has launched the DoctorWho application.
 * Staff is at the command prompt.
 * At least one patient exists in the list.
 
 **Main Success Scenario:**
+
 1. Staff requests to delete the appointment of a specific patient using the index.
 2. DoctorWho removes the appointment from the patient's record.
 3. DoctorWho shows a success message.
@@ -572,11 +600,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 **Post conditions:**
+
 * Appointment is removed from the patient's record.
 
 **Use Case 07: List Appointments**
 
 **Preconditions:**
+
 * Staff has launched the DoctorWho application.
 * Staff is at the command prompt.
 
@@ -612,16 +642,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 **Post conditions:**
+
 * The currently displayed list is updated to show appointment-based results.
 * If a date is provided, only appointments on that date are shown.
 
 **Use Case 08: Find Patients**
 
 **Preconditions:**
+
 * Staff has launched the DoctorWho application.
 * Staff is at the command prompt.
 
 **Main Success Scenario:**
+
 1. Staff requests to find patients by specifying a name keyword.
 2. DoctorWho displays all patients whose names contain the input keyword.
 3. DoctorWho shows a success message with the number of patients found.
@@ -641,15 +674,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 **Post conditions:**
+
 * Patient list panel displays only patients matching the input name.
 
 **Use Case 09: Clear All Patients**
 
 **Preconditions:**
+
 * Staff has launched the DoctorWho application.
 * Staff is at the command prompt.
 
 **Main Success Scenario:**
+
 1. Staff requests to clear all patient records.
 2. DoctorWho removes all patients and their appointments from the system.
 3. DoctorWho shows a success message.
@@ -657,35 +693,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 **Post conditions:**
+
 * Patient list is empty.
 
 **Use Case 10: View Help**
 
 **Preconditions:**
+
 * Staff has launched the DoctorWho application.
 * Staff is at the command prompt.
 
 **Main Success Scenario:**
+
 1. Staff requests to view help.
 2. DoctorWho opens a help window with a link to the User Guide.
 
    Use case ends.
 
 **Post conditions:**
+
 * Help window is displayed to the staff.
 
 **Use Case 11: Exit Application**
 
 **Preconditions:**
+
 * Staff has launched the DoctorWho application.
 
 **Main Success Scenario:**
+
 1. Staff requests to exit the application.
 2. DoctorWho closes the application.
 
    Use case ends.
 
 **Post conditions:**
+
 * Application is closed.
 
 ### Non-Functional Requirements
@@ -709,7 +752,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   to *Architecture/Logic*)
 * **JavaFX**: The software platform and graphical library used to build the DoctorWho desktop interface. (Relevant to
   *UI Component*)
-* **Prefix**: A short identifier followed by a forward slash (_e.g._ `n/` for name, `ic/` for NRIC) used to define arguments in a command.
+* **Prefix**: A short identifier followed by a forward slash (_e.g._ `n/` for name, `ic/` for NRIC) used to define
+  arguments in a command.
 * **Prefix-based Matching**: A parsing technique where data fields are identified by short leading characters (e.g.,
   `n/` for Name) rather than by their position in a sequence. (Relevant to *Logic Component*)
 * **Medical Tag**: A general term encompassing both **Conditions** (_e.g._ Diabetes) and **Allergies** (_e.g._
@@ -805,7 +849,8 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: At least one patient in the list.
     2. Test case: `edit 1 ic/T0234567J p/98557988 al/ mc/High BP`
 
-   Expected: First patient's NRIC and phone are updated, existing allergies are cleared, and the medical condition "High BP" is added. Success message shown.
+   Expected: First patient's NRIC and phone are updated, existing allergies are cleared, and the medical condition "High
+   BP" is added. Success message shown.
 
 3. Editing a patient's date of birth
     1. Prerequisites: At least one patient in the list.
@@ -894,63 +939,69 @@ testers are expected to do more *exploratory* testing.
     4. Re-launch the app.
 
        Expected: App starts with an empty patient list. Corrupted data file is discarded.
-   
+
 ## **Appendix: Planned Enhancements**
 
 Team size: 5
 
-### **Data Handling & Validation**
-1. Include support for slashes (/) in patient name. Currently, we ask the user to remove slashes when entering the
-   patient's name. However, this means that the stored patient name may not match their exact government name. We
-   plan to implement apostrophe string enclosing to allow such special characters to be included in the name without
-   conflicting with the special characters used for the argument prefixes.
-2. Include cross-checks between a patient's date of birth and NRIC. Currently, we don't check that the patient's birth
-   year matches their NRIC due to complexities and edge cases. Additionally, patients born before 1968 won't have their
-   birth year as the first two digits of their NRIC, making this impossible in certain cases. We plan to implement a
-   best-effort check that will flag possible mismatches.
-
-### **Safety & Error Prevention**
-3. Include confirmation for the `clear` command to protect the user from unintentionally clearing all their data. We
+1. **Include support for slashes (/) in patient name.** Currently, we ask the user to remove slashes (e.g., `s/o`
+   becomes `so`) when entering the patient's name. However, this means that the stored patient name may not match their
+   exact government name. We plan to implement apostrophe string enclosing to allow such special characters to be
+   included in the name without conflicting with the special characters used for the argument prefixes.
+2. **Include cross-checks between a patient's date of birth and NRIC.** Currently, we do not check that the patient's
+   birth year matches their NRIC due to complexities and edge cases. Additionally, patients born before 1968 would not
+   have their birth year as the first two digits of their NRIC, making this impossible in certain cases. We plan to
+   implement a best-effort check that will flag possible mismatches.
+3. **Include confirmation for the `clear` command** to protect the user from unintentionally clearing all their data. We
    plan to make it so that the user has to enter two consecutive clear commands before the data is actually cleared.
-
-### **Patient Information Enhancements**
-4. Include support for tagging patients as "High Risk". This feature allows doctors to quickly identify patients who 
-   require extra caution. We plan to implement this as a visual indicator (e.g., tags or highlights) in the patient 
-   profile to improve visibility and awareness during consultations.
-5. Include support for marking allergies as "Severe". Currently, all allergies are treated equally.
-   We plan to allow certain allergies to be flagged as severe so that they stand out more prominently in the patient profile.
-6. Include a confirmation step before permanently deleting a patient record. This will help prevent accidental data 
-   loss by requiring the user to confirm their intent before deletion is executed.
-7. Include support for recording a patient's blood type. This feature would allow doctors to quickly access critical 
-   information in emergency situations.
-
-### **Search & Analysis Features**
-8. Include functionality to list all patients taking a specific medication. This would be useful in scenarios such as 
-   drug recalls or supply shortages, allowing doctors to quickly identify affected patients.
-
-### **Advanced Medical Context**
-9. Include support for linking related patients. This would allow doctors to identify family members and observe
-   potential hereditary patterns in medical conditions.
-10. Include support for attaching external specialist notes to a patient's record. This would provide a more 
-    comprehensive view of the patient's medical history and ongoing care.
-
-### **Advanced User Features**
-11. Include support for chaining commands together. This would allow advanced users to execute multiple actions in a 
-    single command (e.g., adding a patient and scheduling their first appointment), improving efficiency for advanced users.
+4. **Tracking of a patient's appointment history.** Currently, we allow tha addition of appointments on past dates but
+   only support one active appointment per patient. This is due to how small clinics operate whereby the follow-up
+   appointment is made only once the user completes their current appointment. We plan to let multiple appointments be
+   linked to a patient that way past appointments can be traced back to the patient. This will also allow a user
+   transitioning from another system to DoctorWho to preserve their patients' appointment histories.
+5. **Allow the user to manage patients across several doctors.** Currently, the overlap check does not account for
+   different doctors, and trying to add another appointment at the same time will cause an overlap even if it might be
+   for another doctor at the clinic. We will implement this by adding a `Doctor` field to the `Appointment` class, which
+   will then grant the user greater flexibility to track appointments by doctor and have concurrent appointments with
+   different doctors.
+6. **Enhance the `find` command to support more precise string matching.** Currently, the `find` command performs
+   OR-based matching against space separated keywords (e.g., `find James Lee` finds `James Lee`, `James Tan` and
+   `Max Lee`). We intend to allow users to enclose search keywords in apostrophes to get a more precise match, such that
+   `find "James Lee"` only finds `James Lee`.
+7. **Enhance the `find` command to search for NRIC.** Currently, it performs matching across the name field only. Since
+   it is possible for multiple patients to have the same or very similar names, we intend to make `find` more precise by
+   allowing the user to search for patients by their full NRIC, which is unique to each patient.
+8. **Make email an optional field.** Currently, email is a mandatory field. Since not all patients have an email, this
+   forces users to enter placeholder values like `test@example.com` for patients without an email. We plan to make the
+   email parameter optional when using the add command, so that
+   `add n/John Doe ic/T0123456H x/M dob/01-01-2000 p/9876ND-base5432 a/123 Clementi Ave`  (without `e/`)   is accepted.
+9. **Enhance the find command to support AND-based keyword matching.** Currently, the `find` command performs OR-based
+   matching, meaning `find James Lee` returns any patient whose name contains either `James` or `Lee`. This can return
+   too many unrelated results when the user intends to search for a specific patient. We plan to add toggleable
+   AND-based matching, modifying the `find` command to be `find [PRED] KEYWORD [MORE_KEYWORDS]…​`, where `PRED` is
+   either `OR` or `AND` and the command defaults to OR-based matching if `PRED` is absent. This way `find AND James Lee`
+   only returns patients whose name contains both `James` and `Lee`.
 
 ## **Appendix: Effort**
 
-**Difficulty level**: DoctorWho is significantly more complex than AB3. While AB3 manages a single entity type (Person), DoctorWho manages two entity types (Patient and Appointment) with relationships between them, requiring changes across all architectural layers.
+**Difficulty level**: DoctorWho is significantly more complex than AB3. While AB3 manages a single entity type (Person),
+DoctorWho manages two entity types (Patient and Appointment) with relationships between them, requiring changes across
+all architectural layers.
 
 **Challenges faced**:
-- Implementing the `Appointment` entity required changes across Logic, Model, Storage and UI layers simultaneously
-- Refactoring the generic `Tag` class into two specialised subclasses (`Allergy` and `Condition`) with separate validation rules, character limits and regex patterns required careful design to maintain extensibility
-- Implementing overlap detection across all patients' appointments required non-trivial logic in the Model layer
-- Updating the UI to include a dedicated `PatientDetailPanel` alongside the existing list panel required significant JavaFX work
 
-**Effort**: Approximately equivalent to 1.5x the effort of AB3, given the addition of a second entity type and the tag hierarchy refactor.
+- Implementing the `Appointment` entity required changes across Logic, Model, Storage and UI layers simultaneously
+- Refactoring the generic `Tag` class into two specialised subclasses (`Allergy` and `Condition`) with separate
+  validation rules, character limits and regex patterns required careful design to maintain extensibility
+- Implementing overlap detection across all patients' appointments required non-trivial logic in the Model layer
+- Updating the UI to include a dedicated `PatientDetailPanel` alongside the existing list panel required significant
+  JavaFX work
+
+**Effort**: Approximately equivalent to 1.5x the effort of AB3, given the addition of a second entity type and the tag
+hierarchy refactor.
 
 **Achievements**:
+
 - Successfully delivered all 7 MVP features on time
 - Introduced a clean tag hierarchy (`Tag` → `Allergy`/`Condition`) that is easily extensible for future tag types
 - Improved UI with a split-panel layout showing patient details alongside the patient list
