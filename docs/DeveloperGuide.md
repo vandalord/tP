@@ -225,11 +225,11 @@ NRIC is valid only if the computed suffix letter equals the provided letter `L`.
 
 **Aspect: location of checksum logic**
 
-* **Alternative 1 (chosen):** keep checksum logic in `Nric`.
+***Alternative 1 (chosen):** keep checksum logic in `Nric`.
     * Pros: one validation implementation across parser, model, and storage.
     * Cons: parser tests must use checksum-valid NRIC fixtures.
 
-* **Alternative 2:** validate in parser only.
+***Alternative 2:** validate in parser only.
     * Pros: simpler parser flow.
     * Cons: invalid values could still enter through storage or future non-parser paths.
 
@@ -280,23 +280,23 @@ upon launching the application or while it is running.
 
 **Aspect: trigger mechanism for reminder refresh**
 
-* **Alternative 1 (chosen):** hybrid trigger (`Model` change events + periodic refresh).
+***Alternative 1 (chosen):** hybrid trigger (`Model` change events + periodic refresh).
     * Pros: reminders stay up to date after command execution and remain accurate as time passes.
     * Pros: avoids heavy continuous polling while app is idle.
     * Cons: requires careful scheduling/lifecycle management to avoid duplicate refreshes.
 
-* **Alternative 2:** fixed-interval polling only.
+***Alternative 2:** fixed-interval polling only.
     * Pros: simpler implementation model.
     * Cons: can introduce stale reminders between poll intervals or unnecessary background work.
 
 **Aspect: reminder presentation strategy**
 
-* **Alternative 1 (chosen):** non-blocking reminder panel with optional visual markers.
+***Alternative 1 (chosen):** non-blocking reminder panel with optional visual markers.
     * Pros: supports continuous workflow without forcing modal interactions.
     * Pros: allows users to review reminders alongside patient data.
     * Cons: reminders may be less noticeable if users ignore side panels.
 
-* **Alternative 2:** modal pop-up alerts.
+***Alternative 2:** modal pop-up alerts.
     * Pros: high visibility for urgent reminders.
     * Cons: interrupts command flow and can be intrusive when multiple reminders are due.
 
@@ -330,25 +330,25 @@ faster than a typical mouse/GUI driven app
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikely to have) - `*`
 
 | Priority | As an ...                   | I want to ...                                          | So that I can ...                                                 |
 |:---------|:----------------------------|:-------------------------------------------------------|:------------------------------------------------------------------|
-| `* * *`  | Admin Staff                 | add a new patient record                               | keep track of new patients                                        |
-| `* * *`  | Admin Staff                 | delete a patient record                                | keep my database clean of inactive patients                       |
-| `* * *`  | Admin Staff                 | list all patients                                      | see all the doctor's patients at a glance                         |
-| `* * *`  | Admin Staff                 | find a patient by name                                 | quickly locate a specific patient's record                        |
-| `* * *`  | Admin Staff                 | add an appointment to a patient                        | track the doctor's daily schedule                                 |
-| `* * *`  | Admin Staff                 | delete a patient's appointment                         | remove outdated or cancelled appointments                         |
-| `* * *`  | Admin Staff                 | list all appointments                                  | view the doctor's full schedule at a glance                       |
-| `* *`    | less tech-savvy Admin Staff | have the program working immediately after opening     | avoid having to install or configure anything                     |
-| `* *`    | clumsy Admin Staff          | edit an existing patient's record                      | keep my database updated to the newest information                |
-| `* *`    | Admin Staff                 | filter appointments by a specific date                 | see the doctor's schedule for that day                            |
-| `* *`    | Admin Staff                 | add a patient's drug allergis and medical conditions   | help the doctor provide informed care                             |
-| `* *`    | less tech-savvy Admin Staff | have a data file automatically created on first launch | start using the system without manual setup                       |
-| `* *`    | Admin Staff                 | clear all patient records                              | start fresh with a clean database                                 |
-| `* *`    | Admin Staff                 | be alerted if I book two appointments at the same time | avoid double-booking the doctor                                   |
-| `* *`    | forgetful Admin Staff       | search for a patient by a partial or misspelled name   | find records quickly even if I do not remember the exact spelling |
+| `***`    | Admin Staff                 | add a new patient record                               | keep track of new patients                                        |
+| `***`    | Admin Staff                 | delete a patient record                                | keep my database clean of inactive patients                       |
+| `***`    | Admin Staff                 | list all patients                                      | see all the doctor's patients at a glance                         |
+| `***`    | Admin Staff                 | find a patient by name                                 | quickly locate a specific patient's record                        |
+| `***`    | Admin Staff                 | add an appointment to a patient                        | track the doctor's daily schedule                                 |
+| `***`    | Admin Staff                 | delete a patient's appointment                         | remove outdated or cancelled appointments                         |
+| `***`    | Admin Staff                 | list all appointments                                  | view the doctor's full schedule at a glance                       |
+| `**`     | less tech-savvy Admin Staff | have the program working immediately after opening     | avoid having to install or configure anything                     |
+| `**`     | clumsy Admin Staff          | edit an existing patient's record                      | keep my database updated to the newest information                |
+| `**`     | Admin Staff                 | filter appointments by a specific date                 | see the doctor's schedule for that day                            |
+| `**`     | Admin Staff                 | add a patient's drug allergis and medical conditions   | help the doctor provide informed care                             |
+| `**`     | less tech-savvy Admin Staff | have a data file automatically created on first launch | start using the system without manual setup                       |
+| `**`     | Admin Staff                 | clear all patient records                              | start fresh with a clean database                                 |
+| `**`     | Admin Staff                 | be alerted if I book two appointments at the same time | avoid double-booking the doctor                                   |
+| `**`     | forgetful Admin Staff       | search for a patient by a partial or misspelled name   | find records quickly even if I do not remember the exact spelling |
 | `*`      | meticulous Admin Staff      | add notes to an appointment                            | help the doctor remember important details for the visit          |
 | `*`      | Admin Staff                 | be told when a search returns no results               | know the system is working correctly                              |
 | `*`      | forgetful Admin Staff       | input command arguments in any order                   | avoid memorising rigid syntax                                     |
@@ -657,12 +657,12 @@ The use cases operate with the following implicit preconditions, in addition to 
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, macOS. (Relevant to *Setting up*)
-* **Medical Tag**: A general term encompassing both **Medical Conditions** (_e.g._ Diabetes) and **Drug Allergies** (_e.g.,_
+***Mainstream OS**: Windows, Linux, Unix, macOS. (Relevant to *Setting up*)
+***Medical Tag**: A general term encompassing both **Medical Conditions** (_e.g._ Diabetes) and **Drug Allergies** (_e.g.,_
   Penicillin). (Relevant to *Model Component*)
-* **Overlap**: A situation where a new appointment's time interval (start time + duration) intersects with an existing
+***Overlap**: A situation where a new appointment's time interval (start time + duration) intersects with an existing
   appointment's interval. (Relevant to *Use Cases*)
-* **Orphan Schedule**: An appointment record that remains in the system after the associated patient has been deleted.
+***Orphan Schedule**: An appointment record that remains in the system after the associated patient has been deleted.
   DoctorWho prevents this via automated purging. (Relevant to *NFR Section*)
 
 --------------------------------------------------------------------------------------------------------------------
