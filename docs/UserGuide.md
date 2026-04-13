@@ -378,7 +378,7 @@ Must be **1 to 30 characters** long and contain only alphanumeric characters, si
 Examples of valid values: `al/Penicillin`, `al/Beta-lactam`, `al/Type 2`.<br/>
 Examples of invalid values: `al/Beta--lactam` (consecutive hyphens), `al/Beta- lactam` (space after hyphen), `al/Aspirin!` (`!` not allowed).
 
-The parser also conducts a case-sensitive duplicate check so, `mc/penicillin mc/penicillin` will create one `penicillin` medical condition, but `al/penicillin al/Penicillin` will create both `penicillin` and `Penicillin`.
+The parser also conducts a case-sensitive duplicate check so, `al/penicillin al/penicillin` will create one `penicillin` allergy condition, but `al/penicillin al/Penicillin` will create both `penicillin` and `Penicillin`.
 
 **Medical Conditions (`mc/`):**<br/>
 Must be **1 to 50 characters** long and contain only alphanumeric characters, single spaces between words, and single hyphens within a word.<br/>
