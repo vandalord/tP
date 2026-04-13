@@ -11,7 +11,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * AddressBook-Level3 (AB3): The original source code for this application was adapted from the [AddressBook-Level3](https://github.com/se-edu/addressbook-level3) project created by the SE-EDU initiative.
-* NRIC Checksum: Introduce documentation for NRIC checksum. [Link](https://userapps.support.sap.com/sap/support/knowledge/en/2572734)
+* NRIC Checksum: Documentation for NRIC checksum. [Link](https://userapps.support.sap.com/sap/support/knowledge/en/2572734)
 * JavaFX: Used for the Graphical User Interface (GUI). [Link](https://openjfx.io/)
 * JUnit5: Used for the unit testing framework. [Link](https://junit.org/junit5/)
 * PlantUML: Used to generate the diagrams in this documentation. [Link](https://plantuml.com/)
@@ -147,7 +147,7 @@ The `Model` component,
   which is exposed to outsiders as an unmodifiable `ObservableList<Patient>` that can be 'observed' e.g., the UI can be
   bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a
-  `ReadOnlyUserPref` objects.
+  `ReadOnlyUserPref` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
@@ -344,7 +344,7 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 | `**`     | less tech-savvy Admin Staff | have the program working immediately after opening     | avoid having to install or configure anything                     |
 | `**`     | clumsy Admin Staff          | edit an existing patient's record                      | keep my database updated to the newest information                |
 | `**`     | Admin Staff                 | filter appointments by a specific date                 | see the doctor's schedule for that day                            |
-| `**`     | Admin Staff                 | add a patient's drug allergies and medical conditions   | help the doctor provide informed care                             |
+| `**`     | Admin Staff                 | add a patient's drug allergies and medical conditions  | help the doctor provide informed care                             |
 | `**`     | less tech-savvy Admin Staff | have a data file automatically created on first launch | start using the system without manual setup                       |
 | `**`     | Admin Staff                 | clear all patient records                              | start fresh with a clean database                                 |
 | `**`     | Admin Staff                 | be alerted if I book two appointments at the same time | avoid double-booking the doctor                                   |
@@ -576,7 +576,7 @@ The use cases operate with the following implicit preconditions, in addition to 
       Use case ends.
 
 * 2a. There are no appointments to display.
-    * 2a1. DoctorWho shows an empty result list and a success message with 0 patients listed.
+    * 2a1. DoctorWho shows an empty result list and a success message with 0 patients with appointments listed.
 
       Use case ends.
 
@@ -657,12 +657,12 @@ The use cases operate with the following implicit preconditions, in addition to 
 
 ### Glossary
 
-***Mainstream OS**: Windows, Linux, Unix, macOS. (Relevant to *Setting up*)
-***Medical Tag**: A general term encompassing both **Medical Conditions** (_e.g._ Diabetes) and **Drug Allergies** (_e.g.,_
+* **Mainstream OS**: Windows, Linux, Unix, macOS. (Relevant to *Setting up*)
+* **Medical Tag**: A general term encompassing both **Medical Conditions** (_e.g._ Diabetes) and **Drug Allergies** (_e.g.,_
   Penicillin). (Relevant to *Model Component*)
-***Overlap**: A situation where a new appointment's time interval (start time + duration) intersects with an existing
+* **Overlap**: A situation where a new appointment's time interval (start time + duration) intersects with an existing
   appointment's interval. (Relevant to *Use Cases*)
-***Orphan Schedule**: An appointment record that remains in the system after the associated patient has been deleted.
+* **Orphan Schedule**: An appointment record that remains in the system after the associated patient has been deleted.
   DoctorWho prevents this via automated purging. (Relevant to *NFR Section*)
 
 --------------------------------------------------------------------------------------------------------------------

@@ -33,7 +33,7 @@ Yes, if your clinic is still:
 Don't worry if you're not tech-savvy — just follow these steps one by one, and you'll be up and running in no time!
 
 1. First, make sure you have Java `17` installed on your computer. Not sure if you have it? Open a terminal and type `java -version` — if you see the version number 17, you're good to go!<br>
-   **Mac users:** Check out [this guide](https://se-education.org/guides/tutorials/javaInstallationMac.html) to get the exact JDK version you need.
+   **macOS users:** Check out [this guide](https://se-education.org/guides/tutorials/javaInstallationMac.html) to get the exact JDK version you need.
 
 2. Next, download the latest `doctorwho.jar` file from [here](https://github.com/AY2526S2-CS2103T-F10-1/tp/releases). You'll find it under the **Assets** section of the latest release — just click on `doctorwho.jar` to download it.
 
@@ -44,7 +44,7 @@ Don't worry if you're not tech-savvy — just follow these steps one by one, and
 4. Now, let's launch the app! Open a command terminal in your `DoctorWho` folder:
 
    - **Windows:** Press `Win + R`, type `cmd`, and hit Enter.
-   - **Mac/Linux:** Search for **Terminal** in Spotlight or your app menu.
+   - **macOS/Linux:** Search for **Terminal** in Spotlight or your app menu.
 
    Then, navigate to your folder. For example, if you placed it on your Desktop in a folder called `DoctorWho`, type:
     ```
@@ -331,7 +331,7 @@ Examples of invalid name values: `n/-David`, `n/'Aisha`, `n/,Tan`, `n/David-`, `
 
 However, names should not start or end with these special characters or space.<br>
 
-There are other common special characters used in names that are not yet supported. This a non-exhaustive list of some suggested
+There are other common special characters used in names that are not yet supported. This is a non-exhaustive list of some suggested
 replacements you can use if you encounter these special characters:
 
 | Character  | Invalid example | Suggested replacements (Valid) | Future support                                             |
