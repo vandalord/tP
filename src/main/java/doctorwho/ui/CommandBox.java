@@ -35,7 +35,7 @@ public class CommandBox extends UiPart<Region> {
             if (delta == 0 || commandTextField.getText().isEmpty()) {
                 return;
             }
-            int target = commandTextField.getCaretPosition() + (delta > 0 ? -3 : 3);
+            int target = commandTextField.getCaretPosition() + (delta > 0 ? -2 : 2);
             target = Math.max(0, Math.min(commandTextField.getText().length(), target));
             commandTextField.positionCaret(target);
             event.consume();
