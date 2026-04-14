@@ -137,6 +137,7 @@ Format: `add n/NAME ic/NRIC x/SEX dob/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS [al/A
 * Will fail if there is an existing patient with the same NRIC, however other fields allow duplicates _i.e.,_ two patients may have the same name.
 * The date of birth(dob) must be in the format `dd-MM-yyyy` and must be either the current date or earlier _e.g.,_ `12-03-2026` refers to 12th March 2026.
 * All parameters are compulsory, except for those in square brackets.
+* Refer to [`add` command parameters](#for-the-add-and-edit-commands)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A patient can have any number of allergies or medical conditions (including 0)
@@ -168,6 +169,7 @@ Format: `edit PATIENT_NUMBER [n/NAME] [ic/NRIC] [x/SEX] [dob/DOB] [p/PHONE_NUMBE
 * You can remove all the patient’s allergies or medical conditions by typing `al/` or `mc/` respectively, without
   any other entries.<br>
   _e.g.,_ `al/ al/Ibuprofen` and `mc/IBS mc/` will not work.
+* Refer to [`edit` command parameters](#for-the-add-and-edit-commands)
 
 Examples:
 
@@ -188,6 +190,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]…​`
 * Only full words will be matched _e.g.,_ `Han` will not match `Hans`
 * Patients matching at least one keyword will be returned (_i.e.,_ OR search).
   _e.g.,_ `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Refer to [`find` command parameters](#name-params)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Use `find` before `delete` or `edit` to locate the right patient 
@@ -233,6 +236,7 @@ Format: `apt PATIENT_NUMBER d/DATETIME dur/DURATION [note/NOTE]`
 * The duration **must be between 1 and 600 minutes inclusive**.
 * The note is optional.
 * If provided, `NOTE` must be at most **500 characters**.
+* Refer to [`apt` command parameters](#for-the-apt-command)
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If the patient already has an existing appointment, it will be 
@@ -319,6 +323,7 @@ Format: `exit`
 
 #### For the `add` and `edit` commands:
 
+<a name="name-params"></a>
 **Name (`n/`):**<br>
 Must be **1 to 100 characters** long and start and end with an alphanumeric character.
 DoctorWho currently accepts the following special characters in the patient's name:<br>
@@ -388,6 +393,16 @@ Examples of invalid values: `mc/Post--traumatic stress disorder` (consecutive hy
 The parser also conducts a case-sensitive duplicate check so, `mc/diabetes mc/diabetes` will create one `diabetes` medical condition, but `mc/diabetes mc/Diabetes` will create both `diabetes` and `Diabetes`.
 
 #### For the `apt` command:
+
+**Date and Time (`d/`):**<br>
+Must be in the format dd-MM-yyyy HH:mm. The system validates that the date actually exists (e.g., prevents 31-02-2026).
+Example of valid value: `d/12-03-2026 14:00`
+Example of invalid value: `d/2026-03-12 14:00` (wrong format), `d/12-03-2026` (missing time).
+
+**Duration(dur/):**<br>
+Must be a positive integer between **1 and 600** (inclusive), representing the length of the appointment in minutes.
+Example of valid value: `dur/30`, `dur/600`.
+Example of invalid value: `dur/0`, `dur/601`, `dur/one hour` (all wrong formats).
 
 **Note (`note/`):**<br>
 Is limited to 500 characters and can include any character that you can type on your keyboard, except the `/` character, we recommend replacing it with the `\` or `|` characters.
