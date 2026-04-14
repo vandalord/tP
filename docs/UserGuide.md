@@ -239,9 +239,6 @@ Format: `apt PATIENT_NUMBER d/DATETIME dur/DURATION [note/NOTE]`
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If the patient already has an existing appointment, it will be 
 silently overwritten with no confirmation prompt. Check the 
-patient's current appointment before using this command.
-
-If the system has an overlapping appointment, it will not create an appointment, and display an error.
 </div>
 
 Examples:
@@ -390,16 +387,6 @@ Examples of invalid values: `mc/Post--traumatic stress disorder` (consecutive hy
 The parser also conducts a case-sensitive duplicate check so, `mc/diabetes mc/diabetes` will create one `diabetes` medical condition, but `mc/diabetes mc/Diabetes` will create both `diabetes` and `Diabetes`.
 
 #### For the `apt` command:
-
-**Date and Time (`d/`):**<br>
-Must be in the format dd-MM-yyyy HH:mm. The system validates that the date actually exists (e.g., prevents 31-02-2026).
-Example of valid value: `d/12-03-2026 14:00`
-Example of invalid value: `d/2026-03-12 14:00` (wrong format), `d/12-03-2026` (missing time).
-
-**Duration(dur/):**<br>
-Must be a positive integer between **1 and 600** (inclusive), representing the length of the appointment in minutes.
-Example of valid value: `dur/30`, `dur/600`.
-Example of invalid value: `dur/0`, `dur/601`, `dur/one hour` (all wrong formats).
 
 **Note (`note/`):**<br>
 Is limited to 500 characters and can include any character that you can type on your keyboard, except the `/` character, we recommend replacing it with the `\` or `|` characters.
