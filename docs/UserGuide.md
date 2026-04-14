@@ -234,7 +234,6 @@ Format: `apt PATIENT_NUMBER d/DATETIME dur/DURATION [note/NOTE]`
 * The date and time must be in the format `dd-MM-yyyy HH:mm` _e.g.,_ `12-03-2026 14:00` refers to 12th March 2026, 14:00.
 * The duration **must be between 1 and 600 minutes inclusive**.
 * The note is optional.
-* If provided, `NOTE` must be at most **500 characters**.
 * Refer to [`apt` command parameters](#for-the-apt-command)
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
