@@ -190,7 +190,6 @@ Format: `find KEYWORD [MORE_KEYWORDS]…​`
 * Only full words will be matched _e.g.,_ `Han` will not match `Hans`
 * Patients matching at least one keyword will be returned (_i.e.,_ OR search).
   _e.g.,_ `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Refer to [`find` command parameters](#name-params)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Use `find` before `delete` or `edit` to locate the right patient 
@@ -236,7 +235,6 @@ Format: `apt PATIENT_NUMBER d/DATETIME dur/DURATION [note/NOTE]`
 * The duration **must be between 1 and 600 minutes inclusive**.
 * The note is optional.
 * If provided, `NOTE` must be at most **500 characters**.
-* Refer to [`apt` command parameters](#for-the-apt-command)
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If the patient already has an existing appointment, it will be 
@@ -323,7 +321,6 @@ Format: `exit`
 
 #### For the `add` and `edit` commands:
 
-<a name="name-params"></a>
 **Name (`n/`):**<br>
 Must be **1 to 100 characters** long and start and end with an alphanumeric character.
 DoctorWho currently accepts the following special characters in the patient's name:<br>
