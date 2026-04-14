@@ -235,6 +235,7 @@ Format: `apt PATIENT_NUMBER d/DATETIME dur/DURATION [note/NOTE]`
 * The duration **must be between 1 and 600 minutes inclusive**.
 * The note is optional.
 * If provided, `NOTE` must be at most **500 characters**.
+* Refer to [`apt` command parameters](#for-the-apt-command)
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If the patient already has an existing appointment, it will be 
