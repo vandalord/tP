@@ -239,6 +239,7 @@ Format: `apt PATIENT_NUMBER d/DATETIME dur/DURATION [note/NOTE]`
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If the patient already has an existing appointment, it will be 
 silently overwritten with no confirmation prompt. Check the 
+patient's current appointment before using this command.
 </div>
 
 Examples:
